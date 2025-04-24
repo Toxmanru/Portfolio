@@ -1,103 +1,176 @@
-import Image from "next/image";
+'use client';
+
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import BackgroundSvg from '@/components/BackgroundSvg';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [isHovering, setIsHovering] = useState(false);
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setCursorPosition({ x: e.clientX, y: e.clientY });
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  const calculateRotation = (e: React.MouseEvent<HTMLAnchorElement>, bounds: DOMRect) => {
+    const centerX = bounds.left + bounds.width / 2;
+    const centerY = bounds.top + bounds.height / 2;
+    
+    const rotateX = -(((e.clientY - centerY) / (bounds.height / 2)) * 3.75);
+    const rotateY = ((e.clientX - centerX) / (bounds.width / 2)) * 3.75;
+    
+    return { rotateX, rotateY };
+  };
+
+  return (
+    <main className="relative min-h-screen overflow-auto md:overflow-hidden bg-white">
+      <BackgroundSvg />
+      <div className={`custom-cursor ${isHovering ? 'hover' : ''}`} style={{ left: cursorPosition.x, top: cursorPosition.y }} />
+      <div className="relative min-h-screen pb-20 md:pb-20 pt-[64px] md:pt-[104px] z-10">
+        <div className="max-w-[1920px] mx-auto px-4 sm:px-8 md:px-16 md:h-[calc(100vh-184px)]">
+          <div className="flex flex-col md:flex-row gap-2 md:gap-4 md:h-full">
+            {/* Левая секция */}
+            <div className="w-full md:w-2/3 rounded-[10px] md:rounded-[48px] flex flex-col justify-between p-6 md:p-10 text-[#1C1C1C] card left-card md:h-auto text-center md:text-left" style={{ backgroundColor: 'rgba(221, 221, 221, 0.6)' }}>
+              <h1 className="text-[32px] md:text-[64px] font-medium leading-[100%]">
+                LEAD PRODUCT
+                <span className="block mt-2 md:mt-4">DESIGNER &</span>
+                <span className="block mt-2 md:mt-4">DESIGN MANAGER</span>
+              </h1>
+              <p className="text-[16px] md:text-[28px] font-normal leading-[140%] uppercase tracking-[0.05em] mt-[120px] md:mt-0">
+                7+ YEARS OF EXPERIENCE • DESIGN OPS &<br />
+                TEAM BUILDING • CROSS-PLATFORM •<br />
+                INSURE-TECH • E-COM • MED-TECH •
+              </p>
+            </div>
+
+            {/* Правая секция */}
+            <div className="w-full md:w-1/3 flex flex-col gap-2 md:gap-4 perspective-1000 md:h-auto">
+              <motion.div
+                className="md:h-1/3"
+                style={{ transformStyle: 'preserve-3d' }}
+              >
+                <motion.a
+                  href="/work"
+                  className="card work text-white relative block h-full rounded-[10px] md:rounded-[48px]"
+                  onMouseEnter={() => setIsHovering(true)}
+                  onMouseLeave={(e) => {
+                    setIsHovering(false);
+                    e.currentTarget.style.transform = 'rotateX(0deg) rotateY(0deg)';
+                  }}
+                  onMouseMove={(e) => {
+                    const bounds = e.currentTarget.getBoundingClientRect();
+                    const { rotateX, rotateY } = calculateRotation(e, bounds);
+                    e.currentTarget.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                  }}
+                >
+                  <div className="absolute bottom-4 md:bottom-10 right-4 md:right-10 w-8 h-8 md:w-[52px] md:h-[52px] hidden md:block">
+                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5 16H27M27 16L16 5M27 16L16 27" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <div className="absolute bottom-4 md:bottom-10 left-4 md:left-10 w-8 h-8 md:w-[52px] md:h-[52px] hidden md:block">
+                    <motion.svg 
+                      viewBox="0 0 52 52" 
+                      fill="none" 
+                      xmlns="http://www.w3.org/2000/svg"
+                      initial={{ rotate: 0, y: 0 }}
+                      animate={{ 
+                        rotate: 180,
+                        y: [0, -12, 0]
+                      }}
+                      transition={{ 
+                        delay: 2,
+                        duration: 0.3,
+                        ease: "easeOut",
+                        times: [0, 0.5, 1]
+                      }}
+                    >
+                      <path d="M26 0L52 26L26 52L0 26L26 0Z" fill="white"/>
+                    </motion.svg>
+                  </div>
+                  <h2 className="text-[24px] md:text-[32px] font-medium absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 md:translate-y-0 md:translate-x-0 md:top-10 md:left-10 text-center md:text-left w-full md:w-auto">MY WORKS</h2>
+                </motion.a>
+              </motion.div>
+
+              <motion.div
+                className="md:h-1/3"
+                style={{ transformStyle: 'preserve-3d' }}
+              >
+                <motion.a
+                  href="/consulting"
+                  className="card consulting text-[#1C1C1C] relative block h-full rounded-[10px] md:rounded-[48px]"
+                  onMouseEnter={() => setIsHovering(true)}
+                  onMouseLeave={(e) => {
+                    setIsHovering(false);
+                    e.currentTarget.style.transform = 'rotateX(0deg) rotateY(0deg)';
+                  }}
+                  onMouseMove={(e) => {
+                    const bounds = e.currentTarget.getBoundingClientRect();
+                    const { rotateX, rotateY } = calculateRotation(e, bounds);
+                    e.currentTarget.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                  }}
+                >
+                  <div className="absolute bottom-4 md:bottom-10 right-4 md:right-10 w-8 h-8 md:w-[52px] md:h-[52px] hidden md:block">
+                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5 16H27M27 16L16 5M27 16L16 27" stroke="#1C1C1C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <div className="absolute bottom-4 md:bottom-10 left-4 md:left-10 w-8 h-8 md:w-[52px] md:h-[52px] hidden md:block">
+                    <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="26" cy="26" r="26" fill="#1C1C1C"/>
+                    </svg>
+                  </div>
+                  <h2 className="text-[24px] md:text-[32px] font-medium absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 md:translate-y-0 md:translate-x-0 md:top-10 md:left-10 text-center md:text-left w-full md:w-auto">CONSULTING</h2>
+                </motion.a>
+              </motion.div>
+
+              <motion.div
+                className="md:h-1/3"
+                style={{ transformStyle: 'preserve-3d' }}
+              >
+                <motion.a
+                  href="/contacts"
+                  className="card contacts text-[#1C1C1C] relative block h-full rounded-[10px] md:rounded-[48px]"
+                  onMouseEnter={() => setIsHovering(true)}
+                  onMouseLeave={(e) => {
+                    setIsHovering(false);
+                    e.currentTarget.style.transform = 'rotateX(0deg) rotateY(0deg)';
+                  }}
+                  onMouseMove={(e) => {
+                    const bounds = e.currentTarget.getBoundingClientRect();
+                    const { rotateX, rotateY } = calculateRotation(e, bounds);
+                    e.currentTarget.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                  }}
+                >
+                  <div className="absolute bottom-4 md:bottom-10 right-4 md:right-10 w-8 h-8 md:w-[52px] md:h-[52px] hidden md:block">
+                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5 16H27M27 16L16 5M27 16L16 27" stroke="#1C1C1C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <div className="absolute bottom-4 md:bottom-10 left-4 md:left-10 w-8 h-8 md:w-[52px] md:h-[52px] hidden md:block">
+                    <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0 26C0 11.64 11.64 0 26 0H52V26C52 40.36 40.36 52 26 52H0V26Z" fill="#1C1C1C"/>
+                    </svg>
+                  </div>
+                  <h2 className="text-[24px] md:text-[32px] font-medium absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 md:translate-y-0 md:translate-x-0 md:top-10 md:left-10 text-center md:text-left w-full md:w-auto">CONTACTS</h2>
+                </motion.a>
+              </motion.div>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        {/* Safe area с надписью */}
+        <div className="absolute bottom-0 left-0 right-0 h-20 md:h-20 flex items-center justify-center">
+          <p className="text-[12px] font-medium uppercase text-[#1C1C1C]">DESIGN & CODE BY ME</p>
+        </div>
+      </div>
+    </main>
   );
 }
