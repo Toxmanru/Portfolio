@@ -14,7 +14,7 @@ export default function WorkPage() {
     },
     {
       title: 'BALANCY',
-      category: 'AI-BASED NUTRITION TRACKER',
+      category: 'AI-BASED\nNUTRITION TRACKER',
       imageUrl: '/images/balancy-app-cover.jpg',
       projectId: 'balancy'
     },

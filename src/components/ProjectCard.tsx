@@ -13,7 +13,6 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ imageUrl, category, title, projectId }: ProjectCardProps) {
-  const [isHovering, setIsHovering] = useState(false);
   const router = useRouter();
   const [isMobile, setIsMobile] = useState(false);
 
@@ -27,10 +26,8 @@ export default function ProjectCard({ imageUrl, category, title, projectId }: Pr
 
   const handleClick = () => {
     if (isMobile) {
-      // На мобильных устройствах переходим на страницу заглушки
       router.push('/work/mobile');
     } else {
-      // На десктопе переходим на страницу проекта
       router.push(`/work/${projectId}`);
     }
   };
@@ -48,7 +45,7 @@ export default function ProjectCard({ imageUrl, category, title, projectId }: Pr
   };
 
   // Разделяем категорию на строки
-  const categoryLines = category.split('\\n');
+  const categoryLines = category.split('\n');
 
   return (
     <div 
@@ -58,18 +55,16 @@ export default function ProjectCard({ imageUrl, category, title, projectId }: Pr
       <motion.div
         className="w-full relative rounded-[16px] md:rounded-[48px] overflow-hidden bg-[#EAEAEA] group"
         style={{ transformStyle: 'preserve-3d' }}
-        onMouseEnter={() => !isMobile && setIsHovering(true)}
-        onMouseLeave={(e) => {
-          if (!isMobile) {
-            setIsHovering(false);
-            e.currentTarget.style.transform = 'rotateX(0deg) rotateY(0deg)';
-          }
-        }}
         onMouseMove={(e) => {
           if (!isMobile) {
             const bounds = e.currentTarget.getBoundingClientRect();
             const { rotateX, rotateY } = calculateRotation(e, bounds);
             e.currentTarget.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+          }
+        }}
+        onMouseLeave={(e) => {
+          if (!isMobile) {
+            e.currentTarget.style.transform = 'rotateX(0deg) rotateY(0deg)';
           }
         }}
       >
@@ -94,14 +89,14 @@ export default function ProjectCard({ imageUrl, category, title, projectId }: Pr
           
           {/* Контент */}
           <div className="absolute bottom-4 md:bottom-10 left-4 md:left-10 p-0 text-[#1C1C1C]">
-            <div className="text-[12px] font-medium uppercase leading-[110%]">
+            <div className={`text-[8px] md:text-[12px] font-medium uppercase leading-[110%] ${projectId === 'leadership' ? 'text-white' : ''}`}>
               {categoryLines.map((line, index) => (
                 <div key={index} className={index > 0 ? 'mt-0.5' : ''}>
                   {line}
                 </div>
               ))}
             </div>
-            <h2 className="text-[16px] md:text-[32px] font-medium uppercase mt-0.5">{title}</h2>
+            <h2 className={`text-[16px] md:text-[32px] font-medium uppercase mt-0.5 ${projectId === 'leadership' ? 'text-white' : ''}`}>{title}</h2>
           </div>
         </div>
       </motion.div>
