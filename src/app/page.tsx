@@ -7,8 +7,16 @@ import BackgroundSvg from '@/components/BackgroundSvg';
 
 export default function Home() {
   const [isHovering, setIsHovering] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -21,11 +29,13 @@ export default function Home() {
   }, []);
 
   const calculateRotation = (e: React.MouseEvent<HTMLAnchorElement>, bounds: DOMRect) => {
+    if (isMobile) return { rotateX: 0, rotateY: 0 };
+    
     const centerX = bounds.left + bounds.width / 2;
     const centerY = bounds.top + bounds.height / 2;
     
-    const rotateX = -(((e.clientY - centerY) / (bounds.height / 2)) * 3.75);
-    const rotateY = ((e.clientX - centerX) / (bounds.width / 2)) * 3.75;
+    const rotateX = -(((e.clientY - centerY) / (bounds.height / 2)) * 4.75);
+    const rotateY = ((e.clientX - centerX) / (bounds.width / 2)) * 4.75;
     
     return { rotateX, rotateY };
   };
@@ -60,15 +70,17 @@ export default function Home() {
                 <motion.a
                   href="/work"
                   className="card work text-white relative block h-full rounded-[10px] md:rounded-[48px]"
-                  onMouseEnter={() => setIsHovering(true)}
-                  onMouseLeave={(e) => {
-                    setIsHovering(false);
-                    e.currentTarget.style.transform = 'rotateX(0deg) rotateY(0deg)';
-                  }}
                   onMouseMove={(e) => {
-                    const bounds = e.currentTarget.getBoundingClientRect();
-                    const { rotateX, rotateY } = calculateRotation(e, bounds);
-                    e.currentTarget.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                    if (!isMobile) {
+                      const bounds = e.currentTarget.getBoundingClientRect();
+                      const { rotateX, rotateY } = calculateRotation(e, bounds);
+                      e.currentTarget.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isMobile) {
+                      e.currentTarget.style.transform = 'rotateX(0deg) rotateY(0deg)';
+                    }
                   }}
                 >
                   <div className="absolute bottom-4 md:bottom-10 right-4 md:right-10 w-8 h-8 md:w-[52px] md:h-[52px] hidden md:block">
@@ -107,15 +119,17 @@ export default function Home() {
                 <motion.a
                   href="/consulting"
                   className="card consulting text-[#1C1C1C] relative block h-full rounded-[10px] md:rounded-[48px]"
-                  onMouseEnter={() => setIsHovering(true)}
-                  onMouseLeave={(e) => {
-                    setIsHovering(false);
-                    e.currentTarget.style.transform = 'rotateX(0deg) rotateY(0deg)';
-                  }}
                   onMouseMove={(e) => {
-                    const bounds = e.currentTarget.getBoundingClientRect();
-                    const { rotateX, rotateY } = calculateRotation(e, bounds);
-                    e.currentTarget.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                    if (!isMobile) {
+                      const bounds = e.currentTarget.getBoundingClientRect();
+                      const { rotateX, rotateY } = calculateRotation(e, bounds);
+                      e.currentTarget.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isMobile) {
+                      e.currentTarget.style.transform = 'rotateX(0deg) rotateY(0deg)';
+                    }
                   }}
                 >
                   <div className="absolute bottom-4 md:bottom-10 right-4 md:right-10 w-8 h-8 md:w-[52px] md:h-[52px] hidden md:block">
@@ -139,15 +153,17 @@ export default function Home() {
                 <motion.a
                   href="/contacts"
                   className="card contacts text-[#1C1C1C] relative block h-full rounded-[10px] md:rounded-[48px]"
-                  onMouseEnter={() => setIsHovering(true)}
-                  onMouseLeave={(e) => {
-                    setIsHovering(false);
-                    e.currentTarget.style.transform = 'rotateX(0deg) rotateY(0deg)';
-                  }}
                   onMouseMove={(e) => {
-                    const bounds = e.currentTarget.getBoundingClientRect();
-                    const { rotateX, rotateY } = calculateRotation(e, bounds);
-                    e.currentTarget.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                    if (!isMobile) {
+                      const bounds = e.currentTarget.getBoundingClientRect();
+                      const { rotateX, rotateY } = calculateRotation(e, bounds);
+                      e.currentTarget.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isMobile) {
+                      e.currentTarget.style.transform = 'rotateX(0deg) rotateY(0deg)';
+                    }
                   }}
                 >
                   <div className="absolute bottom-4 md:bottom-10 right-4 md:right-10 w-8 h-8 md:w-[52px] md:h-[52px] hidden md:block">
