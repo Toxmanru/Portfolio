@@ -38,8 +38,8 @@ export default function Home() {
         <div className="max-w-[1920px] mx-auto px-4 sm:px-8 md:px-16 md:h-[calc(100vh-184px)]">
           <div className="flex flex-col md:flex-row gap-2 md:gap-4 md:h-full">
             {/* Левая секция */}
-            <div className="w-full md:w-2/3 rounded-[10px] md:rounded-[48px] flex flex-col justify-between p-6 md:p-10 text-[#1C1C1C] card left-card md:h-auto text-center md:text-left" style={{ backgroundColor: 'rgba(221, 221, 221, 0.6)' }}>
-              <h1 className="text-[32px] md:text-[64px] font-medium leading-[100%]">
+            <div className="w-full md:w-2/3 rounded-[10px] md:rounded-[48px] flex flex-col justify-between p-7 md:p-10 text-[#1C1C1C] card left-card md:h-auto text-center md:text-left" style={{ backgroundColor: 'rgba(221, 221, 221, 0.6)' }}>
+              <h1 className="text-[28px] md:text-[64px] font-medium leading-[100%]">
                 LEAD PRODUCT
                 <span className="block mt-2 md:mt-4">DESIGNER &</span>
                 <span className="block mt-2 md:mt-4">DESIGN MANAGER</span>

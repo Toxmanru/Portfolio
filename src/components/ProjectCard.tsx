@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
@@ -15,13 +15,29 @@ interface ProjectCardProps {
 export default function ProjectCard({ imageUrl, category, title, projectId }: ProjectCardProps) {
   const [isHovering, setIsHovering] = useState(false);
   const router = useRouter();
-  const isLeadership = projectId === 'leadership';
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Проверяем, является ли устройство мобильным при монтировании компонента
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handleClick = () => {
-    router.push(`/work/${projectId}`);
+    if (isMobile) {
+      // На мобильных устройствах переходим на страницу заглушки
+      router.push('/work/mobile');
+    } else {
+      // На десктопе переходим на страницу проекта
+      router.push(`/work/${projectId}`);
+    }
   };
 
   const calculateRotation = (e: React.MouseEvent<HTMLDivElement>, bounds: DOMRect) => {
+    if (isMobile) return { rotateX: 0, rotateY: 0 };
+    
     const centerX = bounds.left + bounds.width / 2;
     const centerY = bounds.top + bounds.height / 2;
     
@@ -42,15 +58,19 @@ export default function ProjectCard({ imageUrl, category, title, projectId }: Pr
       <motion.div
         className="w-full relative rounded-[16px] md:rounded-[48px] overflow-hidden bg-[#EAEAEA] group"
         style={{ transformStyle: 'preserve-3d' }}
-        onMouseEnter={() => setIsHovering(true)}
+        onMouseEnter={() => !isMobile && setIsHovering(true)}
         onMouseLeave={(e) => {
-          setIsHovering(false);
-          e.currentTarget.style.transform = 'rotateX(0deg) rotateY(0deg)';
+          if (!isMobile) {
+            setIsHovering(false);
+            e.currentTarget.style.transform = 'rotateX(0deg) rotateY(0deg)';
+          }
         }}
         onMouseMove={(e) => {
-          const bounds = e.currentTarget.getBoundingClientRect();
-          const { rotateX, rotateY } = calculateRotation(e, bounds);
-          e.currentTarget.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+          if (!isMobile) {
+            const bounds = e.currentTarget.getBoundingClientRect();
+            const { rotateX, rotateY } = calculateRotation(e, bounds);
+            e.currentTarget.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+          }
         }}
       >
         {/* Контейнер с соотношением сторон 16:9 */}
@@ -73,7 +93,7 @@ export default function ProjectCard({ imageUrl, category, title, projectId }: Pr
           <div className="absolute inset-0 bg-black/0" />
           
           {/* Контент */}
-          <div className={`absolute bottom-4 md:bottom-10 left-4 md:left-10 p-0 ${isLeadership ? 'text-white' : 'text-[#1C1C1C]'}`}>
+          <div className="absolute bottom-4 md:bottom-10 left-4 md:left-10 p-0 text-[#1C1C1C]">
             <div className="text-[12px] font-medium uppercase leading-[110%]">
               {categoryLines.map((line, index) => (
                 <div key={index} className={index > 0 ? 'mt-0.5' : ''}>
