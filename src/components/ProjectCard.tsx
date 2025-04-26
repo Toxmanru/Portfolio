@@ -74,13 +74,11 @@ export default function ProjectCard({ imageUrl, category, title, projectId }: Pr
           <div className="absolute inset-0 rounded-[16px] md:rounded-[48px] overflow-hidden">
             <Image
               src={imageUrl}
-              alt=""
+              alt={title}
               fill
               className="object-cover"
-              sizes="(max-width: 768px) 100vw, (max-width: 1920px) 50vw, 960px"
-              quality={85}
-              priority={false}
-              loading="lazy"
+              priority
+              quality={100}
             />
           </div>
           
@@ -88,7 +86,7 @@ export default function ProjectCard({ imageUrl, category, title, projectId }: Pr
           <div className="absolute inset-0 bg-black/0" />
           
           {/* Контент */}
-          <div className="absolute bottom-4 md:bottom-10 left-4 md:left-10 p-0 text-[#1C1C1C]">
+          <div className="absolute bottom-6 md:bottom-10 left-6 md:left-10 p-0 text-[#1C1C1C]">
             <div className={`text-[8px] md:text-[12px] font-medium uppercase leading-[110%] ${projectId === 'leadership' ? 'text-white' : ''}`}>
               {categoryLines.map((line, index) => (
                 <div key={index} className={index > 0 ? 'mt-0.5' : ''}>
@@ -96,7 +94,7 @@ export default function ProjectCard({ imageUrl, category, title, projectId }: Pr
                 </div>
               ))}
             </div>
-            <h2 className={`text-[16px] md:text-[32px] font-medium uppercase mt-0.5 ${projectId === 'leadership' ? 'text-white' : ''}`}>{title}</h2>
+            <h2 className={`text-[24px] md:text-[32px] font-medium uppercase mt-0.5 ${projectId === 'leadership' ? 'text-white' : ''}`}>{title}</h2>
           </div>
         </div>
       </motion.div>

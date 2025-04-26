@@ -16,7 +16,7 @@ export default function ContactsPage() {
             <NavCard title="CONTACTS" />
           </div>
           
-          <div className="mt-4 md:mt-8 h-[calc(100%-104px)]">
+          <div className="md:mt-8 h-[calc(100%-104px)]">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-4 h-full">
               {/* Основная секция */}
               <div className="md:col-span-2 rounded-[16px] md:rounded-[48px] flex flex-col justify-between p-8 md:p-10 text-[#1C1C1C] card left-card h-[calc(50vh-32px)] md:h-auto text-center md:text-left" style={{ backgroundColor: 'rgba(221, 221, 221, 0.6)' }}>

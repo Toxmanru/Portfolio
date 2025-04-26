@@ -45,7 +45,7 @@ export default function WorkPage() {
           </div>
 
           {/* Projects Grid */}
-          <div className="mt-4 md:mt-8 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
+          <div className="md:mt-8 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
             {projects.map((project) => (
               <ProjectCard
                 key={project.projectId}

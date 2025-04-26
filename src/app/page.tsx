@@ -48,7 +48,7 @@ export default function Home() {
         <div className="max-w-[1920px] mx-auto px-4 sm:px-8 md:px-16 md:h-[calc(100vh-184px)]">
           <div className="flex flex-col md:flex-row gap-2 md:gap-4 md:h-full">
             {/* Левая секция */}
-            <div className="w-full md:w-2/3 rounded-[10px] md:rounded-[48px] flex flex-col justify-between p-7 md:p-10 text-[#1C1C1C] card left-card md:h-auto text-center md:text-left" style={{ backgroundColor: 'rgba(221, 221, 221, 0.6)' }}>
+            <div className="w-full md:w-2/3 rounded-[14px] md:rounded-[48px] flex flex-col justify-between p-7 md:p-10 text-[#1C1C1C] card left-card md:h-auto text-center md:text-left" style={{ backgroundColor: 'rgba(221, 221, 221, 0.6)' }}>
               <h1 className="text-[28px] md:text-[64px] font-medium leading-[100%]">
                 LEAD PRODUCT
                 <span className="block mt-2 md:mt-4">DESIGNER &</span>
@@ -107,7 +107,7 @@ export default function Home() {
                     >
                       <path d="M26 0L52 26L26 52L0 26L26 0Z" fill="white"/>
                     </motion.svg>
-                  </div>
+        </div>
                   <h2 className="text-[24px] md:text-[32px] font-medium absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 md:translate-y-0 md:translate-x-0 md:top-10 md:left-10 text-center md:text-left w-full md:w-auto">MY WORKS</h2>
                 </motion.a>
               </motion.div>
@@ -186,7 +186,7 @@ export default function Home() {
         <div className="absolute bottom-0 left-0 right-0 h-20 md:h-20 flex items-center justify-center">
           <p className="text-[12px] font-medium uppercase text-[#1C1C1C]">DESIGN & CODE BY ME</p>
         </div>
-      </div>
+    </div>
     </main>
   );
 }
