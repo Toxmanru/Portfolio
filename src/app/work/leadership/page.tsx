@@ -47,7 +47,8 @@ export default function ProjectPage() {
               <PicCard 
                 imageUrl={project.content.intro.image} 
                 variant="full" 
-                className="!rounded-[48px] h-full" 
+                className="h-full"
+                isHero 
               />
             </div>
 

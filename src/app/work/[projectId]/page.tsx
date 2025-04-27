@@ -173,7 +173,8 @@ export default function ProjectPage({ params }: { params: { projectId: string } 
               <PicCard 
                 imageUrl={project.content.intro.image} 
                 variant="full" 
-                className="h-full" 
+                className="h-full"
+                isHero
               />
             </div>
 
