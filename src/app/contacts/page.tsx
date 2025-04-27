@@ -47,7 +47,7 @@ export default function ContactsPage() {
 
               {/* Правая карточка с изображением */}
               <div className="md:col-span-1 flex flex-col gap-2 md:gap-4 perspective-1000 h-[calc(50vh-32px)] md:h-auto mb-8 md:mb-0">
-                <div className="relative rounded-[16px] md:rounded-[48px] overflow-hidden h-full">
+                <div className="relative rounded-[24px] md:rounded-[48px] overflow-hidden h-full">
                   <Image
                     src="/images/contacts.jpg"
                     alt="Contacts"

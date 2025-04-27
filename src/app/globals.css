@@ -41,7 +41,7 @@ body {
 }
 
 /* Стили курсора только для десктопных устройств */
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   body {
     cursor: none;
   }
@@ -66,6 +66,36 @@ body {
   /* Отключаем стандартный курсор для интерактивных элементов */
   a, button, [role="button"] {
     cursor: none !important;
+  }
+
+  /* 3D эффекты только для правых карточек на десктопе */
+  .card.work,
+  .card.consulting,
+  .card.contacts {
+    transform-style: preserve-3d;
+    transform: perspective(1000px) rotateX(var(--rotate-x, 0)) rotateY(var(--rotate-y, 0));
+  }
+
+  .card:hover {
+    z-index: 3;
+  }
+
+  .card.work:hover,
+  .card.consulting:hover,
+  .card.contacts:hover {
+    transform: perspective(1000px) rotateX(var(--rotate-x)) rotateY(var(--rotate-y)) translate3d(0, 0, 0);
+  }
+}
+
+/* Мобильная версия карточек */
+@media (max-width: 1024px) {
+  .card.work,
+  .card.consulting,
+  .card.contacts,
+  .left-card {
+    border-radius: 24px;
+    transform: none !important;
+    transition: none !important;
   }
 }
 
@@ -109,34 +139,6 @@ body {
   background-color: rgba(173, 246, 96, 0.6);
   border-radius: 32px;
   padding: 40px;
-}
-
-/* Мобильная версия карточек */
-@media (max-width: 768px) {
-  .card.work,
-  .card.consulting,
-  .card.contacts,
-  .left-card {
-    border-radius: 24px;
-  }
-}
-
-/* 3D эффекты только для правых карточек */
-.card.work,
-.card.consulting,
-.card.contacts {
-  transform-style: preserve-3d;
-  transform: perspective(1000px) rotateX(var(--rotate-x, 0)) rotateY(var(--rotate-y, 0));
-}
-
-.card:hover {
-  z-index: 3;
-}
-
-.card.work:hover,
-.card.consulting:hover,
-.card.contacts:hover {
-  transform: perspective(1000px) rotateX(var(--rotate-x)) rotateY(var(--rotate-y)) translate3d(0, 0, 0);
 }
 
 /* Стили для левой карточки */

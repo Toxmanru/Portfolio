@@ -53,7 +53,7 @@ export default function ProjectCard({ imageUrl, category, title, projectId }: Pr
       onClick={handleClick}
     >
       <motion.div
-        className="w-full relative rounded-[16px] md:rounded-[48px] overflow-hidden bg-[#EAEAEA] group"
+        className="w-full relative rounded-[24px] md:rounded-[48px] overflow-hidden bg-[#EAEAEA] group"
         style={{ transformStyle: 'preserve-3d' }}
         onMouseMove={(e) => {
           if (!isMobile) {
@@ -71,7 +71,7 @@ export default function ProjectCard({ imageUrl, category, title, projectId }: Pr
         {/* Контейнер с соотношением сторон 16:9 */}
         <div className="relative w-full pt-[56.25%]">
           {/* Изображение */}
-          <div className="absolute inset-0 rounded-[16px] md:rounded-[48px] overflow-hidden">
+          <div className="absolute inset-0 rounded-[24px] md:rounded-[48px] overflow-hidden">
             <Image
               src={imageUrl}
               alt={title}
