@@ -40,8 +40,8 @@ body {
   position: relative;
 }
 
-/* Стили курсора только для десктопных устройств */
-@media (min-width: 1151px) {
+/* Стили курсора и эффекты только для устройств с мышью */
+@media (hover: hover) and (pointer: fine) {
   body {
     cursor: none;
   }
@@ -68,7 +68,7 @@ body {
     cursor: none !important;
   }
 
-  /* 3D эффекты только для правых карточек на десктопе */
+  /* 3D эффекты только для устройств с мышью */
   .card.work,
   .card.consulting,
   .card.contacts {
@@ -87,8 +87,8 @@ body {
   }
 }
 
-/* Мобильная версия карточек */
-@media (max-width: 1150px) {
+/* Стили для устройств без мыши (тачскрин) */
+@media (hover: none) or (pointer: coarse) {
   .card.work,
   .card.consulting,
   .card.contacts,
@@ -96,6 +96,10 @@ body {
     border-radius: 24px;
     transform: none !important;
     transition: none !important;
+  }
+
+  .diamond-icon {
+    display: none !important;
   }
 }
 
