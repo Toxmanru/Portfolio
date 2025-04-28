@@ -35,7 +35,7 @@ export default function ProjectPage() {
             {/* Intro block */}
             <div className="grid grid-cols-2 gap-4">
               <TextCard variant="wide" className="!bg-[#1C1C1C] text-[#FFFFFF]">
-                <div className="absolute top-10 left-10 max-[1150px]:hidden">
+                <div className="absolute top-10 left-10">
                   <DiamondIcon />
                 </div>
                 <div className="space-y-4 uppercase">

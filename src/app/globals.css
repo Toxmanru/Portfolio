@@ -98,7 +98,8 @@ body {
     transition: none !important;
   }
 
-  .diamond-icon {
+  .diamond-icon,
+  [class*="diamond-icon"] {
     display: none !important;
   }
 }

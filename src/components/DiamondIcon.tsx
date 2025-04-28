@@ -8,6 +8,7 @@ export default function DiamondIcon() {
       viewBox="0 0 52 52" 
       fill="none" 
       xmlns="http://www.w3.org/2000/svg"
+      className="diamond-icon"
       initial={{ rotate: 0, y: 0 }}
       animate={{ 
         rotate: 180,
