@@ -41,7 +41,7 @@ body {
 }
 
 /* Стили курсора только для десктопных устройств */
-@media (min-width: 1025px) {
+@media (min-width: 1151px) {
   body {
     cursor: none;
   }
@@ -88,7 +88,7 @@ body {
 }
 
 /* Мобильная версия карточек */
-@media (max-width: 1024px) {
+@media (max-width: 1150px) {
   .card.work,
   .card.consulting,
   .card.contacts,
