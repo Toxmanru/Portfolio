@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 export default function DiamondIcon() {
   return (
     <motion.svg 
-      className="diamond-icon w-[min(52px,5vh)] h-[min(52px,5vh)]"
+      className="diamond-icon w-[min(52px,2.7vw)] h-[min(52px,2.7vw)]"
       viewBox="0 0 52 52" 
       fill="none" 
       xmlns="http://www.w3.org/2000/svg"
