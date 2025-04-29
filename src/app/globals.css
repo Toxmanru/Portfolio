@@ -93,9 +93,13 @@ body {
   .card.consulting,
   .card.contacts,
   .left-card {
-    border-radius: 24px;
+    border-radius: 16px;
     transform: none !important;
     transition: none !important;
+  }
+
+  .left-card {
+    border-radius: 24px;
   }
 
   .diamond-icon,
@@ -128,19 +132,16 @@ body {
 /* Work карточка */
 .card.work {
   background-color: rgba(24, 48, 47, 0.6);
-  border-radius: 32px;
 }
 
 /* Consulting карточка */
 .card.consulting {
   background-color: rgba(177, 157, 255, 0.6);
-  border-radius: 32px;
 }
 
 /* Contacts карточка */
 .card.contacts {
   background-color: rgba(173, 246, 96, 0.6);
-  border-radius: 32px;
 }
 
 /* Стили для левой карточки */
@@ -154,6 +155,14 @@ body {
 @media (max-width: 768px) {
   .left-card {
     border-radius: 24px;
+  }
+}
+
+@media (min-width: 768px) {
+  .card.work,
+  .card.consulting,
+  .card.contacts {
+    border-radius: 32px;
   }
 }
 
