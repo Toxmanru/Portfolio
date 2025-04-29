@@ -83,12 +83,12 @@ export default function Home() {
                     }
                   }}
                 >
-                  <div className="absolute bottom-4 md:bottom-10 right-4 md:right-10 w-8 h-8 md:w-[52px] md:h-[52px] hidden md:block">
+                  <div className="absolute bottom-4 md:bottom-10 right-4 md:right-10 w-8 h-8 md:w-[min(52px,5vh)] md:h-[min(52px,5vh)] hidden md:block">
                     <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M5 16H27M27 16L16 5M27 16L16 27" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </div>
-                  <div className="absolute bottom-4 md:bottom-10 left-4 md:left-10 w-8 h-8 md:w-[52px] md:h-[52px] hidden md:block">
+                  <div className="absolute bottom-4 md:bottom-10 left-4 md:left-10 w-8 h-8 md:w-[min(52px,5vh)] md:h-[min(52px,5vh)] hidden md:block">
                     <motion.svg 
                       viewBox="0 0 52 52" 
                       fill="none" 
@@ -107,7 +107,7 @@ export default function Home() {
                     >
                       <path d="M26 0L52 26L26 52L0 26L26 0Z" fill="white"/>
                     </motion.svg>
-        </div>
+                  </div>
                   <h2 className="text-[24px] md:text-[32px] font-medium absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 md:translate-y-0 md:translate-x-0 md:top-10 md:left-10 text-center md:text-left w-full md:w-auto">MY WORKS</h2>
                 </motion.a>
               </motion.div>
@@ -132,12 +132,12 @@ export default function Home() {
                     }
                   }}
                 >
-                  <div className="absolute bottom-4 md:bottom-10 right-4 md:right-10 w-8 h-8 md:w-[52px] md:h-[52px] hidden md:block">
+                  <div className="absolute bottom-4 md:bottom-10 right-4 md:right-10 w-8 h-8 md:w-[min(52px,5vh)] md:h-[min(52px,5vh)] hidden md:block">
                     <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M5 16H27M27 16L16 5M27 16L16 27" stroke="#1C1C1C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </div>
-                  <div className="absolute bottom-4 md:bottom-10 left-4 md:left-10 w-8 h-8 md:w-[52px] md:h-[52px] hidden md:block">
+                  <div className="absolute bottom-4 md:bottom-10 left-4 md:left-10 w-8 h-8 md:w-[min(52px,5vh)] md:h-[min(52px,5vh)] hidden md:block">
                     <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <circle cx="26" cy="26" r="26" fill="#1C1C1C"/>
                     </svg>
@@ -166,12 +166,12 @@ export default function Home() {
                     }
                   }}
                 >
-                  <div className="absolute bottom-4 md:bottom-10 right-4 md:right-10 w-8 h-8 md:w-[52px] md:h-[52px] hidden md:block">
+                  <div className="absolute bottom-4 md:bottom-10 right-4 md:right-10 w-8 h-8 md:w-[min(52px,5vh)] md:h-[min(52px,5vh)] hidden md:block">
                     <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M5 16H27M27 16L16 5M27 16L16 27" stroke="#1C1C1C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </div>
-                  <div className="absolute bottom-4 md:bottom-10 left-4 md:left-10 w-8 h-8 md:w-[52px] md:h-[52px] hidden md:block">
+                  <div className="absolute bottom-4 md:bottom-10 left-4 md:left-10 w-8 h-8 md:w-[min(52px,5vh)] md:h-[min(52px,5vh)] hidden md:block">
                     <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M0 26C0 11.64 11.64 0 26 0H52V26C52 40.36 40.36 52 26 52H0V26Z" fill="#1C1C1C"/>
                     </svg>
