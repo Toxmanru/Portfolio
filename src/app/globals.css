@@ -129,21 +129,18 @@ body {
 .card.work {
   background-color: rgba(24, 48, 47, 0.6);
   border-radius: 32px;
-  padding: 40px;
 }
 
 /* Consulting карточка */
 .card.consulting {
   background-color: rgba(177, 157, 255, 0.6);
   border-radius: 32px;
-  padding: 40px;
 }
 
 /* Contacts карточка */
 .card.contacts {
   background-color: rgba(173, 246, 96, 0.6);
   border-radius: 32px;
-  padding: 40px;
 }
 
 /* Стили для левой карточки */
