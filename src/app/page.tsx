@@ -48,13 +48,13 @@ export default function Home() {
         <div className="max-w-[1920px] mx-auto px-4 sm:px-8 md:px-16 md:h-[calc(100vh-184px)]">
           <div className="flex flex-col md:flex-row gap-2 md:gap-4 md:h-full">
             {/* Левая секция */}
-            <div className="w-full md:w-2/3 rounded-[14px] md:rounded-[48px] flex flex-col justify-between p-7 md:p-10 text-[#1C1C1C] card left-card md:h-auto text-center md:text-left h-[calc(50vh+40px)]" style={{ backgroundColor: 'rgba(221, 221, 221, 0.6)' }}>
+            <div className="w-full md:w-2/3 rounded-[14px] md:rounded-[48px] flex flex-col justify-between p-8 md:p-10 text-[#1C1C1C] card left-card md:h-auto text-center md:text-left h-[calc(50vh+40px)] max-h-[378px] md:max-h-none" style={{ backgroundColor: 'rgba(221, 221, 221, 0.6)' }}>
               <h1 className="text-[32px] md:text-[64px] font-medium leading-[100%]">
                 LEAD PRODUCT
                 <span className="block mt-2 md:mt-4">DESIGNER &</span>
                 <span className="block mt-2 md:mt-4">DESIGN MANAGER</span>
               </h1>
-              <p className="text-[18px] md:text-[28px] font-normal leading-[140%] uppercase tracking-[0.05em] mt-[80px] md:mt-0">
+              <p className="text-[18px] md:text-[28px] font-normal leading-[140%] uppercase tracking-[0.05em] mt-[max(20px,min(calc(25vh-120px),40px))] md:mt-0">
                 7+ YEARS OF EXPERIENCE • DESIGN OPS &<br />
                 TEAM BUILDING • CROSS-PLATFORM •<br />
                 INSURE-TECH • E-COM • MED-TECH •

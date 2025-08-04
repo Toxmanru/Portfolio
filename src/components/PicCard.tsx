@@ -12,7 +12,7 @@ interface PicCardProps {
 export default function PicCard({ imageUrl, variant = 'full', className = '', isHero = false }: PicCardProps) {
   return (
     <div className={`w-full relative ${className}`}>
-      <div className={`w-full relative rounded-[24px] md:rounded-[48px] overflow-hidden bg-[#EAEAEA] ${isHero ? 'pt-[62.5%]' : variant === 'full' ? 'aspect-[16/9]' : 'aspect-square'}`}>
+      <div className={`w-full relative rounded-[24px] md:rounded-[38px] overflow-hidden bg-[#EAEAEA] ${isHero ? 'pt-[62.5%]' : variant === 'full' ? 'aspect-[16/9]' : 'aspect-square'}`}>
         <div className={`${isHero ? 'absolute inset-0' : ''}`}>
           <Image
             src={imageUrl}

@@ -7,6 +7,12 @@ import ProjectCard from '@/components/ProjectCard';
 export default function WorkPage() {
   const projects = [
     {
+      title: 'AMIWA',
+      category: 'TRAVEL COMPANION',
+      imageUrl: '/images/amiwa-cover.jpg',
+      projectId: 'amiwa'
+    },
+    {
       title: 'QIC APP',
       category: 'ECOSYSTEM HUB',
       imageUrl: '/images/qic-app-cover.jpg',
@@ -20,7 +26,7 @@ export default function WorkPage() {
     },
     {
       title: 'TEAM LEADERSHIP',
-      category: 'TEAM LEADERSHIP',
+      category: 'DESIGN PROCESS',
       imageUrl: '/images/leadership-cover.jpg',
       projectId: 'leadership'
     },
