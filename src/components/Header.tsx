@@ -54,16 +54,8 @@ const Header = () => {
               whileHover={{ scale: 1.1 }}
               transition={{ duration: 0.2 }}
             >
-              <a href="/cv/gubarev-pentin-cv-eng.pdf" download className="text-[16px] md:text-[20px] text-[#1C1C1C] hover:text-gray-600 transition-colors duration-300 font-normal">
+              <a href="/cv/anton-gubarev-pentin-cv.pdf" download className="text-[16px] md:text-[20px] text-[#1C1C1C] hover:text-gray-600 transition-colors duration-300 font-normal">
                 CV eng
-              </a>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.1 }}
-              transition={{ duration: 0.2 }}
-            >
-              <a href="/cv/gubarev-pentin-cv-rus.pdf" download className="text-[16px] md:text-[20px] text-[#1C1C1C] hover:text-gray-600 transition-colors duration-300 font-normal">
-                CV rus
               </a>
             </motion.div>
             <motion.div
@@ -87,20 +79,12 @@ const Header = () => {
           >
             <div className="flex flex-col space-y-4 px-4">
               <a 
-                href="/cv/gubarev-pentin-cv-eng.pdf" 
+                href="/cv/anton-gubarev-pentin-cv.pdf" 
                 download 
                 className="text-[16px] text-[#1C1C1C] hover:text-gray-600 transition-colors duration-300 font-normal"
                 onClick={() => setIsMenuOpen(false)}
               >
                 CV eng
-              </a>
-              <a 
-                href="/cv/gubarev-pentin-cv-rus.pdf" 
-                download 
-                className="text-[16px] text-[#1C1C1C] hover:text-gray-600 transition-colors duration-300 font-normal"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                CV rus
               </a>
               <Link 
                 href="https://www.linkedin.com/in/anton-gubarev-pentin" 
