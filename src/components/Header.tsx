@@ -54,7 +54,7 @@ const Header = () => {
               whileHover={{ scale: 1.1 }}
               transition={{ duration: 0.2 }}
             >
-              <a href="/cv/anton-gubarev-pentin-cv.pdf" download className="text-[16px] md:text-[20px] text-[#1C1C1C] hover:text-gray-600 transition-colors duration-300 font-normal">
+              <a href="/cv/gubarev-pentin-cv.pdf" download className="text-[16px] md:text-[20px] text-[#1C1C1C] hover:text-gray-600 transition-colors duration-300 font-normal">
                 CV eng
               </a>
             </motion.div>
@@ -79,7 +79,7 @@ const Header = () => {
           >
             <div className="flex flex-col space-y-4 px-4">
               <a 
-                href="/cv/anton-gubarev-pentin-cv.pdf" 
+                href="/cv/gubarev-pentin-cv.pdf" 
                 download 
                 className="text-[16px] text-[#1C1C1C] hover:text-gray-600 transition-colors duration-300 font-normal"
                 onClick={() => setIsMenuOpen(false)}
