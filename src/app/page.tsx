@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import BackgroundSvg from '@/components/BackgroundSvg';
 
 export default function Home() {
   const [isHovering, setIsHovering] = useState(false);
