@@ -6,7 +6,6 @@ import NavCard from '@/components/NavCard';
 export default function ConsultingPage() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-white">
-      <BackgroundSvg />
       <div className="relative min-h-screen pb-20 pt-[64px] md:pt-[104px] z-10">
         <div className="max-w-[1920px] mx-auto px-4 md:px-8 lg:px-16 h-[calc(100vh-184px)]">
           {/* Navigation Card */}
