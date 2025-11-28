@@ -134,7 +134,6 @@ export default function ProjectPage({ params }: { params: { projectId: string } 
   if (isMobile) {
     return (
       <main className="relative min-h-screen overflow-hidden bg-white">
-        <BackgroundSvg />
         <div className="relative min-h-screen pb-20 pt-[64px] z-10">
           <div className="max-w-[1920px] mx-auto px-4 h-[calc(100vh-184px)]">
             <div className="h-full">
