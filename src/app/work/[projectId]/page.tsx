@@ -11,7 +11,6 @@ import PicCard from '@/components/PicCard'
 import TextCard from '@/components/TextCard'
 import Button from '@/components/Button'
 import DiamondIcon from '@/components/DiamondIcon'
-import BackgroundSvg from '@/components/BackgroundSvg'
 
 interface Project {
   title: string
