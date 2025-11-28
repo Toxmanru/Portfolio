@@ -41,7 +41,7 @@ export default function Home() {
 
   return (
     <main className="relative min-h-screen overflow-auto md:overflow-hidden bg-white">
-      <BackgroundSvg />
+     
       <div className={`custom-cursor ${isHovering ? 'hover' : ''}`} style={{ left: cursorPosition.x, top: cursorPosition.y }} />
       <div className="relative min-h-screen pb-20 md:pb-20 pt-[64px] md:pt-[104px] z-10">
         <div className="max-w-[1920px] mx-auto px-4 sm:px-8 md:px-16 md:h-[calc(100vh-184px)]">
