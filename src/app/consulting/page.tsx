@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import NavCard from '@/components/NavCard';
-import BackgroundSvg from '@/components/BackgroundSvg';
 
 export default function ConsultingPage() {
   return (
