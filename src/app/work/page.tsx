@@ -1,6 +1,5 @@
 'use client';
 
-import BackgroundSvg from '@/components/BackgroundSvg';
 import NavCard from '@/components/NavCard';
 import ProjectCard from '@/components/ProjectCard';
 
@@ -40,7 +39,6 @@ export default function WorkPage() {
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-white">
-      <BackgroundSvg />
       
       {/* Header */}
       <div className="relative min-h-screen pb-20 pt-[64px] md:pt-[104px] z-10">
