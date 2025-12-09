@@ -101,7 +101,7 @@ export default function ContactsSection() {
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold: isMobile ? 0.95 : 0.6 }
     );
     observer.observe(section);
     return () => {
