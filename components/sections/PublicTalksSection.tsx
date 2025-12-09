@@ -41,7 +41,7 @@ export default function PublicTalksSection() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: isMobile ? 'top 50%' : 'top 280px',
-          end: '+=400',
+          end: isMobile ? '+=250' : '+=400',
           scrub: 1,
           once: true,
         },

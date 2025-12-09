@@ -18,10 +18,8 @@ export default function SberHealthPage() {
   }, []);
 
   const openFullscreen = (src: string) => {
-    if (isMobile) {
-      setFullscreenImage(src);
-      document.body.style.overflow = 'hidden';
-    }
+    setFullscreenImage(src);
+    document.body.style.overflow = 'hidden';
   };
 
   const closeFullscreen = () => {
@@ -123,7 +121,9 @@ export default function SberHealthPage() {
               overflow: 'hidden',
               flexShrink: 0,
               backgroundColor: '#A4A0FF',
+              cursor: 'pointer',
             }}
+            onClick={() => openFullscreen('/images/works/sberhealth/hero.png')}
           >
             <Image
               src="/images/works/sberhealth/hero.png"
@@ -139,7 +139,10 @@ export default function SberHealthPage() {
       <section
         className="relative w-full"
         style={{
-          padding: isMobile ? '32px 16px' : '64px',
+          paddingTop: isMobile ? '32px' : '64px',
+          paddingBottom: isMobile ? '16px' : '64px',
+          paddingLeft: isMobile ? '16px' : '64px',
+          paddingRight: isMobile ? '16px' : '64px',
         }}
       >
         <div
@@ -186,7 +189,7 @@ export default function SberHealthPage() {
               borderRadius: isMobile ? '24px' : '32px',
               overflow: 'hidden',
               backgroundColor: '#EDE9FB',
-              cursor: isMobile ? 'pointer' : 'default',
+              cursor: 'pointer',
             }}
             onClick={() => openFullscreen('/images/works/sberhealth/old-new.png')}
           >
@@ -219,12 +222,12 @@ export default function SberHealthPage() {
           <div
             className="relative w-full"
             style={{
-              marginTop: isMobile ? '16px' : '0px',
+              marginTop: '0px',
               aspectRatio: '16 / 7',
               borderRadius: isMobile ? '24px' : '32px',
               overflow: 'hidden',
               backgroundColor: '#E6DBFF',
-              cursor: isMobile ? 'pointer' : 'default',
+              cursor: 'pointer',
             }}
             onClick={() => openFullscreen('/images/works/sberhealth/new-version.png')}
           >
@@ -276,7 +279,7 @@ export default function SberHealthPage() {
               borderRadius: isMobile ? '24px' : '32px',
               overflow: 'hidden',
               backgroundColor: '#EDE9FB',
-              cursor: isMobile ? 'pointer' : 'default',
+              cursor: 'pointer',
             }}
             onClick={() => openFullscreen('/images/works/sberhealth/research.png')}
           >

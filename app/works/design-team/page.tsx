@@ -18,10 +18,8 @@ export default function DesignTeamPage() {
   }, []);
 
   const openFullscreen = (src: string) => {
-    if (isMobile) {
-      setFullscreenImage(src);
-      document.body.style.overflow = 'hidden';
-    }
+    setFullscreenImage(src);
+    document.body.style.overflow = 'hidden';
   };
 
   const closeFullscreen = () => {
@@ -125,7 +123,9 @@ export default function DesignTeamPage() {
               overflow: 'hidden',
               flexShrink: 0,
               backgroundColor: '#A4A0FF',
+              cursor: 'pointer',
             }}
+            onClick={() => openFullscreen('/images/works/design-team/hero.png')}
           >
             <Image
               src="/images/works/design-team/hero.png"
@@ -186,7 +186,9 @@ export default function DesignTeamPage() {
               borderRadius: isMobile ? '24px' : '32px',
               overflow: 'hidden',
               backgroundColor: '#A4A0FF',
+              cursor: 'pointer',
             }}
+            onClick={() => openFullscreen('/images/works/design-team/foundation.png')}
           >
             <Image
               src="/images/works/design-team/foundation.png"
@@ -237,7 +239,9 @@ export default function DesignTeamPage() {
               borderRadius: isMobile ? '24px' : '32px',
               overflow: 'hidden',
               backgroundColor: '#A4A0FF',
+              cursor: 'pointer',
             }}
+            onClick={() => openFullscreen('/images/works/design-team/collage.png')}
           >
             <Image
               src="/images/works/design-team/collage.png"

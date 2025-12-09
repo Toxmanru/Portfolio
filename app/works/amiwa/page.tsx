@@ -19,10 +19,8 @@ export default function AmiwaPage() {
   }, []);
 
   const openFullscreen = (src: string) => {
-    if (isMobile) {
-      setFullscreenImage(src);
-      document.body.style.overflow = 'hidden';
-    }
+    setFullscreenImage(src);
+    document.body.style.overflow = 'hidden';
   };
 
   const closeFullscreen = () => {
@@ -152,7 +150,7 @@ export default function AmiwaPage() {
               borderRadius: isMobile ? '24px' : '32px',
               overflow: 'hidden',
               flexShrink: 0,
-              cursor: isMobile ? 'pointer' : 'default',
+              cursor: 'pointer',
             }}
             onClick={() => openFullscreen('/images/works/amiwa/hero.png')}
           >
@@ -202,7 +200,7 @@ export default function AmiwaPage() {
                 aspectRatio: '16 / 7',
                 borderRadius: isMobile ? '24px' : '32px',
                 overflow: 'hidden',
-                cursor: isMobile ? 'pointer' : 'default',
+                cursor: 'pointer',
               }}
               onClick={() => openFullscreen('/images/works/amiwa/content-1.png')}
             >
@@ -220,7 +218,7 @@ export default function AmiwaPage() {
                 aspectRatio: '16 / 7',
                 borderRadius: isMobile ? '24px' : '32px',
                 overflow: 'hidden',
-                cursor: isMobile ? 'pointer' : 'default',
+                cursor: 'pointer',
               }}
               onClick={() => openFullscreen('/images/works/amiwa/content-2.png')}
             >
