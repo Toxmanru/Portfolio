@@ -1,0 +1,590 @@
+@import 'tailwindcss';
+
+:root {
+  /* Цветовая палитра */
+  --color-primary: #6366f1;
+  --color-secondary: #8b5cf6;
+  --color-accent: #ED5C4E;
+  --color-background: #020202;
+  --color-surface: #494949;
+  --color-text: #FFFFFF;
+  --color-text-secondary: #a3a3a3;
+  
+  /* Layout */
+  --container-max-width: 1280px;
+  --container-padding: 64px;
+  
+  /* Градиенты */
+  --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+  --gradient-glow: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.15), transparent 70%);
+  
+  /* Тени */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 40px rgba(99, 102, 241, 0.3);
+  
+  /* Анимации */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  
+  /* Размытие */
+  --blur-sm: blur(8px);
+  --blur-md: blur(16px);
+  --blur-lg: blur(24px);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-lexend-exa), system-ui, -apple-system, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Основной контейнер */
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+/* Полноширинная секция с внутренним контейнером */
+.section-full {
+  width: 100%;
+}
+
+.section-full .section-inner {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+/* Адаптивные отступы для мобильных */
+@media (max-width: 768px) {
+  :root {
+    --container-padding: 24px;
+  }
+}
+
+/* Hero section typography */
+.hero-title {
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 1.05em;
+  letter-spacing: -0.1em;
+  text-align: center;
+}
+
+.hero-subtitle {
+  font-weight: 200;
+  font-size: 14px;
+  line-height: 1.4em;
+  letter-spacing: 0.02em;
+  width: 100%;
+  text-align: center;
+}
+
+@media (min-width: 960px) {
+  .hero-subtitle {
+    font-size: 16px;
+  }
+}
+
+/* Hero content container */
+.hero-content {
+  position: relative;
+  margin-top: -56px;
+  padding-left: 16px;
+  padding-right: 16px;
+  width: 100%;
+}
+
+@media (min-width: 960px) {
+  .hero-title {
+    font-size: 64px;
+    text-align: left;
+  }
+  
+  .hero-subtitle {
+    width: 396px;
+    text-align: left;
+  }
+  
+  .hero-content {
+    position: static;
+    margin-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+    width: 896px;
+  }
+}
+
+/* xl breakpoint (1280px+) */
+@media (min-width: 1280px) {
+  .hero-title {
+    font-size: 88px;
+  }
+}
+
+/* 2xl breakpoint (1536px+) */
+@media (min-width: 1536px) {
+  .hero-title {
+    font-size: 96px;
+  }
+  
+  .hero-subtitle {
+    font-size: 20px;
+    width: 515px; /* 396px + 30% */
+  }
+}
+
+/* Adaptive section padding: 64px for 1280px, 120px for 1400px+ */
+.section-padding-adaptive {
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+@media (min-width: 1400px) {
+  .section-padding-adaptive {
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
+}
+
+/* Hero section margin */
+.hero-margin {
+  margin-top: 80px; /* 64px header + 16px gap */
+}
+
+@media (min-width: 960px) {
+  .hero-margin {
+    margin-top: 168px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-margin {
+    margin-top: 200px;
+  }
+}
+
+/* Hero image mobile */
+.hero-image-mobile {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100vw - 176px); /* 88px * 2 */
+  max-width: 400px;
+  aspect-ratio: 326 / 423;
+  height: auto;
+}
+
+@media (min-width: 960px) {
+  .hero-image-mobile {
+    position: absolute;
+    left: auto;
+    transform: none;
+    width: 326px;
+    height: 423px;
+    aspect-ratio: auto;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-image-mobile {
+    width: 422px;
+    height: 547px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .hero-image-mobile {
+    width: 422px;
+    height: 547px;
+  }
+}
+
+/* Hero section responsive padding and height */
+.hero-section {
+  padding-left: 16px;
+  padding-right: 16px;
+  min-height: auto;
+}
+
+@media (min-width: 960px) {
+  .hero-section {
+    padding-left: 64px;
+    padding-right: 64px;
+    height: 423px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-section {
+    height: 547px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .hero-section {
+    height: 629px;
+  }
+}
+
+/* Hero content gap */
+.hero-content-gap {
+  gap: 24px;
+}
+
+@media (min-width: 960px) {
+  .hero-content-gap {
+    gap: 56px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-content-gap {
+    gap: 82px;
+  }
+}
+
+/* Header typography */
+.header-link {
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.25em;
+}
+
+@media (min-width: 960px) {
+  .header-link {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .header-link {
+    font-size: 20px;
+  }
+}
+
+/* Work section image size */
+.work-image-container {
+  width: 440px;
+  height: 440px;
+}
+
+@media (min-width: 1280px) {
+  .work-image-container {
+    width: 568px;
+    height: 568px;
+  }
+}
+
+/* Content wrapper min-height */
+.content-min-height {
+  min-height: 440px;
+}
+
+@media (min-width: 1280px) {
+  .content-min-height {
+    min-height: 568px;
+  }
+}
+
+/* Tagline section padding */
+.tagline-section {
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+  padding-bottom: 200px !important;
+}
+
+@media (min-width: 960px) {
+  .tagline-section {
+    padding-left: 64px !important;
+    padding-right: 64px !important;
+    padding-bottom: 380px !important;
+  }
+}
+
+/* Tagline content container */
+.tagline-content {
+  max-width: 100%;
+}
+
+@media (min-width: 960px) {
+  .tagline-content {
+    max-width: 927px;
+  }
+}
+
+/* Tagline background glow */
+.tagline-glow {
+  width: 100vw;
+  height: 100vw;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -20vw;
+  filter: blur(50vw);
+  -webkit-filter: blur(50vw);
+}
+
+@media (min-width: 960px) {
+  .tagline-glow {
+    width: 872px;
+    height: 872px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -436px;
+    filter: blur(400px);
+    -webkit-filter: blur(400px);
+  }
+}
+
+/* Tagline headlines - 32px for mobile, 48px for < 1280, 56px for >= 1280 */
+.tagline-headline {
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 1.2em;
+  letter-spacing: -0.1em;
+}
+
+@media (min-width: 960px) {
+  .tagline-headline {
+    font-size: 48px;
+  }
+}
+
+.tagline-headline-stroke {
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.2em;
+  letter-spacing: -0.1em;
+}
+
+@media (min-width: 960px) {
+  .tagline-headline-stroke {
+    font-size: 48px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .tagline-headline {
+    font-size: 56px;
+  }
+  
+  .tagline-headline-stroke {
+    font-size: 56px;
+  }
+}
+
+/* Work headlines - 32px mobile, 48px tablet, 56px desktop */
+.work-headline {
+  font-weight: 500 !important;
+  font-size: 32px !important;
+  line-height: 1.2em !important;
+  letter-spacing: -0.1em !important;
+}
+
+@media (min-width: 960px) {
+  .work-headline {
+    font-size: 48px !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .work-headline {
+    font-size: 56px !important;
+  }
+}
+
+/* Public talks gap - 32px for < 1280, 64px for >= 1280 */
+.public-talks-gap {
+  gap: 32px !important;
+}
+
+@media (min-width: 1280px) {
+  .public-talks-gap {
+    gap: 64px !important;
+  }
+}
+
+/* Public talks vertical padding */
+.public-talks-padding {
+  padding-top: 200px !important;
+  padding-bottom: 200px !important;
+}
+
+@media (min-width: 1280px) {
+  .public-talks-padding {
+    padding-top: 280px !important;
+    padding-bottom: 280px !important;
+  }
+}
+
+/* Плавный скролл для анимаций */
+[data-scroll-section] {
+  will-change: transform;
+}
+
+/* Кастомный скроллбар - видимый только при скролле */
+::-webkit-scrollbar {
+  width: 2px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 1px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
+/* Скроллбар появляется при скролле */
+html.is-scrolling::-webkit-scrollbar-thumb {
+  opacity: 1;
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+html.is-scrolling {
+  scrollbar-color: var(--color-accent) transparent;
+}
+
+/* Глобальные утилиты для анимаций */
+.fade-in {
+  animation: fadeIn 0.6s ease forwards;
+}
+
+.slide-up {
+  animation: slideUp 0.8s ease forwards;
+}
+
+.glow {
+  box-shadow: var(--shadow-glow);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Эффект размытия фона */
+.glass {
+  background: rgba(26, 26, 26, 0.6);
+  backdrop-filter: var(--blur-md);
+  -webkit-backdrop-filter: var(--blur-md);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Градиентный текст */
+.gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 3D трансформации */
+.perspective {
+  perspective: 1000px;
+}
+
+.transform-3d {
+  transform-style: preserve-3d;
+}
+
+/* Hover эффекты */
+.hover-lift {
+  transition: transform var(--transition-normal);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+/* Анимация появления при скролле */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Canvas для Three.js */
+canvas {
+  display: block;
+  touch-action: none;
+}
+
+/* Отключение выделения текста при взаимодействии с 3D */
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Loader для асинхронных компонентов */
+.loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
+/* Particles container */
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}

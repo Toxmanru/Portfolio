@@ -1,54 +1,141 @@
-# Personal Portfolio Website
+# Portfolio — Anton Gubarev-Pentin
 
-This is my personal portfolio website built with Next.js, showcasing my work as a Lead Product Designer and Design Manager.
+Современное портфолио-сайт, созданное с использованием передовых технологий для веб-разработки и анимаций.
 
-## Features
+## 🚀 Технологический стек
 
-- Responsive design for both desktop and mobile devices
-- Interactive UI elements with smooth animations
-- Project showcase with detailed case studies
-- Consulting services section
-- Contact information
-- Modern, minimalist design aesthetic
+### Основные технологии
+- **Next.js 16** — React-фреймворк с App Router для SSR и оптимизации
+- **React 19** — последняя версия библиотеки для построения UI
+- **TypeScript** — типизация для надежности кода
+- **Tailwind CSS 4** — utility-first CSS фреймворк
 
-## Tech Stack
+### Библиотеки для анимаций и 3D
+- **GSAP** — мощная библиотека для сложных анимаций и скролл-сцен
+- **Rive** — векторная анимация и motion-графика
+- **Three.js** — 3D-графика в браузере
+- **React Three Fiber** — React-обертка для Three.js
+- **React Three Drei** — хелперы для R3F
+- **Framer Motion** — декларативные анимации для React
 
-- **Framework**: Next.js 14
-- **Styling**: Tailwind CSS
-- **Animations**: Framer Motion
-- **Language**: TypeScript
-- **Deployment**: Vercel
+## 📁 Структура проекта
 
-## Getting Started
-
-1. Clone the repository:
-```bash
-git clone https://github.com/your-username/portfolio.git
+```
+site/
+├── app/                    # Next.js App Router
+│   ├── globals.css        # Глобальные стили
+│   ├── layout.tsx         # Root layout
+│   └── page.tsx           # Главная страница
+├── components/
+│   ├── ui/                # UI компоненты
+│   │   ├── Header.tsx
+│   │   └── GlassButton.tsx
+│   ├── sections/          # Секции страницы
+│   │   ├── HeroSection.tsx
+│   │   ├── WhatDesignMeans.tsx
+│   │   ├── WorkSection.tsx
+│   │   ├── PublicTalksSection.tsx
+│   │   └── ContactsSection.tsx
+│   ├── animations/        # Анимационные компоненты
+│   │   ├── ScrollProgress.tsx
+│   │   ├── FadeIn.tsx
+│   │   └── RiveWrapper.tsx
+│   └── 3d/                # 3D компоненты (для будущих расширений)
+├── hooks/                 # Custom React hooks
+├── utils/                 # Утилиты
+├── types/                 # TypeScript типы
+├── lib/                   # Библиотеки и хелперы
+└── public/
+    ├── images/            # Изображения
+    ├── models/            # 3D модели
+    └── animations/        # Rive анимации
 ```
 
-2. Install dependencies:
+## 🎨 Дизайн-система
+
+### Цветовая палитра
+- **Background**: `#020202` — глубокий черный
+- **Surface**: `#1a1a1a` — темно-серый
+- **Text**: `#FFFFFF` — белый
+- **Accent**: `#ED5C4E` — коралловый красный
+- **Primary**: `#6366f1` — индиго
+- **Secondary**: `#8b5cf6` — фиолетовый
+- **Accent Pink**: `#ec4899` — розовый
+
+### Типографика
+- **Шрифт**: Lexend Exa
+- **Веса**: 200 (ExtraLight), 300 (Light), 400 (Regular), 500 (Medium)
+
+## 🛠️ Разработка
+
+### Установка зависимостей
+
 ```bash
-cd portfolio
 npm install
 ```
 
-3. Run the development server:
+### Запуск dev-сервера
+
 ```bash
 npm run dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser
+Откройте [http://localhost:3000](http://localhost:3000) в браузере.
 
-## Project Structure
+### Сборка для продакшена
 
-- `/src/app/*` - Main application pages and routing
-- `/src/components/*` - Reusable UI components
-- `/public/images/*` - Static images and assets
+```bash
+npm run build
+npm start
+```
 
-## Deployment
+### Линтинг
 
-The site is deployed on Vercel and can be accessed at [gubarev-pentin.xyz](https://gubarev-pentin.xyz)
+```bash
+npm run lint
+```
 
-## Contact
+## 📝 Секции сайта
 
-For any inquiries, please visit the [contacts page](https://gubarev-pentin.xyz/contacts) on my website.
+### 1. Hero Section
+- Крупный заголовок с именем и должностью
+- Фото с градиентным оверлеем
+- Кнопка "Scroll down" с эффектом стекла
+- Светящийся фон (glow effect)
+
+### 2. What Design Means
+- Философия дизайна
+- Крупный текст с выделением акцентом
+
+### 3. Work Section
+- Карточки проектов
+- Описание достижений
+- Кнопки для деталей
+
+### 4. Public Talks
+- Встроенные YouTube видео (готово к интеграции)
+
+### 5. Contacts
+- Email, Telegram, LinkedIn
+- Фоновое изображение
+- Интерактивные ссылки
+
+## 🎯 Следующие шаги
+
+- [ ] Добавить GSAP анимации при скролле
+- [ ] Интегрировать Rive-анимации
+- [ ] Добавить 3D элементы с Three.js
+- [ ] Настроить ScrollTrigger для параллакс-эффектов
+- [ ] Добавить YouTube embed для Public Talks
+- [ ] Создать страницы для детальных кейсов проектов
+- [ ] Адаптивный дизайн для мобильных устройств
+- [ ] Оптимизация производительности
+- [ ] SEO оптимизация
+
+## 📄 Лицензия
+
+Проект создан для личного использования.
+
+---
+
+Разработано с использованием современных технологий веб-разработки 🚀
