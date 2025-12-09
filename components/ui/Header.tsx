@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function Header() {
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [isWorksActive, setIsWorksActive] = useState(false);
+  const [isDarkSectionActive, setIsDarkSectionActive] = useState(false);
   const [baseHeight, setBaseHeight] = useState(104);
   const [basePadding, setBasePadding] = useState(20);
   const [horizontalPadding, setHorizontalPadding] = useState(64);
@@ -39,9 +39,16 @@ export default function Header() {
       }
     };
 
-    // Отслеживаем класс на body для секции works
+    // Отслеживаем классы на body, которые требуют тёмного текста
     const observer = new MutationObserver(() => {
-      setIsWorksActive(document.body.classList.contains('works-section-active'));
+      const darkClasses = [
+        'works-section-active',
+        'contacts-section-active',
+        'case-section-active',
+        'works-section-mobile-active',
+      ];
+      const hasDark = darkClasses.some((cls) => document.body.classList.contains(cls));
+      setIsDarkSectionActive(hasDark);
     });
 
     observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
@@ -63,12 +70,12 @@ export default function Header() {
   const headerHeight = baseHeight - (scrollProgress * scrollReduction);
   const paddingVertical = basePadding - (scrollProgress * paddingReduction);
 
-  // Стили зависят от активности секции works
-  const bgColor = isWorksActive 
-    ? 'rgba(255, 255, 255, 1)' 
+  // Стили зависят от активных тёмных секций
+  const bgColor = isDarkSectionActive
+    ? 'rgba(255, 255, 255, 1)'
     : `rgba(255, 255, 255, ${scrollProgress * 0.16})`;
   
-  const textColor = isWorksActive ? '#020202' : '#FFFFFF';
+  const textColor = isDarkSectionActive ? '#020202' : '#FFFFFF';
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 

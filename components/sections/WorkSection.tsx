@@ -94,6 +94,30 @@ export default function WorkSection() {
     return () => window.removeEventListener('resize', updateSizes);
   }, []);
 
+  // Активируем тёмный хедер на мобильном, пока секция в вьюпорте
+  useEffect(() => {
+    if (!isMobile) return;
+    const section = sectionRef.current;
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            document.body.classList.add('works-section-mobile-active');
+          } else {
+            document.body.classList.remove('works-section-mobile-active');
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(section);
+    return () => {
+      observer.disconnect();
+      document.body.classList.remove('works-section-mobile-active');
+    };
+  }, [isMobile]);
+
   // Desktop: ScrollTrigger анимация
   useEffect(() => {
     // Пропускаем анимацию на мобильных

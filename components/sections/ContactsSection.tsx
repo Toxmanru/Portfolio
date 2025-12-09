@@ -87,6 +87,29 @@ export default function ContactsSection() {
     return () => ctx.revert();
   }, []);
 
+  // Меняем цвет хедера при пересечении секции контактов
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            document.body.classList.add('contacts-section-active');
+          } else {
+            document.body.classList.remove('contacts-section-active');
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(section);
+    return () => {
+      observer.disconnect();
+      document.body.classList.remove('contacts-section-active');
+    };
+  }, []);
+
   // Мобильная версия
   if (isMobile) {
     return (

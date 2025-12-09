@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import Header from '@/components/ui/Header';
 import GlassButton from '@/components/ui/GlassButton';
@@ -8,6 +8,7 @@ import GlassButton from '@/components/ui/GlassButton';
 export default function AmiwaPage() {
   const [isMobile, setIsMobile] = useState(false);
   const [fullscreenImage, setFullscreenImage] = useState<string | null>(null);
+  const contentRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const updateSize = () => {
@@ -16,6 +17,29 @@ export default function AmiwaPage() {
     updateSize();
     window.addEventListener('resize', updateSize);
     return () => window.removeEventListener('resize', updateSize);
+  }, []);
+
+  // Включаем тёмный хедер при входе в основной контент (кроме hero)
+  useEffect(() => {
+    const section = contentRef.current;
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            document.body.classList.add('case-section-active');
+          } else {
+            document.body.classList.remove('case-section-active');
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+    observer.observe(section);
+    return () => {
+      observer.disconnect();
+      document.body.classList.remove('case-section-active');
+    };
   }, []);
 
   const openFullscreen = (src: string) => {
@@ -166,6 +190,7 @@ export default function AmiwaPage() {
       
       {/* Content Section - Text + Images */}
       <section
+        ref={contentRef}
         className="relative w-full"
         style={{
           padding: isMobile ? '32px 16px' : '64px',

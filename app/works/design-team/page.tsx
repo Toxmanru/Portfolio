@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import Header from '@/components/ui/Header';
 import GlassButton from '@/components/ui/GlassButton';
@@ -9,12 +9,36 @@ import KeyResults from '@/components/sections/KeyResults';
 export default function DesignTeamPage() {
   const [isMobile, setIsMobile] = useState(false);
   const [fullscreenImage, setFullscreenImage] = useState<string | null>(null);
+  const contentRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const updateSize = () => setIsMobile(window.innerWidth < 960);
     updateSize();
     window.addEventListener('resize', updateSize);
     return () => window.removeEventListener('resize', updateSize);
+  }, []);
+
+  // Активируем тёмный хедер для контентных секций (кроме hero)
+  useEffect(() => {
+    const section = contentRef.current;
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            document.body.classList.add('case-section-active');
+          } else {
+            document.body.classList.remove('case-section-active');
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+    observer.observe(section);
+    return () => {
+      observer.disconnect();
+      document.body.classList.remove('case-section-active');
+    };
   }, []);
 
   const openFullscreen = (src: string) => {
@@ -139,6 +163,7 @@ export default function DesignTeamPage() {
 
       {/* Section: Building the design foundation */}
       <section
+        ref={contentRef}
         className="relative w-full"
         style={{
           padding: isMobile ? '32px 16px' : '64px',
