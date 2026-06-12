@@ -56,6 +56,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Hide "My works" link on case pages */
+body.case-page .header-my-works-link {
+  display: none;
+}
+
 /* Основной контейнер */
 .container {
   width: 100%;

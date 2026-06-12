@@ -24,19 +24,20 @@ export default function GlassButton({
   disabled = false,
 }: GlassButtonProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isTouchInput, setIsTouchInput] = useState(false);
 
   useEffect(() => {
-    const updateSize = () => {
-      setIsMobile(window.innerWidth < 960);
+    const updateInputType = () => {
+      const hasCoarsePointer = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+      setIsTouchInput(hasCoarsePointer);
     };
-    updateSize();
-    window.addEventListener('resize', updateSize);
-    return () => window.removeEventListener('resize', updateSize);
+    updateInputType();
+    window.addEventListener('resize', updateInputType);
+    return () => window.removeEventListener('resize', updateInputType);
   }, []);
 
-  // На мобильных кнопки всегда оранжевые (как на hover)
-  const isActive = disabled ? false : (isMobile || isHovered);
+  // На touch-устройствах кнопки всегда активны (как hover)
+  const isActive = disabled ? false : (isTouchInput || isHovered);
 
   // Единый padding для всех вариантов
   const padding = '16px 32px';
@@ -75,7 +76,7 @@ export default function GlassButton({
           backgroundColor: '#ED5C4E',
           borderRadius: '48px',
           transform: isActive ? 'translateX(0%)' : 'translateX(-102%)',
-          transition: isMobile ? 'none' : 'transform 0.4s ease-out',
+          transition: isTouchInput ? 'none' : 'transform 0.4s ease-out',
           pointerEvents: 'none',
           zIndex: 1,
         }}
@@ -86,7 +87,7 @@ export default function GlassButton({
           position: 'relative', 
           zIndex: 2,
           color: variant === 'light' ? '#FFFFFF' : (isActive ? '#FFFFFF' : '#020202'),
-          transition: isMobile ? 'none' : 'color 0.4s ease-out',
+          transition: isTouchInput ? 'none' : 'color 0.4s ease-out',
           pointerEvents: 'none',
         }}
       >

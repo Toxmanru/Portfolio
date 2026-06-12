@@ -2,24 +2,18 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
 export default function Header() {
-  const pathname = usePathname();
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [isDarkSectionActive, setIsDarkSectionActive] = useState(false);
   const [baseHeight, setBaseHeight] = useState(104);
   const [basePadding, setBasePadding] = useState(20);
   const [horizontalPadding, setHorizontalPadding] = useState(64);
   const [isMobile, setIsMobile] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const isCasePage = pathname.startsWith('/works/');
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const threshold = 100;
-      setScrollProgress(Math.min(scrollY / threshold, 1));
+      setIsScrolled(window.scrollY > 0);
     };
 
     const updateSizes = () => {
@@ -42,43 +36,18 @@ export default function Header() {
       }
     };
 
-    // Отслеживаем классы на body, которые требуют тёмного текста
-    const observer = new MutationObserver(() => {
-      const darkClasses = [
-        'works-section-active',
-        'contacts-section-active',
-        'case-section-active',
-        'works-section-mobile-active',
-      ];
-      const hasDark = darkClasses.some((cls) => document.body.classList.contains(cls));
-      setIsDarkSectionActive(hasDark);
-    });
-
-    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
-
     updateSizes();
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', updateSizes);
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', updateSizes);
-      observer.disconnect();
     };
   }, []);
 
-  // Progressive values
-  const blurAmount = scrollProgress * 16;
-  const scrollReduction = baseHeight === 64 ? 0 : 24;
-  const paddingReduction = baseHeight === 64 ? 0 : 8;
-  const headerHeight = baseHeight - (scrollProgress * scrollReduction);
-  const paddingVertical = basePadding - (scrollProgress * paddingReduction);
-
-  // Стили зависят от активных тёмных секций
-  const bgColor = isDarkSectionActive
-    ? 'rgba(255, 255, 255, 1)'
-    : `rgba(255, 255, 255, ${scrollProgress * 0.16})`;
-  
-  const textColor = isDarkSectionActive ? '#020202' : '#FFFFFF';
+  const bgColor = isScrolled ? 'rgba(255, 255, 255, 1)' : 'rgba(255, 255, 255, 0)';
+  const textColor = isScrolled ? '#020202' : '#FFFFFF';
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -88,8 +57,6 @@ export default function Header() {
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{ 
           backgroundColor: bgColor,
-          backdropFilter: `blur(${blurAmount}px)`,
-          WebkitBackdropFilter: `blur(${blurAmount}px)`,
         }}
       >
         <div 
@@ -97,9 +64,9 @@ export default function Header() {
           style={{ 
             maxWidth: '1440px',
             margin: '0 auto',
-            height: `${headerHeight}px`,
-            paddingTop: `${paddingVertical}px`, 
-            paddingBottom: `${paddingVertical}px`,
+            height: `${baseHeight}px`,
+            paddingTop: `${basePadding}px`, 
+            paddingBottom: `${basePadding}px`,
             paddingLeft: `${horizontalPadding}px`,
             paddingRight: `${horizontalPadding}px`,
           }}
@@ -115,15 +82,13 @@ export default function Header() {
           {/* Desktop Navigation */}
           {!isMobile && (
             <nav className="flex items-center" style={{ gap: '32px' }}>
-              {!isCasePage && (
-                <Link 
-                  href="#works" 
-                  className="header-link hover:opacity-70 transition-all duration-300"
-                  style={{ color: textColor }}
-                >
-                  My works
-                </Link>
-              )}
+              <Link 
+                href="#works" 
+                className="header-link header-my-works-link hover:opacity-70 transition-all duration-300"
+                style={{ color: textColor }}
+              >
+                My works
+              </Link>
               <Link 
                 href="/cv/gubarev-pentin-cv.pdf" 
                 target="_blank"
@@ -195,23 +160,21 @@ export default function Header() {
             backgroundColor: 'rgba(2, 2, 2, 0.95)',
             opacity: isMenuOpen ? 1 : 0,
             pointerEvents: isMenuOpen ? 'auto' : 'none',
-            paddingTop: `${headerHeight}px`,
+            paddingTop: `${baseHeight}px`,
           }}
         >
           <nav 
             className="flex flex-col items-center justify-center h-full"
             style={{ gap: '32px' }}
           >
-            {!isCasePage && (
-              <Link 
-                href="#works" 
-                className="header-link hover:opacity-70 transition-all duration-300"
-                style={{ color: '#FFFFFF', fontSize: '24px' }}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                My works
-              </Link>
-            )}
+            <Link 
+              href="#works" 
+              className="header-link header-my-works-link hover:opacity-70 transition-all duration-300"
+              style={{ color: '#FFFFFF', fontSize: '24px' }}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              My works
+            </Link>
             <Link 
               href="/cv/gubarev-pentin-cv.pdf" 
               target="_blank"

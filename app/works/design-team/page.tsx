@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Header from '@/components/ui/Header';
 import GlassButton from '@/components/ui/GlassButton';
@@ -9,7 +9,6 @@ import KeyResults from '@/components/sections/KeyResults';
 export default function DesignTeamPage() {
   const [isMobile, setIsMobile] = useState(false);
   const [fullscreenImage, setFullscreenImage] = useState<string | null>(null);
-  const contentRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const updateSize = () => setIsMobile(window.innerWidth < 960);
@@ -18,24 +17,10 @@ export default function DesignTeamPage() {
     return () => window.removeEventListener('resize', updateSize);
   }, []);
 
-  // Активируем тёмный хедер для контентных секций (кроме hero)
   useEffect(() => {
-    const section = contentRef.current;
-    if (!section) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            document.body.classList.add('case-section-active');
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-    observer.observe(section);
+    document.body.classList.add('case-page');
     return () => {
-      observer.disconnect();
-      document.body.classList.remove('case-section-active');
+      document.body.classList.remove('case-page');
     };
   }, []);
 
@@ -71,7 +56,7 @@ export default function DesignTeamPage() {
       >
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px' }}
+          style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
         />
 
         <div
@@ -173,7 +158,7 @@ export default function DesignTeamPage() {
               cursor: 'pointer',
               order: isMobile ? 1 : undefined,
             }}
-            onClick={() => openFullscreen('/images/works/design-team/hero.png')}
+            onClick={!isMobile ? () => openFullscreen('/images/works/design-team/hero.png') : undefined}
           >
             <Image
               src="/images/works/design-team/hero.png"
@@ -194,7 +179,7 @@ export default function DesignTeamPage() {
       >
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px' }}
+          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
         />
 
         <div
@@ -250,7 +235,6 @@ export default function DesignTeamPage() {
 
       {/* Section: Scaling leadership */}
       <section
-        ref={contentRef}
         className="relative w-full"
         style={{
           padding: isMobile ? '32px 16px' : '64px',
@@ -258,7 +242,7 @@ export default function DesignTeamPage() {
       >
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px' }}
+          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
         />
 
         <div
@@ -347,7 +331,7 @@ export default function DesignTeamPage() {
       >
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px' }}
+          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
         />
 
         <div
@@ -431,7 +415,7 @@ export default function DesignTeamPage() {
       >
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px' }}
+          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
         />
 
         <div
@@ -517,7 +501,7 @@ export default function DesignTeamPage() {
       >
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px' }}
+          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
         />
 
         <div
@@ -581,7 +565,7 @@ export default function DesignTeamPage() {
       >
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px' }}
+          style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
         />
         <div style={{ width: isMobile ? '100%' : 'fit-content', paddingLeft: isMobile ? '16px' : 0, paddingRight: isMobile ? '16px' : 0 }}>
           <GlassButton href="/works/cross-product-experiences" variant="light" className="relative" fullWidth={isMobile}>
@@ -601,7 +585,7 @@ export default function DesignTeamPage() {
       >
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px' }}
+          style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
         />
         <p
           className="relative text-white text-center"

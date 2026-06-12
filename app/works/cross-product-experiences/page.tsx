@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Header from '@/components/ui/Header';
 import GlassButton from '@/components/ui/GlassButton';
@@ -36,7 +36,6 @@ const stageSections: StageSection[] = [
 export default function CrossProductExperiencesPage() {
   const [isMobile, setIsMobile] = useState(false);
   const [fullscreenImage, setFullscreenImage] = useState<string | null>(null);
-  const contentRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const updateSize = () => setIsMobile(window.innerWidth < 960);
@@ -46,22 +45,9 @@ export default function CrossProductExperiencesPage() {
   }, []);
 
   useEffect(() => {
-    const section = contentRef.current;
-    if (!section) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            document.body.classList.add('case-section-active');
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-    observer.observe(section);
+    document.body.classList.add('case-page');
     return () => {
-      observer.disconnect();
-      document.body.classList.remove('case-section-active');
+      document.body.classList.remove('case-page');
     };
   }, []);
 
@@ -92,7 +78,7 @@ export default function CrossProductExperiencesPage() {
       >
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px' }}
+          style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
         />
 
         <div
@@ -186,7 +172,7 @@ export default function CrossProductExperiencesPage() {
               cursor: 'pointer',
               order: isMobile ? 1 : undefined,
             }}
-            onClick={() => openFullscreen('/images/works/cross-product-experiences/hero.png')}
+            onClick={!isMobile ? () => openFullscreen('/images/works/cross-product-experiences/hero.png') : undefined}
           >
             <Image src="/images/works/cross-product-experiences/hero.png" alt="Cross-product experiences hero" fill style={{ objectFit: 'cover' }} />
           </div>
@@ -196,7 +182,7 @@ export default function CrossProductExperiencesPage() {
       <section className="relative w-full" style={{ padding: isMobile ? '32px 16px' : '64px' }}>
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px' }}
+          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
         />
 
         <div className={`relative ${isMobile ? 'flex flex-col' : 'flex'}`} style={{ gap: isMobile ? '24px' : '48px', alignItems: 'flex-start' }}>
@@ -243,16 +229,15 @@ export default function CrossProductExperiencesPage() {
         paddingYMobile={48}
       />
 
-      {stageSections.map((stage, index) => (
+      {stageSections.map((stage) => (
         <section
           key={stage.title}
-          ref={index === 0 ? contentRef : undefined}
           className="relative w-full"
           style={{ padding: isMobile ? '32px 16px' : '64px' }}
         >
           <div
             className="absolute inset-0"
-            style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px' }}
+            style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
           />
 
           <div className={`relative ${isMobile ? 'flex flex-col' : 'flex'}`} style={{ gap: isMobile ? '24px' : '48px', alignItems: 'flex-start' }}>
@@ -334,7 +319,7 @@ export default function CrossProductExperiencesPage() {
       <section className="relative w-full" style={{ padding: isMobile ? '32px 16px' : '64px' }}>
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px' }}
+          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
         />
 
         <div className={`relative ${isMobile ? 'flex flex-col' : 'flex'}`} style={{ gap: isMobile ? '24px' : '48px', alignItems: 'flex-start' }}>
@@ -388,7 +373,7 @@ export default function CrossProductExperiencesPage() {
       <section className="relative w-full" style={{ padding: isMobile ? '32px 16px' : '64px' }}>
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px' }}
+          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
         />
 
         <div
@@ -457,7 +442,7 @@ export default function CrossProductExperiencesPage() {
       >
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px' }}
+          style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
         />
         <div style={{ width: isMobile ? '100%' : 'fit-content', paddingLeft: isMobile ? '16px' : 0, paddingRight: isMobile ? '16px' : 0 }}>
           <GlassButton href="/works/amiwa" variant="light" className="relative" fullWidth={isMobile}>
@@ -476,7 +461,7 @@ export default function CrossProductExperiencesPage() {
       >
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px' }}
+          style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
         />
         <p
           className="relative text-white text-center"
