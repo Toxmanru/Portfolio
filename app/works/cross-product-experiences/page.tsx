@@ -406,7 +406,7 @@ export default function CrossProductExperiencesPage() {
           >
             <div style={{ flex: '1 1 0', minWidth: 0, order: isMobile ? 2 : 1 }}>
               <p style={{ fontWeight: 300, fontSize: '16px', lineHeight: '1.6em', letterSpacing: '-0.02em', color: '#020202' }}>
-                As Product Design Manager, I was responsible for product direction, ecosystem strategy, cross-product consistency, and design reviews.
+                As Product Design Lead, I was responsible for product direction, ecosystem strategy, cross-product consistency, and design reviews.
                 <br />
                 This work was delivered together with my exceptional team of product designers:
                 <br />
