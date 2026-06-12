@@ -122,7 +122,7 @@ export default function CrossProductExperiencesPage() {
               </div>
               <div className="flex flex-col" style={{ gap: '4px' }}>
                 <span style={{ fontWeight: 200, fontSize: '16px', lineHeight: '1.4em', color: 'rgba(255,255,255,0.6)' }}>Role</span>
-                <span style={{ fontWeight: 400, fontSize: '16px', lineHeight: '1.4em', color: '#FFFFFF' }}>Lead product designer, Team Leader</span>
+                <span style={{ fontWeight: 400, fontSize: '16px', lineHeight: '1.4em', color: '#FFFFFF' }}>Product Design Lead</span>
               </div>
               <div className="flex flex-col" style={{ gap: '4px' }}>
                 <span style={{ fontWeight: 200, fontSize: '16px', lineHeight: '1.4em', color: 'rgba(255,255,255,0.6)' }}>Expertise</span>
