@@ -373,7 +373,15 @@ export default function CrossProductExperiencesPage() {
         </div>
       </section>
 
-      <section className="relative w-full" style={{ padding: isMobile ? '32px 16px' : '64px' }}>
+      <section
+        className="relative w-full"
+        style={{
+          paddingTop: 0,
+          paddingBottom: isMobile ? '32px' : '64px',
+          paddingLeft: isMobile ? '16px' : '64px',
+          paddingRight: isMobile ? '16px' : '64px',
+        }}
+      >
         <div
           className="absolute inset-0"
           style={{ backgroundColor: '#FFFFFF', left: 'calc(50% - 50vw)', right: 'calc(50% - 50vw)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
@@ -423,10 +431,8 @@ export default function CrossProductExperiencesPage() {
                 order: isMobile ? 1 : 2,
                 borderRadius: isMobile ? '24px' : '32px',
                 clipPath: `inset(0 round ${isMobile ? '24px' : '32px'})`,
-                cursor: canOpenFullscreen ? 'pointer' : 'default',
                 flexShrink: 0,
               }}
-              onClick={canOpenFullscreen ? () => openFullscreen('/images/works/cross-product-experiences/team-designers.png') : undefined}
             >
               <Image
                 src="/images/works/cross-product-experiences/team-designers.png"
