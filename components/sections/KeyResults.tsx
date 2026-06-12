@@ -78,7 +78,7 @@ export default function KeyResults({
     >
       <div
         className="absolute inset-0"
-        style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)' }}
+        style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px' }}
       />
 
       <div className="relative flex flex-col items-center" style={{ gap: isMobile ? '32px' : '40px' }}>

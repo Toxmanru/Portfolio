@@ -92,7 +92,7 @@ export default function CrossProductExperiencesPage() {
       >
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)' }}
+          style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px' }}
         />
 
         <div
@@ -196,7 +196,7 @@ export default function CrossProductExperiencesPage() {
       <section className="relative w-full" style={{ padding: isMobile ? '32px 16px' : '64px' }}>
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)' }}
+          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px' }}
         />
 
         <div className={`relative ${isMobile ? 'flex flex-col' : 'flex'}`} style={{ gap: isMobile ? '24px' : '48px', alignItems: 'flex-start' }}>
@@ -252,7 +252,7 @@ export default function CrossProductExperiencesPage() {
         >
           <div
             className="absolute inset-0"
-            style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)' }}
+            style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px' }}
           />
 
           <div className={`relative ${isMobile ? 'flex flex-col' : 'flex'}`} style={{ gap: isMobile ? '24px' : '48px', alignItems: 'flex-start' }}>
@@ -334,7 +334,7 @@ export default function CrossProductExperiencesPage() {
       <section className="relative w-full" style={{ padding: isMobile ? '32px 16px' : '64px' }}>
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)' }}
+          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px' }}
         />
 
         <div className={`relative ${isMobile ? 'flex flex-col' : 'flex'}`} style={{ gap: isMobile ? '24px' : '48px', alignItems: 'flex-start' }}>
@@ -385,13 +385,79 @@ export default function CrossProductExperiencesPage() {
         </div>
       </section>
 
+      <section className="relative w-full" style={{ padding: isMobile ? '32px 16px' : '64px' }}>
+        <div
+          className="absolute inset-0"
+          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px' }}
+        />
+
+        <div
+          className="relative"
+          style={{
+            width: isMobile ? '100%' : '75%',
+            margin: '0 auto',
+            backgroundColor: '#C7F4C7',
+            borderRadius: isMobile ? '24px' : '32px',
+            padding: isMobile ? '24px' : '32px',
+          }}
+        >
+          <div
+            className={isMobile ? 'flex flex-col' : 'flex'}
+            style={{
+              gap: '16px',
+              alignItems: isMobile ? 'stretch' : 'flex-end',
+            }}
+          >
+            <div style={{ flex: '1 1 0', minWidth: 0, order: isMobile ? 2 : 1 }}>
+              <p style={{ fontWeight: 300, fontSize: '16px', lineHeight: '1.6em', letterSpacing: '-0.02em', color: '#020202' }}>
+                As Product Design Lead, I was responsible for product direction, ecosystem strategy, cross-product consistency, and design reviews.
+                <br />
+                This work was delivered together with my exceptional team of product designers:
+                <br />
+                <br />
+                <span style={{ fontWeight: 500 }}>Artur Subbotkin</span> - Motor Stream
+                <br />
+                <span style={{ fontWeight: 500 }}>Irina Bogdanova</span> - Platform
+                <br />
+                <span style={{ fontWeight: 500 }}>Anastasia Norvikova, Azat Shaikhin</span> - Life & Medical
+                <br />
+                <span style={{ fontWeight: 500 }}>Aruzhan Sailau</span> - Travel & Home
+              </p>
+            </div>
+
+            <div
+              className="relative"
+              style={{
+                width: '100%',
+                maxWidth: '123px',
+                aspectRatio: '1 / 1',
+                alignSelf: isMobile ? 'flex-start' : 'flex-end',
+                order: isMobile ? 1 : 2,
+                borderRadius: isMobile ? '24px' : '32px',
+                overflow: 'hidden',
+                cursor: 'pointer',
+                flexShrink: 0,
+              }}
+              onClick={() => openFullscreen('/images/works/cross-product-experiences/team-designers.png')}
+            >
+              <Image
+                src="/images/works/cross-product-experiences/team-designers.png"
+                alt="Cross-product design team"
+                fill
+                style={{ objectFit: 'cover' }}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section
         className="relative w-full flex items-center justify-center"
         style={{ paddingTop: isMobile ? '32px' : '64px', paddingBottom: isMobile ? '32px' : '64px' }}
       >
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)' }}
+          style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px' }}
         />
         <div style={{ width: isMobile ? '100%' : 'fit-content', paddingLeft: isMobile ? '16px' : 0, paddingRight: isMobile ? '16px' : 0 }}>
           <GlassButton href="/works/amiwa" variant="light" className="relative" fullWidth={isMobile}>
@@ -410,7 +476,7 @@ export default function CrossProductExperiencesPage() {
       >
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)' }}
+          style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px' }}
         />
         <p
           className="relative text-white text-center"

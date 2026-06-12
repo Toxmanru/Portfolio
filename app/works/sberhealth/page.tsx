@@ -73,7 +73,7 @@ export default function SberHealthPage() {
       >
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)' }}
+          style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px' }}
         />
 
         <div
@@ -172,7 +172,7 @@ export default function SberHealthPage() {
       >
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)' }}
+          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px' }}
         />
 
         <div
@@ -240,7 +240,7 @@ export default function SberHealthPage() {
       >
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)' }}
+          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px' }}
         />
 
         <div className="relative flex flex-col">
@@ -290,7 +290,7 @@ export default function SberHealthPage() {
       >
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)' }}
+          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px' }}
         />
 
         <div
@@ -358,7 +358,7 @@ export default function SberHealthPage() {
       >
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)' }}
+          style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px' }}
         />
         <div style={{ width: isMobile ? '100%' : 'fit-content', paddingLeft: isMobile ? '16px' : 0, paddingRight: isMobile ? '16px' : 0 }}>
           <GlassButton href="/" variant="light" className="relative" fullWidth={isMobile}>
@@ -378,7 +378,7 @@ export default function SberHealthPage() {
       >
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)' }}
+          style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px' }}
         />
         <p
           className="relative text-white text-center"
