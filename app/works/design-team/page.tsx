@@ -21,6 +21,7 @@ export default function DesignTeamPage() {
     document.body.classList.add('case-page');
     return () => {
       document.body.classList.remove('case-page');
+      document.body.style.overflow = '';
     };
   }, []);
 
@@ -36,6 +37,7 @@ export default function DesignTeamPage() {
 
   const horizontalPadding = isMobile ? 16 : 64;
   const verticalPadding = isMobile ? 32 : 120;
+  const canOpenFullscreen = !isMobile;
 
   return (
     <main
@@ -46,8 +48,9 @@ export default function DesignTeamPage() {
 
       {/* Hero Section */}
       <section
-        className="relative w-full overflow-hidden"
+        className="relative w-full"
         style={{
+          clipPath: 'inset(0)',
           paddingTop: isMobile ? '96px' : '168px',
           paddingBottom: isMobile ? '32px' : '120px',
           paddingLeft: `${horizontalPadding}px`,
@@ -56,21 +59,20 @@ export default function DesignTeamPage() {
       >
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
+          style={{ backgroundColor: '#020202', left: 'calc(50% - 50vw)', right: 'calc(50% - 50vw)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
         />
 
         <div
           className="absolute pointer-events-none"
           style={{
-            width: isMobile ? '100vw' : '872px',
-            height: isMobile ? '100vw' : '872px',
+            width: isMobile ? '140vw' : '1200px',
+            height: isMobile ? '140vw' : '1200px',
             left: '50%',
             transform: 'translateX(-50%)',
-            bottom: isMobile ? '-20vw' : '-436px',
+            bottom: isMobile ? '-40vw' : '-600px',
             borderRadius: '50%',
-            backgroundColor: 'rgba(237, 92, 78, 0.2)',
-            filter: isMobile ? 'blur(50vw)' : 'blur(400px)',
-            WebkitFilter: isMobile ? 'blur(50vw)' : 'blur(400px)',
+            background:
+              'radial-gradient(circle, rgba(237, 92, 78, 0.20) 0%, rgba(237, 92, 78, 0.10) 40%, rgba(237, 92, 78, 0) 70%)',
             zIndex: 0,
           }}
         />
@@ -152,18 +154,19 @@ export default function DesignTeamPage() {
               width: isMobile ? '100%' : 'calc(60% - 32px)',
               aspectRatio: '16 / 12',
               borderRadius: isMobile ? '24px' : '32px',
-              overflow: 'hidden',
+              clipPath: `inset(0 round ${isMobile ? '24px' : '32px'})`,
               flexShrink: 0,
               backgroundColor: '#A4A0FF',
-              cursor: 'pointer',
+              cursor: canOpenFullscreen ? 'pointer' : 'default',
               order: isMobile ? 1 : undefined,
             }}
-            onClick={!isMobile ? () => openFullscreen('/images/works/design-team/hero.png') : undefined}
+            onClick={canOpenFullscreen ? () => openFullscreen('/images/works/design-team/hero.png') : undefined}
           >
             <Image
               src="/images/works/design-team/hero.png"
               alt="Design workflow"
               fill
+              draggable={false}
               style={{ objectFit: 'cover' }}
             />
           </div>
@@ -179,7 +182,7 @@ export default function DesignTeamPage() {
       >
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
+          style={{ backgroundColor: '#FFFFFF', left: 'calc(50% - 50vw)', right: 'calc(50% - 50vw)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
         />
 
         <div
@@ -242,7 +245,7 @@ export default function DesignTeamPage() {
       >
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
+          style={{ backgroundColor: '#FFFFFF', left: 'calc(50% - 50vw)', right: 'calc(50% - 50vw)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
         />
 
         <div
@@ -307,16 +310,17 @@ export default function DesignTeamPage() {
             width: '100%',
             marginTop: isMobile ? '24px' : '32px',
             borderRadius: isMobile ? '24px' : '32px',
-            overflow: 'hidden',
-            cursor: 'pointer',
+            clipPath: `inset(0 round ${isMobile ? '24px' : '32px'})`,
+            cursor: canOpenFullscreen ? 'pointer' : 'default',
           }}
-          onClick={() => openFullscreen('/images/works/design-team/stage-1-predictability.png')}
+          onClick={canOpenFullscreen ? () => openFullscreen('/images/works/design-team/stage-1-predictability.png') : undefined}
         >
           <Image
             src="/images/works/design-team/stage-1-predictability.png"
             alt="Stage 1 — Creating Predictability"
             width={1600}
             height={1000}
+            draggable={false}
             style={{ width: '100%', height: 'auto', display: 'block' }}
           />
         </div>
@@ -331,7 +335,7 @@ export default function DesignTeamPage() {
       >
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
+          style={{ backgroundColor: '#FFFFFF', left: 'calc(50% - 50vw)', right: 'calc(50% - 50vw)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
         />
 
         <div
@@ -391,16 +395,17 @@ export default function DesignTeamPage() {
             width: '100%',
             marginTop: isMobile ? '24px' : '32px',
             borderRadius: isMobile ? '24px' : '32px',
-            overflow: 'hidden',
-            cursor: 'pointer',
+            clipPath: `inset(0 round ${isMobile ? '24px' : '32px'})`,
+            cursor: canOpenFullscreen ? 'pointer' : 'default',
           }}
-          onClick={() => openFullscreen('/images/works/design-team/stage-2-building-for-scale.png')}
+          onClick={canOpenFullscreen ? () => openFullscreen('/images/works/design-team/stage-2-building-for-scale.png') : undefined}
         >
           <Image
             src="/images/works/design-team/stage-2-building-for-scale.png"
             alt="Stage 2 — Building for Scale"
             width={1600}
             height={1000}
+            draggable={false}
             style={{ width: '100%', height: 'auto', display: 'block' }}
           />
         </div>
@@ -415,7 +420,7 @@ export default function DesignTeamPage() {
       >
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
+          style={{ backgroundColor: '#FFFFFF', left: 'calc(50% - 50vw)', right: 'calc(50% - 50vw)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
         />
 
         <div
@@ -477,16 +482,17 @@ export default function DesignTeamPage() {
             width: '100%',
             marginTop: isMobile ? '24px' : '32px',
             borderRadius: isMobile ? '24px' : '32px',
-            overflow: 'hidden',
-            cursor: 'pointer',
+            clipPath: `inset(0 round ${isMobile ? '24px' : '32px'})`,
+            cursor: canOpenFullscreen ? 'pointer' : 'default',
           }}
-          onClick={() => openFullscreen('/images/works/design-team/stage-3-platforms-to-verticals.png')}
+          onClick={canOpenFullscreen ? () => openFullscreen('/images/works/design-team/stage-3-platforms-to-verticals.png') : undefined}
         >
           <Image
             src="/images/works/design-team/stage-3-platforms-to-verticals.png"
             alt="Stage 3 — From Platforms to Product Verticals"
             width={1600}
             height={1000}
+            draggable={false}
             style={{ width: '100%', height: 'auto', display: 'block' }}
           />
         </div>
@@ -501,7 +507,7 @@ export default function DesignTeamPage() {
       >
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
+          style={{ backgroundColor: '#FFFFFF', left: 'calc(50% - 50vw)', right: 'calc(50% - 50vw)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
         />
 
         <div
@@ -565,7 +571,7 @@ export default function DesignTeamPage() {
       >
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
+          style={{ backgroundColor: '#020202', left: 'calc(50% - 50vw)', right: 'calc(50% - 50vw)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
         />
         <div style={{ width: isMobile ? '100%' : 'fit-content', paddingLeft: isMobile ? '16px' : 0, paddingRight: isMobile ? '16px' : 0 }}>
           <GlassButton href="/works/cross-product-experiences" variant="light" className="relative" fullWidth={isMobile}>
@@ -585,7 +591,7 @@ export default function DesignTeamPage() {
       >
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
+          style={{ backgroundColor: '#020202', left: 'calc(50% - 50vw)', right: 'calc(50% - 50vw)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
         />
         <p
           className="relative text-white text-center"

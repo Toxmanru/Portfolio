@@ -42,8 +42,12 @@
 }
 
 html {
-  scroll-behavior: smooth;
-  overflow-x: hidden;
+  scroll-behavior: auto;
+  /* clip (not hidden) keeps overflow-y as `visible`, so <html> stays the single
+     native viewport scroller. `overflow-x: hidden` would compute overflow-y to
+     `auto`, turning <html>/<body> into nested scroll containers that latch the
+     first wheel/touch gesture (page scrolls only on the 2nd try). */
+  overflow-x: clip;
 }
 
 body {
@@ -51,7 +55,7 @@ body {
   background-color: var(--color-background);
   color: var(--color-text);
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -60,6 +64,7 @@ body {
 body.case-page .header-my-works-link {
   display: none;
 }
+
 
 /* Основной контейнер */
 .container {

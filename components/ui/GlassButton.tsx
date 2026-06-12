@@ -98,7 +98,7 @@ export default function GlassButton({
 
   const buttonStyle: React.CSSProperties = {
     position: 'relative',
-    overflow: 'hidden',
+    clipPath: 'inset(0 round 48px)',
     padding: padding,
     backgroundColor: bgColor,
     borderRadius: '48px',
@@ -120,12 +120,10 @@ export default function GlassButton({
   };
 
   const handleMouseEnter = () => {
-    console.log('Mouse entered, isHovered:', true);
     setIsHovered(true);
   };
   
   const handleMouseLeave = () => {
-    console.log('Mouse left, isHovered:', false);
     setIsHovered(false);
   };
 

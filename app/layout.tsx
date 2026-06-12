@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Lexend_Exa } from "next/font/google";
 import "./globals.css";
-import ScrollIndicator from "@/components/ui/ScrollIndicator";
 
 const lexendExa = Lexend_Exa({
   variable: "--font-lexend-exa",
@@ -30,7 +29,6 @@ export default function RootLayout({
   return (
     <html lang="ru" className={lexendExa.variable} suppressHydrationWarning>
       <body className="antialiased" suppressHydrationWarning>
-        <ScrollIndicator />
         {children}
       </body>
     </html>

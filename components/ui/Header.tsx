@@ -153,13 +153,13 @@ export default function Header() {
       </header>
 
       {/* Mobile Menu Overlay */}
-      {isMobile && (
+      {isMobile && isMenuOpen && (
         <div
           className="fixed inset-0 z-40 transition-all duration-300"
           style={{
             backgroundColor: 'rgba(2, 2, 2, 0.95)',
-            opacity: isMenuOpen ? 1 : 0,
-            pointerEvents: isMenuOpen ? 'auto' : 'none',
+            opacity: 1,
+            pointerEvents: 'auto',
             paddingTop: `${baseHeight}px`,
           }}
         >
