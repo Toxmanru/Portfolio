@@ -93,7 +93,7 @@ export default function SberHealthPage() {
         />
 
         <div className={`relative ${isMobile ? 'flex flex-col' : 'flex items-start'}`} style={{ gap: isMobile ? '32px' : '64px', zIndex: 1 }}>
-          <div className="flex flex-col" style={{ gap: isMobile ? '24px' : '40px', width: isMobile ? '100%' : 'calc(40% - 32px)', flexShrink: 0 }}>
+          <div className="flex flex-col" style={{ gap: isMobile ? '24px' : '40px', width: isMobile ? '75%' : 'calc(40% - 32px)', flexShrink: 0, order: isMobile ? 2 : undefined }}>
             <h1
               style={{
                 fontWeight: 500,
@@ -146,6 +146,7 @@ export default function SberHealthPage() {
               flexShrink: 0,
               backgroundColor: '#A4A0FF',
               cursor: 'pointer',
+              order: isMobile ? 1 : undefined,
             }}
             onClick={() => openFullscreen('/images/works/sberhealth/hero.png')}
           >
@@ -182,7 +183,7 @@ export default function SberHealthPage() {
             <h2
               style={{
                 fontWeight: 500,
-                fontSize: isMobile ? '28px' : '40px',
+                fontSize: isMobile ? '28px' : '32px',
                 lineHeight: '1.2em',
                 letterSpacing: '-0.06em',
                 color: '#020202',
@@ -320,7 +321,7 @@ export default function SberHealthPage() {
             <h2
               style={{
                 fontWeight: 500,
-                fontSize: isMobile ? '28px' : '40px',
+                fontSize: isMobile ? '28px' : '32px',
                 lineHeight: '1.2em',
                 letterSpacing: '-0.06em',
                 color: '#020202',

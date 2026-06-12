@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function Header() {
+  const pathname = usePathname();
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isDarkSectionActive, setIsDarkSectionActive] = useState(false);
   const [baseHeight, setBaseHeight] = useState(104);
@@ -11,6 +13,7 @@ export default function Header() {
   const [horizontalPadding, setHorizontalPadding] = useState(64);
   const [isMobile, setIsMobile] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isCasePage = pathname.startsWith('/works/');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -112,13 +115,15 @@ export default function Header() {
           {/* Desktop Navigation */}
           {!isMobile && (
             <nav className="flex items-center" style={{ gap: '32px' }}>
-              <Link 
-                href="#works" 
-                className="header-link hover:opacity-70 transition-all duration-300"
-                style={{ color: textColor }}
-              >
-                My works
-              </Link>
+              {!isCasePage && (
+                <Link 
+                  href="#works" 
+                  className="header-link hover:opacity-70 transition-all duration-300"
+                  style={{ color: textColor }}
+                >
+                  My works
+                </Link>
+              )}
               <Link 
                 href="/cv/gubarev-pentin-cv.pdf" 
                 target="_blank"
@@ -197,14 +202,16 @@ export default function Header() {
             className="flex flex-col items-center justify-center h-full"
             style={{ gap: '32px' }}
           >
-            <Link 
-              href="#works" 
-              className="header-link hover:opacity-70 transition-all duration-300"
-              style={{ color: '#FFFFFF', fontSize: '24px' }}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              My works
-            </Link>
+            {!isCasePage && (
+              <Link 
+                href="#works" 
+                className="header-link hover:opacity-70 transition-all duration-300"
+                style={{ color: '#FFFFFF', fontSize: '24px' }}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                My works
+              </Link>
+            )}
             <Link 
               href="/cv/gubarev-pentin-cv.pdf" 
               target="_blank"

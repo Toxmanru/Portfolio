@@ -100,7 +100,7 @@ export default function AmiwaPage() {
         
         <div className={`relative ${isMobile ? 'flex flex-col' : 'flex items-start'}`} style={{ gap: isMobile ? '32px' : '64px', zIndex: 1 }}>
           {/* Left content */}
-          <div className="flex flex-col" style={{ gap: isMobile ? '24px' : '40px', width: isMobile ? '100%' : 'calc(40% - 32px)', flexShrink: 0 }}>
+          <div className="flex flex-col" style={{ gap: isMobile ? '24px' : '40px', width: isMobile ? '75%' : 'calc(40% - 32px)', flexShrink: 0, order: isMobile ? 2 : undefined }}>
             <h1 
               style={{
                 fontWeight: 500,
@@ -144,26 +144,36 @@ export default function AmiwaPage() {
                 </span>
               </div>
 
-            <div className="flex flex-col" style={{ gap: '8px', marginTop: '48px', alignItems: 'flex-start' }}>
-              <div
-                style={{
-                  display: 'inline-flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  gap: '8px',
-                  width: isMobile ? '100%' : 'auto',
-                }}
-              >
-                <GlassButton href="https://www.amiwa.app/" variant="light" fullWidth={isMobile}>
-                  Visit Amiwa
-                </GlassButton>
-                <span style={{ fontWeight: 300, fontSize: '12px', lineHeight: '1.4em', color: '#FFFFFF', opacity: 0.7 }}>
-                  mobile only
-                </span>
+            {!isMobile && (
+              <div className="flex flex-col" style={{ gap: '8px', marginTop: '48px', alignItems: 'flex-start' }}>
+                <div
+                  style={{
+                    display: 'inline-flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: '8px',
+                    width: 'auto',
+                  }}
+                >
+                  <GlassButton href="https://www.amiwa.app/" openInNewTab variant="light">
+                    Visit Amiwa
+                  </GlassButton>
+                  <span style={{ fontWeight: 300, fontSize: '12px', lineHeight: '1.4em', color: '#FFFFFF', opacity: 0.7 }}>
+                    mobile only
+                  </span>
+                </div>
               </div>
-            </div>
+            )}
             </div>
           </div>
+
+          {isMobile && (
+            <div style={{ width: '100%', order: 3 }}>
+              <GlassButton href="https://www.amiwa.app/" openInNewTab variant="light" fullWidth>
+                Visit Amiwa
+              </GlassButton>
+            </div>
+          )}
           
           {/* Right - Hero image */}
           <div 
@@ -175,6 +185,7 @@ export default function AmiwaPage() {
               overflow: 'hidden',
               flexShrink: 0,
               cursor: 'pointer',
+              order: isMobile ? 1 : undefined,
             }}
             onClick={() => openFullscreen('/images/works/amiwa/hero.png')}
           >
@@ -272,7 +283,7 @@ export default function AmiwaPage() {
           style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)' }}
         />
         <div style={{ width: isMobile ? '100%' : 'fit-content', paddingLeft: isMobile ? '16px' : 0, paddingRight: isMobile ? '16px' : 0 }}>
-          <GlassButton href="/works/design-team" variant="light" className="relative" fullWidth={isMobile}>
+          <GlassButton href="/works/sberhealth" variant="light" className="relative" fullWidth={isMobile}>
             Check next case
           </GlassButton>
         </div>

@@ -6,6 +6,7 @@ interface GlassButtonProps {
   children: ReactNode;
   onClick?: () => void;
   href?: string;
+  openInNewTab?: boolean;
   variant?: 'light' | 'dark';
   className?: string;
   fullWidth?: boolean;
@@ -16,6 +17,7 @@ export default function GlassButton({
   children,
   onClick,
   href,
+  openInNewTab = false,
   variant = 'light',
   className = '',
   fullWidth = false,
@@ -130,6 +132,8 @@ export default function GlassButton({
     return (
       <a 
         href={href} 
+        target={openInNewTab ? '_blank' : undefined}
+        rel={openInNewTab ? 'noopener noreferrer' : undefined}
         className={className}
         style={buttonStyle}
         onMouseEnter={handleMouseEnter}

@@ -27,8 +27,6 @@ export default function DesignTeamPage() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             document.body.classList.add('case-section-active');
-          } else {
-            document.body.classList.remove('case-section-active');
           }
         });
       },
@@ -94,7 +92,7 @@ export default function DesignTeamPage() {
 
         <div className={`relative ${isMobile ? 'flex flex-col' : 'flex items-start'}`} style={{ gap: isMobile ? '32px' : '64px', zIndex: 1 }}>
           {/* Left content */}
-          <div className="flex flex-col" style={{ gap: isMobile ? '24px' : '40px', width: isMobile ? '100%' : 'calc(40% - 32px)', flexShrink: 0 }}>
+          <div className="flex flex-col" style={{ gap: isMobile ? '24px' : '40px', width: isMobile ? '75%' : 'calc(40% - 32px)', flexShrink: 0, order: isMobile ? 2 : undefined }}>
             <h1
               style={{
                 fontWeight: 500,
@@ -104,7 +102,7 @@ export default function DesignTeamPage() {
                 color: '#FFFFFF',
               }}
             >
-              Architecture of a Design Team
+              Scaling Design at&nbsp;QIC
             </h1>
 
             <div className="flex flex-col" style={{ gap: isMobile ? '16px' : '24px' }}>
@@ -113,7 +111,7 @@ export default function DesignTeamPage() {
                   Area
                 </span>
                 <span style={{ fontWeight: 400, fontSize: '16px', lineHeight: '1.4em', color: '#FFFFFF' }}>
-                  Insurance, Health, Travel
+                  Ecosystem, Insurance, Health, Travel, Car
                 </span>
               </div>
 
@@ -122,20 +120,45 @@ export default function DesignTeamPage() {
                   Role
                 </span>
                 <span style={{ fontWeight: 400, fontSize: '16px', lineHeight: '1.4em', color: '#FFFFFF' }}>
-                  Team Lead, Design Manager
+                  Product Design Lead, Design Manager
                 </span>
               </div>
 
               <div className="flex flex-col" style={{ gap: '4px' }}>
                 <span style={{ fontWeight: 200, fontSize: '16px', lineHeight: '1.4em', color: 'rgba(255,255,255,0.6)' }}>
-                  My focuses
+                  Expertise
                 </span>
                 <span style={{ fontWeight: 400, fontSize: '16px', lineHeight: '1.4em', color: '#FFFFFF' }}>
-                  Design Ops, Delivery Processes, Product Consistency, Team Scaling, Design System
+                  Team Scaling • Design Operations • Product Ecosystems • Design Systems • Cross-functional Leadership
                 </span>
               </div>
             </div>
+
+            {!isMobile && (
+              <div className="flex flex-col" style={{ gap: '8px', marginTop: '48px', alignItems: 'flex-start' }}>
+                <div
+                  style={{
+                    display: 'inline-flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    width: 'auto',
+                  }}
+                >
+                  <GlassButton href="https://qic.online/en" openInNewTab variant="light">
+                    Visit QIC
+                  </GlassButton>
+                </div>
+              </div>
+            )}
           </div>
+
+          {isMobile && (
+            <div style={{ width: '100%', order: 3 }}>
+              <GlassButton href="https://qic.online/en" openInNewTab variant="light" fullWidth>
+                Visit QIC
+              </GlassButton>
+            </div>
+          )}
 
           {/* Right - Hero placeholder with link */}
           <div
@@ -148,6 +171,7 @@ export default function DesignTeamPage() {
               flexShrink: 0,
               backgroundColor: '#A4A0FF',
               cursor: 'pointer',
+              order: isMobile ? 1 : undefined,
             }}
             onClick={() => openFullscreen('/images/works/design-team/hero.png')}
           >
@@ -163,7 +187,6 @@ export default function DesignTeamPage() {
 
       {/* Section: Building the design foundation */}
       <section
-        ref={contentRef}
         className="relative w-full"
         style={{
           padding: isMobile ? '32px 16px' : '64px',
@@ -176,20 +199,22 @@ export default function DesignTeamPage() {
 
         <div
           className={`relative ${isMobile ? 'flex flex-col' : 'flex'}`}
-          style={{ gap: isMobile ? '24px' : '64px', alignItems: isMobile ? 'flex-start' : 'center' }}
+          style={{ gap: isMobile ? '24px' : '48px', alignItems: 'flex-start' }}
         >
-          <div className="flex flex-col" style={{ gap: isMobile ? '12px' : '16px', width: isMobile ? '100%' : '50%' }}>
+          <div style={{ flex: isMobile ? undefined : '0 0 calc((100% - 48px) / 3)', width: isMobile ? '100%' : undefined }}>
             <h2
               style={{
                 fontWeight: 500,
-                fontSize: isMobile ? '28px' : '40px',
+                fontSize: isMobile ? '28px' : '32px',
                 lineHeight: '1.2em',
                 letterSpacing: '-0.06em',
                 color: '#020202',
               }}
             >
-              Building the design foundation
+              Scaling Design Through Three Stages of Growth
             </h2>
+          </div>
+          <div style={{ flex: isMobile ? undefined : '1 1 0', width: isMobile ? '100%' : undefined }}>
             <p
               style={{
                 fontWeight: 300,
@@ -199,34 +224,17 @@ export default function DesignTeamPage() {
                 color: '#020202',
               }}
             >
-              I joined QIC team at the earliest stage and built the Mobile design team from the ground up. I set up core design processes, established smooth collaboration between designers, developers, and analysts, and created a workflow that balanced speed and quality. My focus was on building a sustainable design culture that could scale as the product grew.
+              In 2022, I took over a two-person Mobile Design Team at QIC during a period of rapid growth.
+              <br />
+              Over the following years, I built the foundations of a scalable design organization: establishing design operations, enabling team growth, leading the shift to product-based teams, and driving consistency across multiple product streams.
             </p>
-          </div>
-
-          <div
-            className="relative"
-            style={{
-              width: isMobile ? '100%' : '50%',
-              aspectRatio: '16 / 11',
-              borderRadius: isMobile ? '24px' : '32px',
-              overflow: 'hidden',
-              backgroundColor: '#A4A0FF',
-              cursor: 'pointer',
-            }}
-            onClick={() => openFullscreen('/images/works/design-team/foundation.png')}
-          >
-            <Image
-              src="/images/works/design-team/foundation.png"
-              alt="Specifications and limitations"
-              fill
-              style={{ objectFit: 'cover' }}
-            />
           </div>
         </div>
       </section>
 
       <KeyResults
         isMobile={isMobile}
+        title="Key numbers"
         items={[
           { title: 'Design TTM', value: '4 weeks → 2 weeks' },
           { title: 'Delivery predictability', value: '56% → 82%' },
@@ -242,6 +250,7 @@ export default function DesignTeamPage() {
 
       {/* Section: Scaling leadership */}
       <section
+        ref={contentRef}
         className="relative w-full"
         style={{
           padding: isMobile ? '32px 16px' : '64px',
@@ -254,52 +263,309 @@ export default function DesignTeamPage() {
 
         <div
           className={`relative ${isMobile ? 'flex flex-col' : 'flex'}`}
-          style={{ gap: isMobile ? '24px' : '64px', alignItems: isMobile ? 'flex-start' : 'center' }}
+          style={{ gap: isMobile ? '24px' : '48px', alignItems: 'flex-start' }}
         >
-          <div
-            className="relative"
-            style={{
-              width: isMobile ? '100%' : '50%',
-              aspectRatio: '16 / 11',
-              borderRadius: isMobile ? '24px' : '32px',
-              overflow: 'hidden',
-              backgroundColor: '#A4A0FF',
-              cursor: 'pointer',
-            }}
-            onClick={() => openFullscreen('/images/works/design-team/collage.png')}
-          >
-            <Image
-              src="/images/works/design-team/collage.png"
-              alt="Product screens collage"
-              fill
-              style={{ objectFit: 'cover' }}
-            />
-          </div>
-
-          <div className="flex flex-col" style={{ gap: isMobile ? '12px' : '16px', width: isMobile ? '100%' : '50%' }}>
+          <div style={{ flex: isMobile ? undefined : '0 0 calc((100% - 48px) / 3)', width: isMobile ? '100%' : undefined }}>
             <h2
               style={{
                 fontWeight: 500,
-                  fontSize: isMobile ? '28px' : '40px',
+                fontSize: isMobile ? '28px' : '32px',
                 lineHeight: '1.2em',
                 letterSpacing: '-0.06em',
                 color: '#020202',
               }}
             >
-              Scaling leadership
+              Stage 1 — Creating Predictability
             </h2>
+          </div>
+
+          <div style={{ flex: isMobile ? undefined : '1 1 0', width: isMobile ? '100%' : undefined }}>
             <p
               style={{
                 fontWeight: 300,
-                  fontSize: '16px',
+                fontSize: '16px',
                 lineHeight: '1.6em',
                 letterSpacing: '-0.02em',
                 color: '#020202',
               }}
             >
-              As the product evolved, I transitioned to leading a cross-platform team within the same business stream — shifting from a single-platform focus to a unified design approach across all surfaces we owned.
+              <span style={{ fontWeight: 500 }}>Challenge</span>
               <br />
-              This shift helped us drive consistency, improve UX across platforms, and establish a shared design language and system tailored to the needs of our stream, while staying aligned with the other streams.
+              Design delivery was inconsistent and heavily dependent on individuals. There were no established workflows, review processes, or clear collaboration with engineering.
+              <br />
+              <br />
+              <span style={{ fontWeight: 500 }}>What I Did</span>
+              <br />
+              Introduced an end-to-end design delivery process
+              <br />
+              Established design reviews and quality checkpoints
+              <br />
+              Standardized design-engineering collaboration
+              <br />
+              Reorganized Figma assets and documentation
+              <br />
+              Laid the foundation for a Design System
+              <br />
+              <br />
+              <span style={{ fontWeight: 500 }}>Outcome</span>
+              <br />
+              The new operating model significantly improved delivery predictability and reduced design bottlenecks.
+              <br />
+              <br />
+              Design Time-to-Market was reduced from 4 weeks to 2 weeks while maintaining quality standards.
+            </p>
+          </div>
+        </div>
+
+        <div
+          className="relative"
+          style={{
+            width: '100%',
+            marginTop: isMobile ? '24px' : '32px',
+            borderRadius: isMobile ? '24px' : '32px',
+            overflow: 'hidden',
+            cursor: 'pointer',
+          }}
+          onClick={() => openFullscreen('/images/works/design-team/stage-1-predictability.png')}
+        >
+          <Image
+            src="/images/works/design-team/stage-1-predictability.png"
+            alt="Stage 1 — Creating Predictability"
+            width={1600}
+            height={1000}
+            style={{ width: '100%', height: 'auto', display: 'block' }}
+          />
+        </div>
+      </section>
+
+      {/* Section: Stage 2 */}
+      <section
+        className="relative w-full"
+        style={{
+          padding: isMobile ? '32px 16px' : '64px',
+        }}
+      >
+        <div
+          className="absolute inset-0"
+          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)' }}
+        />
+
+        <div
+          className={`relative ${isMobile ? 'flex flex-col' : 'flex'}`}
+          style={{ gap: isMobile ? '24px' : '48px', alignItems: 'flex-start' }}
+        >
+          <div style={{ flex: isMobile ? undefined : '0 0 calc((100% - 48px) / 3)', width: isMobile ? '100%' : undefined }}>
+            <h2
+              style={{
+                fontWeight: 500,
+                fontSize: isMobile ? '28px' : '32px',
+                lineHeight: '1.2em',
+                letterSpacing: '-0.06em',
+                color: '#020202',
+              }}
+            >
+              Stage 2 — Building for Scale
+            </h2>
+          </div>
+
+          <div style={{ flex: isMobile ? undefined : '1 1 0', width: isMobile ? '100%' : undefined }}>
+            <p
+              style={{
+                fontWeight: 300,
+                fontSize: '16px',
+                lineHeight: '1.6em',
+                letterSpacing: '-0.02em',
+                color: '#020202',
+              }}
+            >
+              <span style={{ fontWeight: 500 }}>Challenge</span>
+              <br />
+              As the team grew, we needed repeatable systems for hiring, onboarding, and performance management.
+              <br />
+              <br />
+              <span style={{ fontWeight: 500 }}>What I Did</span>
+              <br />
+              Built a hiring framework for Product Designers
+              <br />
+              Introduced grading and performance evaluation
+              <br />
+              Created onboarding and growth programs
+              <br />
+              Defined clear career development paths
+              <br />
+              <br />
+              <span style={{ fontWeight: 500 }}>Outcome</span>
+              <br />
+              Design evolved from a small team into a scalable organizational function with transparent growth and hiring processes.
+            </p>
+          </div>
+        </div>
+
+        <div
+          className="relative"
+          style={{
+            width: '100%',
+            marginTop: isMobile ? '24px' : '32px',
+            borderRadius: isMobile ? '24px' : '32px',
+            overflow: 'hidden',
+            cursor: 'pointer',
+          }}
+          onClick={() => openFullscreen('/images/works/design-team/stage-2-building-for-scale.png')}
+        >
+          <Image
+            src="/images/works/design-team/stage-2-building-for-scale.png"
+            alt="Stage 2 — Building for Scale"
+            width={1600}
+            height={1000}
+            style={{ width: '100%', height: 'auto', display: 'block' }}
+          />
+        </div>
+      </section>
+
+      {/* Section: Stage 3 */}
+      <section
+        className="relative w-full"
+        style={{
+          padding: isMobile ? '32px 16px' : '64px',
+        }}
+      >
+        <div
+          className="absolute inset-0"
+          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)' }}
+        />
+
+        <div
+          className={`relative ${isMobile ? 'flex flex-col' : 'flex'}`}
+          style={{ gap: isMobile ? '24px' : '48px', alignItems: 'flex-start' }}
+        >
+          <div style={{ flex: isMobile ? undefined : '0 0 calc((100% - 48px) / 3)', width: isMobile ? '100%' : undefined }}>
+            <h2
+              style={{
+                fontWeight: 500,
+                fontSize: isMobile ? '28px' : '32px',
+                lineHeight: '1.2em',
+                letterSpacing: '-0.06em',
+                color: '#020202',
+              }}
+            >
+              Stage 3 —
+              <br />
+              From Platforms to Product Verticals
+            </h2>
+          </div>
+
+          <div style={{ flex: isMobile ? undefined : '1 1 0', width: isMobile ? '100%' : undefined }}>
+            <p
+              style={{
+                fontWeight: 300,
+                fontSize: '16px',
+                lineHeight: '1.6em',
+                letterSpacing: '-0.02em',
+                color: '#020202',
+              }}
+            >
+              <span style={{ fontWeight: 500 }}>Challenge</span>
+              <br />
+              The company was transitioning toward an ecosystem model, while design teams were still organized around platforms.
+              <br />
+              <br />
+              <span style={{ fontWeight: 500 }}>What I Did</span>
+              <br />
+              Collaborated with fellow Leads to drive the transition from platform teams to cross-platform product units
+              <br />
+              Established onboarding process to help designers quickly ramp up on new platforms
+              <br />
+              Established collaboration across product verticals
+              <br />
+              Introduced practices focused on cross-product consistency
+              <br />
+              <br />
+              <span style={{ fontWeight: 500 }}>Outcome</span>
+              <br />
+              Design became better aligned with business goals, customer journeys, and ecosystem thinking.
+            </p>
+          </div>
+        </div>
+
+        <div
+          className="relative"
+          style={{
+            width: '100%',
+            marginTop: isMobile ? '24px' : '32px',
+            borderRadius: isMobile ? '24px' : '32px',
+            overflow: 'hidden',
+            cursor: 'pointer',
+          }}
+          onClick={() => openFullscreen('/images/works/design-team/stage-3-platforms-to-verticals.png')}
+        >
+          <Image
+            src="/images/works/design-team/stage-3-platforms-to-verticals.png"
+            alt="Stage 3 — From Platforms to Product Verticals"
+            width={1600}
+            height={1000}
+            style={{ width: '100%', height: 'auto', display: 'block' }}
+          />
+        </div>
+      </section>
+
+      {/* Section: Driving consistency */}
+      <section
+        className="relative w-full"
+        style={{
+          padding: isMobile ? '32px 16px' : '64px',
+        }}
+      >
+        <div
+          className="absolute inset-0"
+          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)' }}
+        />
+
+        <div
+          className={`relative ${isMobile ? 'flex flex-col' : 'flex'}`}
+          style={{ gap: isMobile ? '24px' : '48px', alignItems: 'flex-start' }}
+        >
+          <div style={{ flex: isMobile ? undefined : '0 0 calc((100% - 48px) / 3)', width: isMobile ? '100%' : undefined }}>
+            <h2
+              style={{
+                fontWeight: 500,
+                fontSize: isMobile ? '28px' : '32px',
+                lineHeight: '1.2em',
+                letterSpacing: '-0.06em',
+                color: '#020202',
+              }}
+            >
+              Driving Consistency and Future-Ready Design Practices
+            </h2>
+          </div>
+
+          <div style={{ flex: isMobile ? undefined : '1 1 0', width: isMobile ? '100%' : undefined }}>
+            <p
+              style={{
+                fontWeight: 300,
+                fontSize: '16px',
+                lineHeight: '1.6em',
+                letterSpacing: '-0.02em',
+                color: '#020202',
+              }}
+            >
+              As the organization expanded across multiple products and product streams, maintaining consistency became a strategic challenge.
+              <br />
+              <br />
+              Alongside the transition to product verticals, I focused on creating shared principles, reusable patterns, and stronger alignment between teams. This work helped increase Design System adoption, improve cross-platform experiences, and strengthen ecosystem thinking across the organization.
+              <br />
+              <br />
+              At the same time, I collaborated with other Design Leads to prepare teams for emerging ways of working. Together, we defined a shared approach to AI-assisted design, established workflows and best practices, and supported adoption across multiple teams.
+              <br />
+              <br />
+              <span style={{ fontWeight: 500 }}>Outcome</span>
+              <br />
+              Increased consistency across products and platforms
+              <br />
+              Strengthened alignment between seven product streams
+              <br />
+              Improved Design System adoption and reuse
+              <br />
+              Established a scalable framework for AI-enabled design work
             </p>
           </div>
         </div>
@@ -318,8 +584,8 @@ export default function DesignTeamPage() {
           style={{ backgroundColor: '#020202', width: '100vw', left: '50%', transform: 'translateX(-50%)' }}
         />
         <div style={{ width: isMobile ? '100%' : 'fit-content', paddingLeft: isMobile ? '16px' : 0, paddingRight: isMobile ? '16px' : 0 }}>
-          <GlassButton href="/works/sberhealth" variant="light" className="relative" fullWidth={isMobile}>
-            Check next case
+          <GlassButton href="/works/cross-product-experiences" variant="light" className="relative" fullWidth={isMobile}>
+            See what we built
           </GlassButton>
         </div>
       </section>

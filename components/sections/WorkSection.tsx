@@ -10,6 +10,26 @@ gsap.registerPlugin(ScrollTrigger);
 
 const works = [
   {
+    id: 3,
+    headline: 'Scaling Design\nat QIC',
+    descriptions: [
+      'Transformed a two-person design team into a scalable design function supporting multiple product streams, cross-platform experiences, and AI-enabled workflows.',
+    ],
+    role: 'Role: Design Manager, Product Design Lead',
+    buttonHref: '/works/design-team',
+    image: '/images/works/design-team.png',
+  },
+  {
+    id: 5,
+    headline: 'Cross-Product\nExperiences',
+    descriptions: [
+      'Led the design of multiple product verticals, balancing unique customer needs with a consistent cross-product experience across the QIC ecosystem',
+    ],
+    role: 'Role: Product Design Lead',
+    buttonHref: '/works/cross-product-experiences',
+    image: '/images/works/cross-product-experiences.png',
+  },
+  {
     id: 1,
     headline: 'QIC App',
     descriptions: [
@@ -30,16 +50,6 @@ const works = [
     role: 'Role: Solo founder, Product Designer',
     buttonHref: '/works/amiwa',
     image: '/images/works/amiwa.png',
-  },
-  {
-    id: 3,
-    headline: 'Architecture\nof a Design Team',
-    descriptions: [
-      "I led the creation of product design team at QIC and processes within my stream, building a scalable workflow, establishing a strong design culture, and transforming an early MVP into a full, multi-platform product experience",
-    ],
-    role: 'Role: Team Lead, Design Manager',
-    buttonHref: '/works/design-team',
-    image: '/images/works/design-team.png',
   },
   {
     id: 4,
