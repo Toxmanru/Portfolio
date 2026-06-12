@@ -91,11 +91,13 @@ export default function WorkSection() {
         setHorizontalPadding(64);
       }
       
-      // Pin offset: 64px для < 1280, 80px для >= 1280
+      // Pin offset matches the compact (scrolled, white) header height so the
+      // works section sits flush under it with no seam: 104*0.7≈73 for >=1280,
+      // 64*0.7≈45 for 960–1280.
       if (width < 1280) {
-        setPinOffset(64);
+        setPinOffset(45);
       } else {
-        setPinOffset(80);
+        setPinOffset(73);
       }
     };
 
@@ -293,7 +295,7 @@ export default function WorkSection() {
     <section ref={sectionRef} className="relative" style={{ zIndex: 10 }}>
       <div 
         className="absolute inset-0"
-        style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)' }}
+        style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-2px' }}
       />
       
       <div 

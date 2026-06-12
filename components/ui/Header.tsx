@@ -49,6 +49,11 @@ export default function Header() {
   const bgColor = isScrolled ? 'rgba(255, 255, 255, 1)' : 'rgba(255, 255, 255, 0)';
   const textColor = isScrolled ? '#020202' : '#FFFFFF';
 
+  // On desktop, the white (scrolled) header becomes ~30% more compact.
+  const isCompact = isScrolled && !isMobile;
+  const effectiveHeight = isCompact ? Math.round(baseHeight * 0.7) : baseHeight;
+  const effectivePadding = isCompact ? Math.round(basePadding * 0.7) : basePadding;
+
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
@@ -64,9 +69,9 @@ export default function Header() {
           style={{ 
             maxWidth: '1440px',
             margin: '0 auto',
-            height: `${baseHeight}px`,
-            paddingTop: `${basePadding}px`, 
-            paddingBottom: `${basePadding}px`,
+            height: `${effectiveHeight}px`,
+            paddingTop: `${effectivePadding}px`, 
+            paddingBottom: `${effectivePadding}px`,
             paddingLeft: `${horizontalPadding}px`,
             paddingRight: `${horizontalPadding}px`,
           }}
