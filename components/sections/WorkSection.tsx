@@ -69,35 +69,61 @@ export default function WorkSection() {
   const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [isMobile, setIsMobile] = useState(false);
   const [verticalPadding, setVerticalPadding] = useState(120);
+  const [bottomPadding, setBottomPadding] = useState(120);
   const [horizontalPadding, setHorizontalPadding] = useState(64);
   const [pinOffset, setPinOffset] = useState(80);
+  const [imageSize, setImageSize] = useState(568);
+  const [labelMargin, setLabelMargin] = useState(48);
 
   useEffect(() => {
     const updateSizes = () => {
       const width = window.innerWidth;
+      const height = window.innerHeight;
       
       // Мобильный брейкпоинт < 960px
       setIsMobile(width < 960);
-      
-      // Отступы для мобильных: 32px вертикальные, 16px горизонтальные
-      if (width < 960) {
-        setVerticalPadding(32);
-        setHorizontalPadding(16);
-      } else if (width < 1400) {
-        setVerticalPadding(64);
-        setHorizontalPadding(64);
-      } else {
-        setVerticalPadding(120);
-        setHorizontalPadding(64);
-      }
-      
+
+      setHorizontalPadding(width < 960 ? 16 : 64);
+
       // Pin offset matches the compact (scrolled, white) header height so the
       // works section sits flush under it with no seam: 104*0.7≈73 for >=1280,
       // 64*0.7≈45 for 960–1280.
-      if (width < 1280) {
-        setPinOffset(45);
+      const pin = width < 1280 ? 45 : 73;
+      setPinOffset(pin);
+
+      // Большой вертикальный отступ 120px оправдан только на высоких экранах.
+      // На низких широкоформатных дисплеях (13–14" макбуки) держим 64px,
+      // иначе блок уезжает вниз и картинка не влезает.
+      const isCompactDesktop = width >= 960 && !(width >= 1400 && height >= 950);
+
+      let vp: number;
+      if (width < 960) {
+        vp = 32;
+      } else if (isCompactDesktop) {
+        vp = 64;
       } else {
-        setPinOffset(73);
+        vp = 120;
+      }
+      setVerticalPadding(vp);
+
+      // На компактных десктопах нижний отступ чуть больше верхнего,
+      // чтобы картинка не липла к границе секции.
+      const bp = isCompactDesktop ? 80 : vp;
+      setBottomPadding(bp);
+
+      // На компактных по высоте десктопах сокращаем отступ от "My works"
+      // до заголовков кейсов, чтобы блок занимал меньше высоты.
+      setLabelMargin(isCompactDesktop ? 24 : 48);
+
+      // Размер квадратной картинки: по ширине 440/568, но если по высоте
+      // вьюпорта места не хватает — ужимаем, не опускаясь ниже 440px.
+      if (width < 960) {
+        setImageSize(440);
+      } else {
+        const desired = width < 1280 ? 440 : 568;
+        const reserve = 96; // заголовок секции + отступы
+        const available = height - pin - vp - bp - reserve;
+        setImageSize(Math.min(desired, Math.max(440, available)));
       }
     };
 
@@ -193,7 +219,7 @@ export default function WorkSection() {
     }, section);
 
     return () => ctx.revert();
-  }, [pinOffset, isMobile]);
+  }, [pinOffset, isMobile, imageSize]);
 
   // Мобильная версия - обычный скролл карточек
   if (isMobile) {
@@ -299,18 +325,18 @@ export default function WorkSection() {
       />
       
       <div 
-        className="relative w-full"
-        style={{ paddingTop: `${verticalPadding}px`, paddingBottom: `${verticalPadding}px`, paddingLeft: `${horizontalPadding}px`, paddingRight: `${horizontalPadding}px` }}
+        className="relative w-full flex flex-col justify-center"
+        style={{ minHeight: `calc(100vh - ${pinOffset}px)`, paddingTop: `${verticalPadding}px`, paddingBottom: `${bottomPadding}px`, paddingLeft: `${horizontalPadding}px`, paddingRight: `${horizontalPadding}px` }}
       >
-        <div className="relative flex" style={{ minHeight: '568px', gap: '16px' }}>
-          <div className="relative" style={{ flex: 1, minHeight: '568px' }}>
+        <div className="relative flex" style={{ minHeight: `${imageSize}px`, gap: '16px' }}>
+          <div className="relative" style={{ flex: 1, minHeight: `${imageSize}px` }}>
             {/* Статичный заголовок секции - на одной линии с картинкой */}
-            <p style={{ fontWeight: 300, fontSize: '20px', lineHeight: '1.4em', letterSpacing: '0.02em', color: '#ED5C4E', marginBottom: '48px' }}>
+            <p style={{ fontWeight: 300, fontSize: '20px', lineHeight: '1.4em', letterSpacing: '0.02em', color: '#ED5C4E', marginBottom: `${labelMargin}px` }}>
               My works
             </p>
 
             {/* Контейнер для работ */}
-            <div className="relative" style={{ minHeight: '450px' }}>
+            <div className="relative" style={{ minHeight: `${Math.max(0, imageSize - 118)}px` }}>
               {works.map((work, index) => (
                 <div
                   key={work.id}
@@ -365,6 +391,8 @@ export default function WorkSection() {
           <div 
             className="relative work-image-container"
             style={{ 
+              width: `${imageSize}px`,
+              height: `${imageSize}px`,
               borderRadius: '32px', 
               backgroundColor: '#FFFFFF', 
               overflow: 'hidden', 
