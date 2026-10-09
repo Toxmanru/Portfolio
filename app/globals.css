@@ -320,18 +320,47 @@ body.case-page .header-my-works-link {
   }
 }
 
-/* Tagline section padding */
+/* Tagline section: высокий «трек» для скролла.
+   Высота = 100svh (залипший экран) + 100svh (следующая секция наезжает поверх) + 150svh (скролл-анимация).
+   Отрицательный margin-bottom заставляет следующую (белую) секцию наезжать на залипший блок. */
 .tagline-section {
-  padding-left: 8px !important;
-  padding-right: 8px !important;
-  padding-bottom: 200px !important;
+  height: 350vh;
+  height: 350svh;
+  margin-bottom: -100vh;
+  margin-bottom: -100svh;
+}
+
+/* Залипающий экран: контент строго по центру вьюпорта */
+.tagline-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 8px;
+  padding-right: 8px;
+  overflow: hidden;
 }
 
 @media (min-width: 960px) {
-  .tagline-section {
-    padding-left: 64px !important;
-    padding-right: 64px !important;
-    padding-bottom: 380px !important;
+  .tagline-sticky {
+    padding-left: 64px;
+    padding-right: 64px;
+  }
+}
+
+/* Слова проявляются через GSAP (scrub); до инициализации скрыты */
+.tagline-word {
+  display: inline-block;
+  opacity: 0;
+  will-change: transform, opacity, filter;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tagline-word {
+    opacity: 1;
   }
 }
 
