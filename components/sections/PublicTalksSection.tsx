@@ -8,8 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function PublicTalksSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const video1Ref = useRef<HTMLDivElement>(null);
-  const video2Ref = useRef<HTMLDivElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
   const publicWordRef = useRef<HTMLSpanElement>(null);
   const talksWordRef = useRef<HTMLSpanElement>(null);
   const [isMobile, setIsMobile] = useState(false);
@@ -24,63 +23,75 @@ export default function PublicTalksSection() {
   }, []);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Начальное состояние
-      gsap.set([publicWordRef.current, talksWordRef.current], {
-        opacity: 0,
-        y: 80,
-      });
-      gsap.set([video1Ref.current, video2Ref.current], {
-        opacity: 0,
-        x: -30,
-      });
+    const section = sectionRef.current;
+    const heading = headingRef.current;
+    const words = [publicWordRef.current, talksWordRef.current];
+    if (!section || !heading || words.some((w) => !w)) return;
 
-      // Timeline привязанный к скроллу
-      // На мобильных start ниже (top 80%), чтобы анимация начиналась раньше
-      const tl = gsap.timeline({
+    // Пользователям с reduced motion ничего не прячем
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      gsap.set(words, { opacity: 1, backgroundPosition: '0% 0%' });
+      gsap.set(gsap.utils.toArray('[data-talk-video-wrap] > div', section), { opacity: 1 });
+      return;
+    }
+
+    const ctx = gsap.context(() => {
+      // Заголовок: слова поднимаются и проявляются из размытия, затем "Talks" закрашивается.
+      // Всё идёт по прогрессу скролла (scrub), без привязки к фиксированному числу пикселей.
+      const headingTl = gsap.timeline({
+        defaults: { ease: 'power2.out' },
         scrollTrigger: {
-          trigger: sectionRef.current,
-          start: isMobile ? 'top 50%' : 'top 280px',
-          end: isMobile ? '+=250' : '+=400',
-          scrub: 1,
-          once: true,
+          trigger: heading,
+          start: isMobile ? 'top 72%' : 'top 70%',
+          end: isMobile ? 'top 28%' : 'top 22%',
+          scrub: 0.8,
+          invalidateOnRefresh: true,
         },
       });
 
-      // Слова появляются снизу вверх
-      tl.to(publicWordRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-      })
-      .to(talksWordRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-      }, '-=0.6')
-      // Закрашивание слова "Talks" оранжевым
-      .to(talksWordRef.current, {
-        backgroundPosition: '0% 0%',
-        duration: 0.8,
-        ease: 'power2.inOut',
-      }, '-=0.4')
-      // Первое видео появляется (слева направо)
-      .to(video1Ref.current, {
-        opacity: 1,
-        x: 0,
-        duration: 0.3,
-        ease: 'power2.out',
-      }, '-=0.4')
-      // Второе видео появляется с небольшой задержкой
-      .to(video2Ref.current, {
-        opacity: 1,
-        x: 0,
-        duration: 0.3,
-        ease: 'power2.out',
-      }, '-=0.2');
-    }, sectionRef);
+      headingTl
+        .fromTo(
+          words[0],
+          { opacity: 0, y: 48, filter: 'blur(10px)' },
+          { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1.2, ease: 'power3.out' },
+          0,
+        )
+        .fromTo(
+          words[1],
+          { opacity: 0, y: 48, filter: 'blur(10px)' },
+          { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1.2, ease: 'power3.out' },
+          0.3,
+        )
+        // Закрашивание слова "Talks" оранжевым
+        .to(words[1], { backgroundPosition: '0% 0%', duration: 1, ease: 'power2.inOut' }, 0.9);
+
+      // Видео: каждое появляется по прогрессу собственного положения на экране.
+      // Триггер — неанимируемая обёртка, чтобы transform не сдвигал точки старта/конца.
+      const wraps = gsap.utils.toArray<HTMLElement>('[data-talk-video-wrap]', section);
+      wraps.forEach((wrap, i) => {
+        const inner = wrap.firstElementChild as HTMLElement | null;
+        if (!inner) return;
+        // На десктопе видео стоят рядом — второе чуть запаздывает, на мобильном — идут друг за другом
+        const lag = !isMobile && i > 0 ? 6 : 0;
+        gsap.fromTo(
+          inner,
+          { opacity: 0, y: 56, scale: 0.96, transformOrigin: '50% 100%' },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: wrap,
+              start: `top ${isMobile ? 82 : 72 - lag}%`,
+              end: `top ${isMobile ? 46 : 34 - lag}%`,
+              scrub: 0.8,
+              invalidateOnRefresh: true,
+            },
+          },
+        );
+      });
+    }, section);
 
     return () => ctx.revert();
   }, [isMobile]);
@@ -108,45 +119,42 @@ export default function PublicTalksSection() {
       }}
     >
       <div className="flex flex-col items-center gap-8 xl:gap-16">
-        <h2 className="text-white text-center work-headline">
-        
-          <span ref={publicWordRef} className="inline-block">Public</span>
+        <h2 ref={headingRef} className="text-white text-center work-headline">
+          <span ref={publicWordRef} className="inline-block" style={{ opacity: 0 }}>Public</span>
           {' '}
-          <span ref={talksWordRef} className="inline-block" style={{ ...accentWordStyle, paddingRight: '0.1em' }}>
+          <span ref={talksWordRef} className="inline-block" style={{ ...accentWordStyle, paddingRight: '0.1em', opacity: 0 }}>
             Talks
           </span>
         </h2>
 
         <div className={`${isMobile ? 'flex flex-col' : 'flex'} w-full`} style={{ gap: '16px' }}>
-          <div 
-            ref={video1Ref}
-            className="flex-1"
-          >
-            <div style={{ position: 'relative', paddingBottom: '56.25%', borderRadius: '24px', overflow: 'hidden' }}>
-              <iframe
-                src="https://www.youtube.com/embed/dqeFii50Gg8"
-                title="YouTube video 1"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', borderRadius: '24px' }}
-              />
+          <div data-talk-video-wrap className="flex-1">
+            <div style={{ opacity: 0 }}>
+              <div style={{ position: 'relative', paddingBottom: '56.25%', borderRadius: '24px', overflow: 'hidden' }}>
+                <iframe
+                  src="https://www.youtube.com/embed/dqeFii50Gg8"
+                  title="YouTube video 1"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', borderRadius: '24px' }}
+                />
+              </div>
             </div>
           </div>
 
-          <div 
-            ref={video2Ref}
-            className="flex-1"
-          >
-            <div style={{ position: 'relative', paddingBottom: '56.25%', borderRadius: '24px', overflow: 'hidden' }}>
-              <iframe
-                src="https://www.youtube.com/embed/Y-Eu5dlszDU"
-                title="YouTube video 2"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', borderRadius: '24px' }}
-              />
+          <div data-talk-video-wrap className="flex-1">
+            <div style={{ opacity: 0 }}>
+              <div style={{ position: 'relative', paddingBottom: '56.25%', borderRadius: '24px', overflow: 'hidden' }}>
+                <iframe
+                  src="https://www.youtube.com/embed/Y-Eu5dlszDU"
+                  title="YouTube video 2"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', borderRadius: '24px' }}
+                />
+              </div>
             </div>
           </div>
         </div>

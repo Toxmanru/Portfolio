@@ -179,14 +179,26 @@ export default function WorkSection() {
         }
       });
 
+      // Длительности в условных единицах таймлайна.
+      // Одно переключение = 0.5 (текст уходит) + 0.5 (картинка уходит) + 0.5 (новая карточка появляется).
+      const INTRO_HOLD = 0.5; // пауза перед первым переключением
+      const SWITCH = 1.5; // длительность одного переключения
+      const HOLD = 1; // «задержка»: карточка стоит на месте после переключения (в т.ч. последняя — перед снятием pin)
+      const SCROLL_PER_UNIT = 40; // % высоты вьюпорта скролла на единицу времени
+      const switches = works.length - 1;
+      const totalUnits = INTRO_HOLD + switches * (SWITCH + HOLD);
+
       // ScrollTrigger для pin и переключения работ
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: `top ${pinOffset}px`,
-          end: `+=${works.length * 50}%`,
+          end: `+=${totalUnits * SCROLL_PER_UNIT}%`,
           pin: true,
           pinSpacing: true,
+          // Pin должен пересчитываться раньше триггеров секций ниже (Public Talks и т.д.),
+          // иначе они измеряют позицию до появления pin-spacer и срабатывают слишком рано.
+          refreshPriority: 1,
           scrub: 0.5,
           onEnter: () => document.body.classList.add('works-section-active'),
           onLeave: () => document.body.classList.remove('works-section-active'),
@@ -196,7 +208,7 @@ export default function WorkSection() {
       });
 
       // Пустая пауза в начале, чтобы первая работа не переключалась сразу
-      tl.to({}, { duration: 0.5 });
+      tl.to({}, { duration: INTRO_HOLD });
 
       // Анимации переключения между работами
       for (let i = 0; i < works.length - 1; i++) {
@@ -214,12 +226,23 @@ export default function WorkSection() {
             .set(nextImage, { visibility: 'visible' })
             .fromTo(nextContent, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.5 }, '<')
             .fromTo(nextImage, { opacity: 0 }, { opacity: 1, duration: 0.5 }, '<');
+
+          // Задержка: новая карточка стоит на месте, пока скролл идёт дальше
+          tl.to({}, { duration: HOLD });
         }
       }
     }, section);
 
     return () => ctx.revert();
   }, [pinOffset, isMobile, imageSize]);
+
+  // Размеры секции (padding, размер картинки) меняются через state уже после монтирования,
+  // из-за чего высота страницы меняется. Пересчитываем позиции всех ScrollTrigger на странице,
+  // иначе у секций ниже (Public Talks и т.д.) старт анимаций «уезжает» относительно реального положения.
+  useEffect(() => {
+    const id = requestAnimationFrame(() => ScrollTrigger.refresh());
+    return () => cancelAnimationFrame(id);
+  }, [isMobile, pinOffset, imageSize, verticalPadding, bottomPadding, horizontalPadding, labelMargin]);
 
   // Мобильная версия - обычный скролл карточек
   if (isMobile) {
