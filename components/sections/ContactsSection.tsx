@@ -208,7 +208,7 @@ export default function ContactsSection() {
               aspectRatio: '1 / 1',
             }}
           >
-            <Image src="/images/contacts-bg-69af9d.png" alt="Contacts background" fill className="object-cover" />
+            <Image src="/images/contacts-bg-69af9d.png" alt="Contacts background" fill sizes="(max-width: 1440px) 100vw, 1440px" className="object-cover" />
           </div>
         </div>
       </section>
@@ -299,7 +299,7 @@ export default function ContactsSection() {
             flexShrink: 0,
           }}
         >
-          <Image src="/images/contacts-bg-69af9d.png" alt="Contacts background" fill className="object-cover" />
+          <Image src="/images/contacts-bg-69af9d.png" alt="Contacts background" fill sizes="(max-width: 1440px) 100vw, 1440px" className="object-cover" />
         </div>
       </div>
     </section>

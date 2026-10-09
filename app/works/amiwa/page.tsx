@@ -178,6 +178,8 @@ export default function AmiwaPage() {
               src="/images/works/amiwa/hero.png"
               alt="Amiwa app preview"
               fill
+              priority
+              sizes="(max-width: 1440px) 100vw, 1440px"
               draggable={false}
               style={{ objectFit: 'cover' }}
             />
@@ -229,6 +231,7 @@ export default function AmiwaPage() {
                 src="/images/works/amiwa/content-1.png"
                 alt="Amiwa app screens showcase 1"
                 fill
+                sizes="(max-width: 1440px) 100vw, 1312px"
                 draggable={false}
                 style={{ objectFit: 'cover' }}
               />
@@ -248,6 +251,7 @@ export default function AmiwaPage() {
                 src="/images/works/amiwa/content-2.png"
                 alt="Amiwa app screens showcase 2"
                 fill
+                sizes="(max-width: 1440px) 100vw, 1312px"
                 draggable={false}
                 style={{ objectFit: 'cover' }}
               />
@@ -345,6 +349,7 @@ export default function AmiwaPage() {
               src={fullscreenImage}
               alt="Fullscreen view"
               fill
+              sizes="100vw"
               style={{ objectFit: 'contain' }}
             />
           </div>

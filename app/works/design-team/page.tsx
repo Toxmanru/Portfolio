@@ -166,6 +166,8 @@ export default function DesignTeamPage() {
               src="/images/works/design-team/hero.png"
               alt="Design workflow"
               fill
+              priority
+              sizes="(max-width: 1440px) 100vw, 1440px"
               draggable={false}
               style={{ objectFit: 'cover' }}
             />
@@ -320,6 +322,7 @@ export default function DesignTeamPage() {
             alt="Stage 1 — Creating Predictability"
             width={1600}
             height={1000}
+            sizes="(max-width: 1440px) 100vw, 1312px"
             draggable={false}
             style={{ width: '100%', height: 'auto', display: 'block' }}
           />
@@ -405,6 +408,7 @@ export default function DesignTeamPage() {
             alt="Stage 2 — Building for Scale"
             width={1600}
             height={1000}
+            sizes="(max-width: 1440px) 100vw, 1312px"
             draggable={false}
             style={{ width: '100%', height: 'auto', display: 'block' }}
           />
@@ -492,6 +496,7 @@ export default function DesignTeamPage() {
             alt="Stage 3 — From Platforms to Product Verticals"
             width={1600}
             height={1000}
+            sizes="(max-width: 1440px) 100vw, 1312px"
             draggable={false}
             style={{ width: '100%', height: 'auto', display: 'block' }}
           />
@@ -645,6 +650,7 @@ export default function DesignTeamPage() {
               src={fullscreenImage}
               alt="Fullscreen view"
               fill
+              sizes="100vw"
               style={{ objectFit: 'contain' }}
             />
           </div>

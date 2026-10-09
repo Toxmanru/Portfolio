@@ -139,6 +139,8 @@ export default function SberHealthPage() {
               src="/images/works/sberhealth/hero.png"
               alt="SberHealth hero"
               fill
+              priority
+              sizes="(max-width: 1440px) 100vw, 1440px"
               draggable={false}
               style={{ objectFit: 'cover' }}
             />
@@ -208,6 +210,7 @@ export default function SberHealthPage() {
               src="/images/works/sberhealth/old-new.png"
               alt="Old vs new catalog view"
               fill
+              sizes="(max-width: 1440px) 100vw, 1312px"
               draggable={false}
               style={{ objectFit: 'cover' }}
             />
@@ -247,6 +250,7 @@ export default function SberHealthPage() {
               src="/images/works/sberhealth/new-version.png"
               alt="New catalog version screens"
               fill
+              sizes="(max-width: 1440px) 100vw, 1312px"
               draggable={false}
               style={{ objectFit: 'cover' }}
             />
@@ -300,6 +304,7 @@ export default function SberHealthPage() {
               src="/images/works/sberhealth/research.png"
               alt="Research-driven improvements"
               fill
+              sizes="(max-width: 1440px) 100vw, 1312px"
               draggable={false}
               style={{ objectFit: 'cover' }}
             />
@@ -420,6 +425,7 @@ export default function SberHealthPage() {
               src={fullscreenImage}
               alt="Fullscreen view"
               fill
+              sizes="100vw"
               style={{ objectFit: 'contain' }}
             />
           </div>

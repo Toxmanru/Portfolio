@@ -135,8 +135,6 @@ export default function TaglineSection() {
       <div 
         className="absolute pointer-events-none tagline-glow"
         style={{
-          borderRadius: '50%',
-          backgroundColor: 'rgba(237, 92, 78, 0.2)',
           zIndex: 0,
         }}
       />

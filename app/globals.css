@@ -348,24 +348,28 @@ body.case-page .header-my-works-link {
 
 /* Tagline background glow */
 .tagline-glow {
-  width: 100vw;
-  height: 100vw;
+  width: 150vw;
+  height: 150vw;
   left: 50%;
   transform: translateX(-50%);
-  bottom: -20vw;
-  filter: blur(50vw);
-  -webkit-filter: blur(50vw);
+  bottom: -40vw;
+  /* Soft glow via radial-gradient instead of an extremely expensive blur() filter.
+     blur(50vw)/blur(400px) forced a full-layer GPU recompute on every repaint/scroll. */
+  background: radial-gradient(
+    circle at center,
+    rgba(237, 92, 78, 0.22) 0%,
+    rgba(237, 92, 78, 0.12) 28%,
+    rgba(237, 92, 78, 0) 60%
+  );
 }
 
 @media (min-width: 960px) {
   .tagline-glow {
-    width: 872px;
-    height: 872px;
+    width: 1600px;
+    height: 1600px;
     left: 50%;
     transform: translateX(-50%);
-    bottom: -436px;
-    filter: blur(400px);
-    -webkit-filter: blur(400px);
+    bottom: -800px;
   }
 }
 
