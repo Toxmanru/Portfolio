@@ -17,25 +17,25 @@ const stageSections: StageSection[] = [
     title: 'Motor Stream',
     content:
       'Motor insurance is one of the most important entry points into the ecosystem.\n\nThe challenge was not only to create a fast and intuitive insurance purchase experience, but also to extend the relationship beyond the transaction itself. Insurance is purchased infrequently, while vehicle ownership generates continuous needs throughout the year.\n\nMy work focused on designing experiences that connected insurance with surrounding automotive services, helping customers manage different aspects of vehicle ownership within the same ecosystem.\n\nAs a result, the product evolved from a simple insurance flow into a broader automotive services experience that encouraged ongoing engagement beyond policy purchase.',
-    image: '/images/works/cross-product-experiences/motor-stream.png',
+    image: '/images/works/cross-product-experiences/motor-stream.webp',
   },
   {
     title: 'Life & Health',
     content:
       'Unlike Motor Insurance, this initiative required creating an entirely new product area from the ground up.\n\nThe vision extended beyond insurance coverage itself. We designed a comprehensive health experience that combined insurance products with a growing collection of health-related services and tools.\n\nMy role included defining product experiences that helped users manage different aspects of their health journey in one place, creating a stronger connection between insurance and everyday health needs.\n\nThe result was a health-focused ecosystem that increased product relevance and created more frequent customer interactions compared to traditional insurance products.',
-    image: '/images/works/cross-product-experiences/life-health.png',
+    image: '/images/works/cross-product-experiences/life-health.webp',
   },
   {
     title: 'Loyalty Program',
     content:
       'As the ecosystem expanded, we designed a cross-product loyalty system built around a shared rewards currency.\n\nCustomers could earn and redeem rewards across multiple products, creating stronger connections between services and encouraging deeper ecosystem engagement.\n\nMy contribution was focused on creating reusable loyalty patterns that different product teams could adopt while maintaining a consistent customer experience.\n\nToday, the loyalty framework serves as a shared ecosystem layer used across multiple products and teams.',
-    image: '/images/works/cross-product-experiences/loyalty-program.png',
+    image: '/images/works/cross-product-experiences/loyalty-program.webp',
   },
   {
     title: 'Travel',
     content:
       'When I took over the Travel stream, the team had just launched an MVP of hotel booking within QIC App.\n\nThe next challenge was to transform this mobile-first service into a cross-platform product while maintaining a fast delivery pace. My focus was on restructuring the design process for parallel mobile and web development, coaching the designer to work across platforms, and ensuring a consistent booking experience.\n\nThe first major milestone was launching a web hotel-booking platform from scratch in less than a month, from design kickoff to production. This established a new multi-platform design workflow and expanded the Travel experience beyond the mobile app.',
-    image: '/images/works/cross-product-experiences/hotels.png',
+    image: '/images/works/cross-product-experiences/hotels.webp',
   },
 ];
 
@@ -180,9 +180,9 @@ export default function CrossProductExperiencesPage() {
               cursor: canOpenFullscreen ? 'pointer' : 'default',
               order: isMobile ? 1 : undefined,
             }}
-            onClick={canOpenFullscreen ? () => openFullscreen('/images/works/cross-product-experiences/hero.png') : undefined}
+            onClick={canOpenFullscreen ? () => openFullscreen('/images/works/cross-product-experiences/hero.webp') : undefined}
           >
-            <Image src="/images/works/cross-product-experiences/hero.png" alt="Cross-product experiences hero" fill priority sizes="(max-width: 1440px) 100vw, 1440px" draggable={false} style={{ objectFit: 'cover' }} />
+            <Image src="/images/works/cross-product-experiences/hero.webp" alt="Cross-product experiences hero" fill priority sizes="(max-width: 1440px) 100vw, 1440px" draggable={false} style={{ objectFit: 'cover' }} />
           </div>
         </div>
       </section>
@@ -375,10 +375,10 @@ export default function CrossProductExperiencesPage() {
             clipPath: `inset(0 round ${isMobile ? '24px' : '32px'})`,
             cursor: canOpenFullscreen ? 'pointer' : 'default',
           }}
-          onClick={canOpenFullscreen ? () => openFullscreen('/images/works/cross-product-experiences/bringing-everything-together.png') : undefined}
+          onClick={canOpenFullscreen ? () => openFullscreen('/images/works/cross-product-experiences/bringing-everything-together.webp') : undefined}
         >
           <Image
-            src="/images/works/cross-product-experiences/bringing-everything-together.png"
+            src="/images/works/cross-product-experiences/bringing-everything-together.webp"
             alt="Bringing Everything Together"
             width={1600}
             height={1000}
@@ -455,7 +455,7 @@ export default function CrossProductExperiencesPage() {
               }}
             >
               <Image
-                src="/images/works/cross-product-experiences/team-designers.png"
+                src="/images/works/cross-product-experiences/team-designers.webp"
                 alt="Cross-product design team"
                 fill
                 sizes="(max-width: 1440px) 100vw, 1312px"
