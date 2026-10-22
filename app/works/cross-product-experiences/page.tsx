@@ -31,6 +31,12 @@ const stageSections: StageSection[] = [
       'As the ecosystem expanded, we designed a cross-product loyalty system built around a shared rewards currency.\n\nCustomers could earn and redeem rewards across multiple products, creating stronger connections between services and encouraging deeper ecosystem engagement.\n\nMy contribution was focused on creating reusable loyalty patterns that different product teams could adopt while maintaining a consistent customer experience.\n\nToday, the loyalty framework serves as a shared ecosystem layer used across multiple products and teams.',
     image: '/images/works/cross-product-experiences/loyalty-program.png',
   },
+  {
+    title: 'Travel',
+    content:
+      'When I took over the Travel stream, the team had just launched an MVP of hotel booking within QIC App.\n\nThe next challenge was to transform this mobile-first service into a cross-platform product while maintaining a fast delivery pace. My focus was on restructuring the design process for parallel mobile and web development, coaching the designer to work across platforms, and ensuring a consistent booking experience.\n\nThe first major milestone was launching a web hotel-booking platform from scratch in less than a month, from design kickoff to production. This established a new multi-platform design workflow and expanded the Travel experience beyond the mobile app.',
+    image: '/images/works/cross-product-experiences/hotels.png',
+  },
 ];
 
 export default function CrossProductExperiencesPage() {
@@ -293,6 +299,16 @@ export default function CrossProductExperiencesPage() {
                     {' '}was focused on creating reusable loyalty patterns that different product teams could adopt while maintaining a consistent customer experience.
                     {'\n\n'}
                     Today, the loyalty framework serves as a shared <span style={{ fontWeight: 500 }}>ecosystem layer</span> used across multiple products and teams.
+                  </>
+                ) : stage.title === 'Travel' ? (
+                  <>
+                    When I took over the Travel stream, the team had just launched an MVP of hotel booking within QIC App.
+                    {'\n\n'}
+                    <span style={{ fontWeight: 500 }}>The next challenge</span>
+                    {' '}was to transform this mobile-first service into a cross-platform product while maintaining a fast delivery pace. My focus was on restructuring the design process for parallel mobile and web development, coaching the designer to work across platforms, and ensuring a consistent booking experience.
+                    {'\n\n'}
+                    <span style={{ fontWeight: 500 }}>The first major milestone</span>
+                    {' '}was launching a web hotel-booking platform from scratch in less than a month, from design kickoff to production. This established a new multi-platform design workflow and expanded the Travel experience beyond the mobile app.
                   </>
                 ) : (
                   stage.content
