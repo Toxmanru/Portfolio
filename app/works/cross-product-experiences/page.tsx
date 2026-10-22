@@ -219,12 +219,10 @@ export default function CrossProductExperiencesPage() {
         isMobile={isMobile}
         title="Key numbers"
         items={[
-          { title: 'Product Streams', value: '7' },
-          { title: 'New Ecosystem Services', value: '4+' },
-          { title: 'User Engagement', value: '+14%' },
-          { title: 'Revenue Growth', value: '+200% YoY' },
+          { title: 'Design Leadership', value: '6 Business Streams' },
+          { title: 'New Products', value: '7+ Launched' },
         ]}
-        columnsDesktop={4}
+        columnsDesktop={2}
         horizontalPadding={horizontalPadding}
         paddingTopDesktop={104}
         paddingBottomDesktop={104}
