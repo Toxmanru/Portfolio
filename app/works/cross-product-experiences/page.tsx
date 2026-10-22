@@ -39,6 +39,12 @@ const stageSections: StageSection[] = [
   },
 ];
 
+const teamColumns: string[][] = [
+  ['Artur Subbotkin', 'Irina Bogdanova'],
+  ['Azat Shaikhin', 'Anastasia Norvikova'],
+  ['Aruzhan Sailau', 'Tatiana Usacheva'],
+];
+
 export default function CrossProductExperiencesPage() {
   const [isMobile, setIsMobile] = useState(false);
   const [fullscreenImage, setFullscreenImage] = useState<string | null>(null);
@@ -404,65 +410,72 @@ export default function CrossProductExperiencesPage() {
         />
 
         <div
-          className="relative"
+          className="relative flex flex-col items-center"
           style={{
-            width: isMobile ? '100%' : '75%',
-            margin: '0 auto',
-            backgroundColor: '#C7F4C7',
-            borderRadius: isMobile ? '24px' : '32px',
-            padding: isMobile ? '24px' : '32px',
+            gap: isMobile ? '24px' : '32px',
+            padding: isMobile ? 0 : '0 120px',
+            textAlign: 'center',
           }}
         >
-          <div
-            className={isMobile ? 'flex flex-col' : 'flex'}
+          <p
             style={{
-              gap: '16px',
-              alignItems: isMobile ? 'stretch' : 'flex-end',
+              width: '100%',
+              maxWidth: isMobile ? '100%' : 'min(698px, calc(100% - 334px))',
+              position: 'relative',
+              zIndex: 1,
+              fontWeight: 300,
+              fontSize: '14px',
+              lineHeight: '1.4em',
+              letterSpacing: '-0.02em',
+              color: '#020202',
             }}
           >
-            <div style={{ flex: '1 1 0', minWidth: 0, order: isMobile ? 2 : 1 }}>
-              <p style={{ fontWeight: 300, fontSize: '16px', lineHeight: '1.6em', letterSpacing: '-0.02em', color: '#020202' }}>
-                As Product Design Lead, I was responsible for product direction, ecosystem strategy, cross-product consistency, and design reviews.
-                <br />
-                This work was delivered together with my exceptional team of product designers:
-                <br />
-                <br />
-                <span style={{ fontWeight: 500 }}>Artur Subbotkin</span>
-                <br />
-                <span style={{ fontWeight: 500 }}>Irina Bogdanova</span>
-                <br />
-                <span style={{ fontWeight: 500 }}>Azat Shaikhin</span>
-                <br />
-                <span style={{ fontWeight: 500 }}>Anastasia Norvikova</span>
-                <br />
-                <span style={{ fontWeight: 500 }}>Tatiana Usacheva</span>
-                <br />
-                <span style={{ fontWeight: 500 }}>Aruzhan Sailau</span>
-              </p>
-            </div>
+            As Product Design Lead, I was responsible for product direction, ecosystem strategy, cross-product consistency, and design reviews.
+            <br />
+            <br />
+            This work was delivered together with my exceptional team of product designers:
+          </p>
 
-            <div
-              className="relative"
-              style={{
-                width: '100%',
-                maxWidth: '123px',
-                aspectRatio: '1 / 1',
-                alignSelf: isMobile ? 'flex-start' : 'flex-end',
-                order: isMobile ? 1 : 2,
-                borderRadius: isMobile ? '24px' : '32px',
-                clipPath: `inset(0 round ${isMobile ? '24px' : '32px'})`,
-                flexShrink: 0,
-              }}
-            >
-              <Image
-                src="/images/works/cross-product-experiences/team-designers.webp"
-                alt="Cross-product design team"
-                fill
-                sizes="(max-width: 1440px) 100vw, 1312px"
-                draggable={false}
-                style={{ objectFit: 'cover' }}
-              />
-            </div>
+          <div
+            style={{
+              width: '100%',
+              position: 'relative',
+              zIndex: 1,
+              display: 'grid',
+              gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
+              gap: isMobile ? '12px' : '8px',
+              fontWeight: 500,
+              fontSize: '14px',
+              lineHeight: '1.4em',
+              letterSpacing: '-0.02em',
+              color: '#ED5C4E',
+            }}
+          >
+            {teamColumns.map((names) => (
+              <div key={names.join('-')} className="flex flex-col items-center">
+                {names.map((name) => (
+                  <span key={name}>{name}</span>
+                ))}
+              </div>
+            ))}
+          </div>
+
+          <div
+            className="relative"
+            style={
+              isMobile
+                ? { position: 'absolute', right: 0, bottom: '-23px', width: '86px', height: '86px', zIndex: 0 }
+                : { position: 'absolute', top: '24px', right: '28px', width: '123px', height: '123px', zIndex: 0 }
+            }
+          >
+            <Image
+              src="/images/works/cross-product-experiences/team-designers.webp"
+              alt="Cross-product design team"
+              fill
+              sizes="123px"
+              draggable={false}
+              style={{ objectFit: 'contain' }}
+            />
           </div>
         </div>
       </section>
