@@ -221,8 +221,9 @@ export default function CrossProductExperiencesPage() {
         items={[
           { title: 'Design Leadership', value: '6 Business Streams' },
           { title: 'New Products', value: '7+ Launched' },
+          { title: 'Shared UX Patterns', value: '84%+ Compliance' },
         ]}
-        columnsDesktop={2}
+        columnsDesktop={3}
         horizontalPadding={horizontalPadding}
         paddingTopDesktop={104}
         paddingBottomDesktop={104}
