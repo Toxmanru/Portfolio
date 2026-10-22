@@ -410,13 +410,17 @@ export default function CrossProductExperiencesPage() {
                 This work was delivered together with my exceptional team of product designers:
                 <br />
                 <br />
-                <span style={{ fontWeight: 500 }}>Artur Subbotkin</span> - Motor Stream
+                <span style={{ fontWeight: 500 }}>Artur Subbotkin</span>
                 <br />
-                <span style={{ fontWeight: 500 }}>Irina Bogdanova</span> - Platform
+                <span style={{ fontWeight: 500 }}>Irina Bogdanova</span>
                 <br />
-                <span style={{ fontWeight: 500 }}>Anastasia Norvikova, Azat Shaikhin</span> - Life & Medical
+                <span style={{ fontWeight: 500 }}>Azat Shaikhin</span>
                 <br />
-                <span style={{ fontWeight: 500 }}>Aruzhan Sailau</span> - Travel & Home
+                <span style={{ fontWeight: 500 }}>Anastasia Norvikova</span>
+                <br />
+                <span style={{ fontWeight: 500 }}>Tatiana Usacheva</span>
+                <br />
+                <span style={{ fontWeight: 500 }}>Aruzhan Sailau</span>
               </p>
             </div>
 
