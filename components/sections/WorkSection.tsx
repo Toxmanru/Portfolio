@@ -27,7 +27,7 @@ const works = [
     ],
     role: 'Role: Product Design Lead',
     buttonHref: '/works/cross-product-experiences',
-    image: '/images/works/cross-product-experiences.png',
+    image: '/images/works/cross-product-experiences.webp',
   },
   {
     id: 1,
