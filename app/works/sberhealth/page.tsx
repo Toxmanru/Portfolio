@@ -37,7 +37,7 @@ export default function SberHealthPage() {
 
   const horizontalPadding = isMobile ? 16 : 64;
   const verticalPadding = isMobile ? 32 : 120;
-  const canOpenFullscreen = !isMobile;
+  const canOpenFullscreen = true;
 
   return (
     <main

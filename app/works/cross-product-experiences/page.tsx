@@ -75,7 +75,7 @@ export default function CrossProductExperiencesPage() {
   };
 
   const horizontalPadding = isMobile ? 16 : 64;
-  const canOpenFullscreen = !isMobile;
+  const canOpenFullscreen = true;
 
   return (
     <main className="relative min-h-screen bg-[#020202]" style={{ maxWidth: '1440px', margin: '0 auto' }}>
