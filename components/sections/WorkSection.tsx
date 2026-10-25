@@ -26,7 +26,7 @@ const works: Work[] = [
     descriptions: [
       'Transformed a two-person design team into a scalable design function supporting multiple product streams, cross-platform experiences, and AI-enabled workflows.',
     ],
-    role: 'Role: Design Manager, Lead Product Designer',
+    role: 'Role: Product Design Manager',
     buttonHref: '/works/design-team',
     image: '/images/works/design-team.png',
   },

@@ -107,7 +107,7 @@ export default function DesignTeamPage() {
                   Role
                 </span>
                 <span style={{ fontWeight: 400, fontSize: '16px', lineHeight: '1.4em', color: '#FFFFFF' }}>
-                  Lead Product Designer, Design Manager
+                  Product Design Manager
                 </span>
               </div>
 
