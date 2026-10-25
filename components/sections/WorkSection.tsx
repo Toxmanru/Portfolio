@@ -8,7 +8,18 @@ import GlassButton from '@/components/ui/GlassButton';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const works = [
+type Work = {
+  id: number;
+  headline: string;
+  descriptions: string[];
+  role: string;
+  buttonHref: string;
+  buttonLabel?: string;
+  disabled?: boolean;
+  image: string;
+};
+
+const works: Work[] = [
   {
     id: 3,
     headline: 'Scaling Design\nat QIC',
