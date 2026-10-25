@@ -387,8 +387,8 @@ export default function CrossProductExperiencesPage() {
             quality={90}
             src="/images/works/cross-product-experiences/bringing-everything-together.webp"
             alt="Bringing Everything Together"
-            width={1600}
-            height={1000}
+            width={3456}
+            height={1380}
             sizes="(max-width: 1440px) 100vw, 1312px"
             draggable={false}
             style={{ width: '100%', height: 'auto', display: 'block' }}
