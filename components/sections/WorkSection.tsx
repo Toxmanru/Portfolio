@@ -37,9 +37,7 @@ const works = [
     ],
     role: 'Role: Product Design Lead',
     buttonHref: '/works/qic-app',
-    buttonLabel: 'Coming soon',
-    disabled: true,
-    image: '/images/works/qic-app.png',
+    image: '/images/works/qic-app.webp',
   },
   {
     id: 2,
