@@ -424,8 +424,8 @@ export default function CrossProductExperiencesPage() {
               position: 'relative',
               zIndex: 1,
               fontWeight: 300,
-              fontSize: '14px',
-              lineHeight: '1.4em',
+              fontSize: '16px',
+              lineHeight: '1.6em',
               letterSpacing: '-0.02em',
               color: '#020202',
             }}
@@ -445,8 +445,8 @@ export default function CrossProductExperiencesPage() {
               gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
               gap: isMobile ? '12px' : '8px',
               fontWeight: 500,
-              fontSize: '14px',
-              lineHeight: '1.4em',
+              fontSize: '16px',
+              lineHeight: '1.6em',
               letterSpacing: '-0.02em',
               color: '#ED5C4E',
             }}
@@ -489,8 +489,8 @@ export default function CrossProductExperiencesPage() {
           style={{ backgroundColor: '#020202', left: 'calc(50% - 50vw)', right: 'calc(50% - 50vw)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
         />
         <div style={{ width: isMobile ? '100%' : 'fit-content', paddingLeft: isMobile ? '16px' : 0, paddingRight: isMobile ? '16px' : 0 }}>
-          <GlassButton href="/works/amiwa" variant="light" className="relative" fullWidth={isMobile}>
-            Check next case
+          <GlassButton href="/works/qic-app" variant="light" className="relative" fullWidth={isMobile}>
+            Explore QIC App case
           </GlassButton>
         </div>
       </section>
