@@ -290,7 +290,7 @@ export default function WorkSection() {
                     overflow: 'hidden',
                   }}
                 >
-                  <Image src={work.image} alt={work.headline} fill sizes="(max-width: 960px) 92vw, 680px" className="object-cover" />
+                  <Image quality={90} src={work.image} alt={work.headline} fill sizes="(max-width: 960px) 92vw, 680px" className="object-cover" />
                 </div>
                 
                 {/* Заголовок работы - отступ 24px от картинки */}
@@ -438,7 +438,7 @@ export default function WorkSection() {
                 className="absolute inset-0"
                 style={{ backgroundColor: '#FFFFFF', visibility: index === 0 ? 'visible' : 'hidden' }}
               >
-                <Image src={work.image} alt={work.headline} fill sizes="(max-width: 960px) 92vw, 680px" className="object-cover" />
+                <Image quality={90} src={work.image} alt={work.headline} fill sizes="(max-width: 960px) 92vw, 680px" className="object-cover" />
               </div>
             ))}
           </div>

@@ -188,7 +188,7 @@ export default function CrossProductExperiencesPage() {
             }}
             onClick={canOpenFullscreen ? () => openFullscreen('/images/works/cross-product-experiences/hero.webp') : undefined}
           >
-            <Image src="/images/works/cross-product-experiences/hero.webp" alt="Cross-product experiences hero" fill priority sizes="(max-width: 1440px) 100vw, 1440px" draggable={false} style={{ objectFit: 'cover' }} />
+            <Image quality={90} src="/images/works/cross-product-experiences/hero.webp" alt="Cross-product experiences hero" fill priority sizes="(max-width: 1440px) 100vw, 1440px" draggable={false} style={{ objectFit: 'cover' }} />
           </div>
         </div>
       </section>
@@ -334,7 +334,7 @@ export default function CrossProductExperiencesPage() {
             }}
             onClick={canOpenFullscreen ? () => openFullscreen(stage.image) : undefined}
           >
-            <Image src={stage.image} alt={stage.title} width={1600} height={1000} sizes="(max-width: 1440px) 100vw, 1312px" draggable={false} style={{ width: '100%', height: 'auto', display: 'block' }} />
+            <Image quality={90} src={stage.image} alt={stage.title} width={1600} height={1000} sizes="(max-width: 1440px) 100vw, 1312px" draggable={false} style={{ width: '100%', height: 'auto', display: 'block' }} />
           </div>
         </section>
       ))}
@@ -384,6 +384,7 @@ export default function CrossProductExperiencesPage() {
           onClick={canOpenFullscreen ? () => openFullscreen('/images/works/cross-product-experiences/bringing-everything-together.webp') : undefined}
         >
           <Image
+            quality={90}
             src="/images/works/cross-product-experiences/bringing-everything-together.webp"
             alt="Bringing Everything Together"
             width={1600}
@@ -469,6 +470,7 @@ export default function CrossProductExperiencesPage() {
             }
           >
             <Image
+              quality={90}
               src="/images/works/cross-product-experiences/team-designers.webp"
               alt="Cross-product design team"
               fill
@@ -547,7 +549,7 @@ export default function CrossProductExperiencesPage() {
           </button>
 
           <div className="relative w-full h-full" style={{ padding: '60px 16px 16px 16px' }} onClick={(e) => e.stopPropagation()}>
-            <Image src={fullscreenImage} alt="Fullscreen view" fill sizes="100vw" style={{ objectFit: 'contain' }} />
+            <Image quality={90} src={fullscreenImage} alt="Fullscreen view" fill sizes="100vw" style={{ objectFit: 'contain' }} />
           </div>
         </div>
       )}

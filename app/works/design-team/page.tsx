@@ -163,6 +163,7 @@ export default function DesignTeamPage() {
             onClick={canOpenFullscreen ? () => openFullscreen('/images/works/design-team/hero.png') : undefined}
           >
             <Image
+              quality={90}
               src="/images/works/design-team/hero.png"
               alt="Design workflow"
               fill
@@ -318,6 +319,7 @@ export default function DesignTeamPage() {
           onClick={canOpenFullscreen ? () => openFullscreen('/images/works/design-team/stage-1-predictability.png') : undefined}
         >
           <Image
+            quality={90}
             src="/images/works/design-team/stage-1-predictability.png"
             alt="Stage 1 — Creating Predictability"
             width={1600}
@@ -404,6 +406,7 @@ export default function DesignTeamPage() {
           onClick={canOpenFullscreen ? () => openFullscreen('/images/works/design-team/stage-2-building-for-scale.png') : undefined}
         >
           <Image
+            quality={90}
             src="/images/works/design-team/stage-2-building-for-scale.png"
             alt="Stage 2 — Building for Scale"
             width={1600}
@@ -492,6 +495,7 @@ export default function DesignTeamPage() {
           onClick={canOpenFullscreen ? () => openFullscreen('/images/works/design-team/stage-3-platforms-to-verticals.png') : undefined}
         >
           <Image
+            quality={90}
             src="/images/works/design-team/stage-3-platforms-to-verticals.png"
             alt="Stage 3 — From Platforms to Product Verticals"
             width={1600}
@@ -647,6 +651,7 @@ export default function DesignTeamPage() {
             onClick={(e) => e.stopPropagation()}
           >
             <Image
+              quality={90}
               src={fullscreenImage}
               alt="Fullscreen view"
               fill

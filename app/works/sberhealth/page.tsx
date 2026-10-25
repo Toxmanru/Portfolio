@@ -136,6 +136,7 @@ export default function SberHealthPage() {
             onClick={canOpenFullscreen ? () => openFullscreen('/images/works/sberhealth/hero.png') : undefined}
           >
             <Image
+              quality={90}
               src="/images/works/sberhealth/hero.png"
               alt="SberHealth hero"
               fill
@@ -207,6 +208,7 @@ export default function SberHealthPage() {
             onClick={canOpenFullscreen ? () => openFullscreen('/images/works/sberhealth/old-new.png') : undefined}
           >
             <Image
+              quality={90}
               src="/images/works/sberhealth/old-new.png"
               alt="Old vs new catalog view"
               fill
@@ -247,6 +249,7 @@ export default function SberHealthPage() {
             onClick={canOpenFullscreen ? () => openFullscreen('/images/works/sberhealth/new-version.png') : undefined}
           >
             <Image
+              quality={90}
               src="/images/works/sberhealth/new-version.png"
               alt="New catalog version screens"
               fill
@@ -301,6 +304,7 @@ export default function SberHealthPage() {
             onClick={canOpenFullscreen ? () => openFullscreen('/images/works/sberhealth/research.png') : undefined}
           >
             <Image
+              quality={90}
               src="/images/works/sberhealth/research.png"
               alt="Research-driven improvements"
               fill
@@ -422,6 +426,7 @@ export default function SberHealthPage() {
             onClick={(e) => e.stopPropagation()}
           >
             <Image
+              quality={90}
               src={fullscreenImage}
               alt="Fullscreen view"
               fill

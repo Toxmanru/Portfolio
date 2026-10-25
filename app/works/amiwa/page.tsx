@@ -175,6 +175,7 @@ export default function AmiwaPage() {
             onClick={canOpenFullscreen ? () => openFullscreen('/images/works/amiwa/hero.png') : undefined}
           >
             <Image
+              quality={90}
               src="/images/works/amiwa/hero.png"
               alt="Amiwa app preview"
               fill
@@ -228,6 +229,7 @@ export default function AmiwaPage() {
               onClick={canOpenFullscreen ? () => openFullscreen('/images/works/amiwa/content-1.png') : undefined}
             >
               <Image
+                quality={90}
                 src="/images/works/amiwa/content-1.png"
                 alt="Amiwa app screens showcase 1"
                 fill
@@ -248,6 +250,7 @@ export default function AmiwaPage() {
               onClick={canOpenFullscreen ? () => openFullscreen('/images/works/amiwa/content-2.png') : undefined}
             >
               <Image
+                quality={90}
                 src="/images/works/amiwa/content-2.png"
                 alt="Amiwa app screens showcase 2"
                 fill
@@ -346,6 +349,7 @@ export default function AmiwaPage() {
             onClick={(e) => e.stopPropagation()}
           >
             <Image
+              quality={90}
               src={fullscreenImage}
               alt="Fullscreen view"
               fill

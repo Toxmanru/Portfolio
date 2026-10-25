@@ -26,7 +26,7 @@ const sections: CaseSection[] = [
         <B>The challenge</B> was to introduce an entirely new product structure while keeping familiar insurance journeys accessible and making future expansion possible without repeated redesigns.
       </>,
     ],
-    image: { src: '/images/works/qic-app/challenge.webp', alt: 'Old version of QIC App', width: 2304, height: 1080 },
+    image: { src: '/images/works/qic-app/challenge.webp', alt: 'Old version of QIC App', width: 3456, height: 1620 },
   },
   {
     id: 'vision',
@@ -48,7 +48,7 @@ const sections: CaseSection[] = [
       </>,
       <>Together, these principles created a flexible structure designed to evolve alongside the business.</>,
     ],
-    image: { src: '/images/works/qic-app/vision.webp', alt: 'Ecosystem concept', width: 2304, height: 1038 },
+    image: { src: '/images/works/qic-app/vision.webp', alt: 'Ecosystem concept', width: 3456, height: 1557 },
   },
   {
     id: 'validation',
@@ -66,7 +66,7 @@ const sections: CaseSection[] = [
         The concept demonstrated strong task completion across the key scenarios, requiring only minor adjustments to content and visual emphasis.
       </>,
     ],
-    image: { src: '/images/works/qic-app/validation.webp', alt: 'Concept validation', width: 2304, height: 1038 },
+    image: { src: '/images/works/qic-app/validation.webp', alt: 'Concept validation', width: 3456, height: 1557 },
   },
   {
     id: 'execution',
@@ -91,7 +91,7 @@ const sections: CaseSection[] = [
       <>I delegated detailed production design to a designer on my team, supporting the transition through discovery sessions, design reviews, and strategic alignment with Product Management.</>,
       <>Over next iterations, the complete concept reached production, with refinements to visual design, edge cases, and content priorities.</>,
     ],
-    image: { src: '/images/works/qic-app/execution.webp', alt: 'Final production version of QIC App', width: 2304, height: 1112 },
+    image: { src: '/images/works/qic-app/execution.webp', alt: 'Final production version of QIC App', width: 3456, height: 1668 },
   },
   {
     id: 'impact',
@@ -240,7 +240,7 @@ export default function QicAppPage() {
             }}
             onClick={canOpenFullscreen ? () => openFullscreen('/images/works/qic-app/hero.webp') : undefined}
           >
-            <Image src="/images/works/qic-app/hero.webp" alt="QIC App hero" fill priority sizes="(max-width: 1440px) 100vw, 1440px" draggable={false} style={{ objectFit: 'cover' }} />
+            <Image quality={90} src="/images/works/qic-app/hero.webp" alt="QIC App hero" fill priority sizes="(max-width: 1440px) 100vw, 1440px" draggable={false} style={{ objectFit: 'cover' }} />
           </div>
         </div>
       </section>
@@ -315,6 +315,7 @@ export default function QicAppPage() {
               onClick={canOpenFullscreen ? () => openFullscreen(section.image!.src) : undefined}
             >
               <Image
+                quality={90}
                 src={section.image.src}
                 alt={section.image.alt}
                 width={section.image.width}
@@ -397,7 +398,7 @@ export default function QicAppPage() {
           </button>
 
           <div className="relative w-full h-full" style={{ padding: '60px 16px 16px 16px' }} onClick={(e) => e.stopPropagation()}>
-            <Image src={fullscreenImage} alt="Fullscreen view" fill sizes="100vw" style={{ objectFit: 'contain' }} />
+            <Image quality={90} src={fullscreenImage} alt="Fullscreen view" fill sizes="100vw" style={{ objectFit: 'contain' }} />
           </div>
         </div>
       )}
