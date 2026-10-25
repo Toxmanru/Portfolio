@@ -26,7 +26,7 @@ const works: Work[] = [
     descriptions: [
       'Transformed a two-person design team into a scalable design function supporting multiple product streams, cross-platform experiences, and AI-enabled workflows.',
     ],
-    role: 'Role: Design Manager, Product Design Lead',
+    role: 'Role: Design Manager, Lead Product Designer',
     buttonHref: '/works/design-team',
     image: '/images/works/design-team.png',
   },
@@ -36,7 +36,7 @@ const works: Work[] = [
     descriptions: [
       'Led the design of multiple product verticals, balancing unique customer needs with a consistent cross-product experience across the QIC ecosystem',
     ],
-    role: 'Role: Product Design Lead',
+    role: 'Role: Lead Product Designer',
     buttonHref: '/works/cross-product-experiences',
     image: '/images/works/cross-product-experiences.webp',
   },
@@ -46,7 +46,7 @@ const works: Work[] = [
     descriptions: [
       "I led the UX transformation of the MENA's largest insur-tech app, evolving it from a single-purpose driver app into a multi-domain ecosystem recognized with multiple industry awards",
     ],
-    role: 'Role: Product Design Lead',
+    role: 'Role: Lead Product Designer',
     buttonHref: '/works/qic-app',
     image: '/images/works/qic-app.webp',
   },

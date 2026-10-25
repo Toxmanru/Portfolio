@@ -134,7 +134,7 @@ export default function CrossProductExperiencesPage() {
               </div>
               <div className="flex flex-col" style={{ gap: '4px' }}>
                 <span style={{ fontWeight: 200, fontSize: '16px', lineHeight: '1.4em', color: 'rgba(255,255,255,0.6)' }}>Role</span>
-                <span style={{ fontWeight: 400, fontSize: '16px', lineHeight: '1.4em', color: '#FFFFFF' }}>Product Design Lead</span>
+                <span style={{ fontWeight: 400, fontSize: '16px', lineHeight: '1.4em', color: '#FFFFFF' }}>Lead Product Designer</span>
               </div>
               <div className="flex flex-col" style={{ gap: '4px' }}>
                 <span style={{ fontWeight: 200, fontSize: '16px', lineHeight: '1.4em', color: 'rgba(255,255,255,0.6)' }}>Expertise</span>
@@ -221,7 +221,7 @@ export default function CrossProductExperiencesPage() {
               The challenge was to create a unified experience across products, platforms, and customer journeys while accounting for the unique needs of different audiences and business domains. Each product needed to solve its own customer problem while contributing to a broader ecosystem experience that encouraged seamless movement between services.
               <br />
               <br />
-              As Product Design Lead, I was responsible for shaping several key areas of this ecosystem, including Motor Insurance, Medical Insurance, Loyalty Program, and the unified QIC App experience.
+              As Lead Product Designer, I was responsible for shaping several key areas of this ecosystem, including Motor Insurance, Medical Insurance, Loyalty Program, and the unified QIC App experience.
             </p>
           </div>
         </div>
@@ -431,7 +431,7 @@ export default function CrossProductExperiencesPage() {
               color: '#020202',
             }}
           >
-            As Product Design Lead, I was responsible for product direction, ecosystem strategy, cross-product consistency, and design reviews.
+            As Lead Product Designer, I was responsible for product direction, ecosystem strategy, cross-product consistency, and design reviews.
             <br />
             <br />
             This work was delivered together with my exceptional team of product designers:
