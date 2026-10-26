@@ -51,16 +51,6 @@ const works: Work[] = [
     image: '/images/works/qic-app.webp',
   },
   {
-    id: 2,
-    headline: 'Amiwa™',
-    descriptions: [
-      "Solo-built with AI travel companion designed to keep every part of your trip: plans, tickets, locations, and notes. Organized in one simple, private space, so you can stay fully present on the road",
-    ],
-    role: 'Role: Solo founder, Product Designer',
-    buttonHref: '/works/amiwa',
-    image: '/images/works/amiwa.png',
-  },
-  {
     id: 4,
     headline: 'SberHealth',
     descriptions: [
@@ -69,6 +59,16 @@ const works: Work[] = [
     role: 'Role: Product Designer',
     buttonHref: '/works/sberhealth',
     image: '/images/works/sberhealth.png',
+  },
+  {
+    id: 2,
+    headline: 'Amiwa™',
+    descriptions: [
+      "Solo-built with AI travel companion designed to keep every part of your trip: plans, tickets, locations, and notes. Organized in one simple, private space, so you can stay fully present on the road",
+    ],
+    role: 'Role: Solo founder, Product Designer',
+    buttonHref: '/works/amiwa',
+    image: '/images/works/amiwa.png',
   },
 ];
 
