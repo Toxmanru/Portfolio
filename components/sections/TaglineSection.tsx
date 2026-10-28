@@ -6,173 +6,202 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const subtitleText = 'What design means to me —';
-const tagline1Text = 'Crafting simple experiences, keeping all complexity';
-const tagline2Text = 'behind the scenes';
+type MottoLine = { text: string; asterisk?: boolean };
 
-/**
- * Структура:
- *  <section.tagline-section>        — высокий «трек» для скролла (сам не пинится)
- *    <div.tagline-sticky>           — CSS `position: sticky`, ровно 100svh, контент по центру
- *
- * Прогресс скролла по треку (ScrollTrigger со scrub) плавно «проявляет» слова:
- * opacity + сдвиг + blur. Следующая секция (белая) наезжает поверх залипшего блока
- * за счёт отрицательного margin-bottom у трека.
- */
+// Переносы строк заданы макетами: на мобилке звёздочка переезжает в плашку
+const LAYOUTS: Record<'desktop' | 'mobile', { lines: MottoLine[]; badge: MottoLine[] }> = {
+  desktop: {
+    lines: [
+      { text: 'I design simple' },
+      { text: 'experiences', asterisk: true },
+      { text: 'Keeping complexity' },
+    ],
+    badge: [{ text: 'behind the scenes' }],
+  },
+  mobile: {
+    lines: [
+      { text: 'I design' },
+      { text: 'simple' },
+      { text: 'experiences' },
+      { text: 'Keeping' },
+      { text: 'complexity' },
+    ],
+    badge: [{ text: 'behind', asterisk: true }, { text: 'the scenes' }],
+  },
+};
+
+const ARIA_LABEL = 'I design simple experiences Keeping complexity behind the scenes';
+
+function Asterisk() {
+  return <span className="motto-asterisk">*</span>;
+}
+
+function Chars({ text }: { text: string }) {
+  return (
+    <>
+      {text.split('').map((char, i) => (
+        <span key={i} className="motto-char" data-motto-char>
+          {char === ' ' ? '\u00A0' : char}
+        </span>
+      ))}
+    </>
+  );
+}
+
+function BadgeLines({ lines }: { lines: MottoLine[] }) {
+  return (
+    <>
+      {lines.map((line) => (
+        <span key={line.text} className="motto-badge-line">
+          {line.asterisk && <Asterisk />}
+          <Chars text={line.text} />
+        </span>
+      ))}
+    </>
+  );
+}
+
 export default function TaglineSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const tagline2ContainerRef = useRef<HTMLDivElement>(null);
+  const badgeRef = useRef<HTMLSpanElement>(null);
+  const spotlightRef = useRef<HTMLSpanElement>(null);
   const revealedRef = useRef(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
-  const [trail, setTrail] = useState<{ x: number; y: number }[]>([]);
-  const [isHovering, setIsHovering] = useState(false);
-  const trailLength = 8;
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 959px)');
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
 
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
 
     const ctx = gsap.context(() => {
-      const words = gsap.utils.toArray<HTMLElement>('[data-tagline-word]', section);
-      if (!words.length) return;
+      const q = gsap.utils.selector(section);
 
-      // Пользователям с reduced motion сразу показываем текст
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        gsap.set(words, { opacity: 1, y: 0, filter: 'none' });
+      if (revealedRef.current || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         revealedRef.current = true;
         return;
       }
 
-      const subtitleCount = subtitleText.split(' ').length;
-      const STEP = 0.32; // сдвиг между соседними словами
-      const GAP = 0.9; // пауза между подзаголовком и заголовком
+      const lines = q('[data-motto-line-inner]');
+      const badgeBg = q('[data-motto-badge-bg]');
+      const badgeChars = q('[data-motto-badge-text] .motto-badge-line > *');
+      const circle = q('[data-motto-circle]');
 
-      const tl = gsap.timeline({
-        defaults: { ease: 'power2.out' },
-        scrollTrigger: {
-          trigger: section,
-          // Начинаем, когда блок только появляется снизу, заканчиваем уже на залипшем экране
-          start: 'top 30%',
-          end: 'top -100%',
-          scrub: 0.8,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            revealedRef.current = self.progress > 0.96;
+      gsap.set(lines, { yPercent: 100 });
+      gsap.set(badgeBg, { scaleX: 0 });
+      gsap.set(badgeChars, { xPercent: -120, opacity: 0 });
+      gsap.set(circle, { opacity: 0, rotate: -90, scale: 0.6 });
+
+      const tl = gsap.timeline({ paused: true, defaults: { ease: 'power4.out' } });
+
+      // Скраб только вперёд: прогресс не уменьшается при скролле вверх
+      let maxProgress = 0;
+      const advance = (self: ScrollTrigger) => {
+        if (self.progress <= maxProgress) return;
+        maxProgress = self.progress;
+        gsap.to(tl, {
+          progress: maxProgress,
+          duration: 0.6,
+          ease: 'power2.out',
+          overwrite: true,
+          onComplete: () => {
+            if (maxProgress >= 1) revealedRef.current = true;
           },
-        },
-      });
+        });
+      };
 
-      words.forEach((word, i) => {
-        const at = i * STEP + (i >= subtitleCount ? GAP : 0);
-        tl.fromTo(
-          word,
-          { opacity: 0, y: 28, filter: 'blur(10px)' },
-          { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1.4, ease: 'power3.out' },
-          at,
-        );
+      // Секция закрепляется по центру экрана: скролл крутит анимацию, после её конца страница едет дальше.
+      // Пин не снимаем после раскрытия, иначе пропадёт отступ под него и страница прыгнет.
+      const trigger = ScrollTrigger.create({
+        trigger: section,
+        start: 'center center',
+        end: isMobile ? '+=900' : '+=1200',
+        pin: true,
+        anticipatePin: 1,
+        // Выше пина works: пересчитывается первым, чтобы works мерил позицию уже с учётом этого pin-spacer
+        refreshPriority: 2,
+        invalidateOnRefresh: true,
+        onUpdate: advance,
       });
+      ScrollTrigger.sort();
+      ScrollTrigger.refresh();
+      advance(trigger);
+
+      tl.to(lines, { yPercent: 0, duration: 0.9, stagger: 0.1, ease: 'power3.out' }, 0)
+        .to(badgeBg, { scaleX: 1, duration: 0.9, ease: 'expo.inOut' }, 0.9)
+        .to(badgeChars, { xPercent: 0, opacity: 1, duration: 0.8, stagger: 0.02 }, 1.6)
+        .to(circle, { opacity: 1, rotate: 0, scale: 1, duration: 0.8, ease: 'power3.out' }, 2)
+        .to({}, { duration: 0.2 });
     }, section);
 
     return () => ctx.revert();
-  }, []);
+  }, [isMobile]);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!tagline2ContainerRef.current || !revealedRef.current) return;
-    const rect = tagline2ContainerRef.current.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-
-    setMousePos({ x, y });
-    setTrail((prev) => [{ x, y }, ...prev].slice(0, trailLength));
+  const moveSpotlight = (e: React.MouseEvent<HTMLSpanElement>) => {
+    const badge = badgeRef.current;
+    const spotlight = spotlightRef.current;
+    if (!badge || !spotlight) return;
+    const rect = badge.getBoundingClientRect();
+    spotlight.style.setProperty('--spot-x', `${e.clientX - rect.left}px`);
+    spotlight.style.setProperty('--spot-y', `${e.clientY - rect.top}px`);
   };
 
-  const renderWords = (text: string) => {
-    const parts = text.split(' ');
-    return parts.map((word, index) => (
-      <span key={index} data-tagline-word className="tagline-word">
-        {word}
-        {index < parts.length - 1 ? '\u00A0' : ''}
-      </span>
-    ));
+  const setSpotlight = (radius: number) => {
+    if (!revealedRef.current && radius > 0) return;
+    gsap.to(spotlightRef.current, { '--spot-r': `${radius}px`, duration: 0.45, ease: 'power3.out' });
   };
 
-  const tagline2BaseStyle: React.CSSProperties = {
-    color: '#020202',
-    WebkitTextStroke: '2px #ED5C4E',
-    paintOrder: 'stroke fill',
-  };
+  const layout = LAYOUTS[isMobile ? 'mobile' : 'desktop'];
 
   return (
-    <section ref={sectionRef} className="relative w-full tagline-section" style={{ zIndex: 0 }}>
-      <div className="tagline-sticky">
-        {/* Background Glow */}
-        <div className="absolute pointer-events-none tagline-glow" style={{ zIndex: 0 }} />
+    <section ref={sectionRef} className="relative w-full tagline-section">
+      <h2 className="motto" aria-label={ARIA_LABEL}>
+        {layout.lines.map((line) => (
+          <span key={line.text} className="motto-line" aria-hidden>
+            <span className="motto-line-inner" data-motto-line-inner>
+              {line.asterisk && <Asterisk />}
+              {line.text}
+            </span>
+          </span>
+        ))}
 
-        <div
-          className="flex flex-col items-center relative z-10 tagline-content"
-          style={{ gap: '40px', margin: '0 auto' }}
+        <span
+          ref={badgeRef}
+          className="motto-badge"
+          aria-hidden
+          onMouseMove={moveSpotlight}
+          onMouseEnter={(e) => {
+            moveSpotlight(e);
+            setSpotlight(110);
+          }}
+          onMouseLeave={() => setSpotlight(0)}
         >
-          <p
-            className="text-white text-center"
-            style={{
-              fontWeight: 200,
-              fontSize: '16px',
-              lineHeight: '1.4em',
-              letterSpacing: '0.02em',
-            }}
-          >
-            {renderWords(subtitleText)}
-          </p>
+          <span className="motto-badge-bg" data-motto-badge-bg />
+          <span className="motto-badge-text" data-motto-badge-text>
+            <BadgeLines lines={layout.badge} />
+          </span>
+          <span ref={spotlightRef} className="motto-badge-text motto-badge-spotlight">
+            <BadgeLines lines={layout.badge} />
+          </span>
+        </span>
 
-          <div className="flex flex-col w-full text-center" style={{ gap: '1px' }}>
-            <h2 className="text-white tagline-headline">{renderWords(tagline1Text)}</h2>
-
-            {/* "behind the scenes" с spotlight эффектом */}
-            <div
-              ref={tagline2ContainerRef}
-              className="relative cursor-pointer"
-              onMouseMove={handleMouseMove}
-              onMouseEnter={() => setIsHovering(true)}
-              onMouseLeave={() => setIsHovering(false)}
-            >
-              {/* Базовый слой - оранжевая обводка без заливки */}
-              <h2 className="tagline-headline-stroke" style={tagline2BaseStyle}>
-                {renderWords(tagline2Text)}
-              </h2>
-
-              {/* Верхний слой - белая заливка с эффектом "колбаски" */}
-              {(() => {
-                const circles = trail.map((pos, i) => {
-                  const size = 80 - i * 8;
-                  return `radial-gradient(circle ${Math.max(size, 20)}px at ${pos.x}% ${pos.y}%, black 0%, black 100%, transparent 100%)`;
-                });
-
-                const mainCircle = `radial-gradient(circle 80px at ${mousePos.x}% ${mousePos.y}%, black 0%, black 100%, transparent 100%)`;
-                const allCircles = [mainCircle, ...circles].join(', ');
-
-                return (
-                  <h2
-                    className="absolute inset-0 transition-opacity duration-300 pointer-events-none tagline-headline-stroke"
-                    style={{
-                      color: '#FFFFFF',
-                      WebkitTextStroke: '2px #FFFFFF',
-                      paintOrder: 'stroke fill',
-                      opacity: isHovering && revealedRef.current ? 1 : 0,
-                      maskImage: allCircles,
-                      WebkitMaskImage: allCircles,
-                      maskComposite: 'add',
-                      WebkitMaskComposite: 'source-over',
-                    }}
-                  >
-                    {tagline2Text}
-                  </h2>
-                );
-              })()}
-            </div>
-          </div>
-        </div>
-      </div>
+        <svg
+          className="motto-circle"
+          data-motto-circle
+          viewBox="0 0 50 50"
+          fill="none"
+          aria-hidden="true"
+        >
+          <circle cx="25" cy="25" r="24.5" stroke="var(--rd-lime)" />
+          <rect x="38" y="19" width="12" height="12" fill="var(--rd-lime)" />
+        </svg>
+      </h2>
     </section>
   );
 }

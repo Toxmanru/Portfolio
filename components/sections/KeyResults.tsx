@@ -32,7 +32,7 @@ export default function KeyResults({
   paddingTopDesktop = 104,
   paddingBottomDesktop = 104,
   paddingYMobile = 48,
-  valueColor = '#ED5C4E',
+  valueColor = '#C0FE06',
 }: KeyResultsProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const valueRefs = useRef<(HTMLSpanElement | null)[]>([]);
@@ -84,10 +84,11 @@ export default function KeyResults({
       <div className="relative flex flex-col items-center" style={{ gap: isMobile ? '32px' : '40px' }}>
         <h2
           style={{
-            fontWeight: 500,
-            fontSize: isMobile ? '28px' : '40px',
-            lineHeight: '1.2em',
-            letterSpacing: '-0.06em',
+            fontWeight: 900,
+            fontSize: '32px',
+            lineHeight: '1.13em',
+            letterSpacing: '-0.08em',
+            textTransform: 'uppercase',
             color: '#FFFFFF',
             textAlign: 'center',
           }}
@@ -106,7 +107,15 @@ export default function KeyResults({
         >
           {items.map((item) => (
             <div key={item.title} className="flex flex-col" style={{ gap: '8px', alignItems: 'center', textAlign: 'center' }}>
-              <span style={{ fontWeight: 300, fontSize: '16px', lineHeight: '1.4em', letterSpacing: '-0.02em' }}>
+              <span
+                style={{
+                  fontWeight: 300,
+                  fontSize: isMobile ? '10px' : '12px',
+                  lineHeight: '1.2em',
+                  letterSpacing: '-0.1em',
+                  textTransform: 'uppercase',
+                }}
+              >
                 {item.title}
               </span>
               <span
@@ -115,10 +124,11 @@ export default function KeyResults({
                   valueRefs.current[items.indexOf(item)] = el;
                 }}
                 style={{
-                  fontWeight: 300,
-                  fontSize: isMobile ? '14px' : '16px',
-                  lineHeight: '1.4em',
-                  letterSpacing: '-0.02em',
+                  fontWeight: 900,
+                  fontSize: '24px',
+                  lineHeight: '1.13em',
+                  letterSpacing: '-0.08em',
+                  textTransform: 'uppercase',
                   color: valueColor,
                 }}
               >

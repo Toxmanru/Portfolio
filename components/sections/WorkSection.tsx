@@ -5,6 +5,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
 import GlassButton from '@/components/ui/GlassButton';
+import Badge from '@/components/ui/Badge';
+import FrameCorner from '@/components/ui/FrameCorner';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -94,10 +96,9 @@ export default function WorkSection() {
 
       setHorizontalPadding(width < 960 ? 16 : 64);
 
-      // Pin offset matches the compact (scrolled, white) header height so the
-      // works section sits flush under it with no seam: 104*0.7≈73 for >=1280,
-      // 64*0.7≈45 for 960–1280.
-      const pin = width < 1280 ? 45 : 73;
+      // Pin offset matches the desktop header height so the works section
+      // sits flush under it with no seam.
+      const pin = 104;
       setPinOffset(pin);
 
       // Большой вертикальный отступ 120px оправдан только на высоких экранах.
@@ -107,7 +108,7 @@ export default function WorkSection() {
 
       let vp: number;
       if (width < 960) {
-        vp = 32;
+        vp = 48;
       } else if (isCompactDesktop) {
         vp = 64;
       } else {
@@ -259,7 +260,7 @@ export default function WorkSection() {
       <section ref={sectionRef} className="relative" style={{ zIndex: 10 }}>
         <div 
           className="absolute inset-0"
-          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)' }}
+          style={{ background: 'var(--rd-light-gradient)', width: '100vw', left: '50%', transform: 'translateX(-50%)' }}
         />
         
         <div 
@@ -272,9 +273,7 @@ export default function WorkSection() {
           }}
         >
           {/* Заголовок секции */}
-          <p style={{ fontWeight: 300, fontSize: '16px', lineHeight: '1.4em', letterSpacing: '0.02em', color: '#ED5C4E', marginBottom: '32px' }}>
-            My works
-          </p>
+          <Badge style={{ marginBottom: '24px' }}>My works</Badge>
 
           {/* Карточки работ - вертикальный список */}
           <div className="flex flex-col" style={{ gap: '48px' }}>
@@ -284,7 +283,7 @@ export default function WorkSection() {
                 <div 
                   className="w-full relative"
                   style={{ 
-                    borderRadius: '24px', 
+                    borderRadius: '8px', 
                     backgroundColor: '#FFFFFF', 
                     aspectRatio: '1 / 1',
                     overflow: 'hidden',
@@ -294,38 +293,17 @@ export default function WorkSection() {
                 </div>
                 
                 {/* Заголовок работы - отступ 24px от картинки */}
-                <h3 style={{ 
-                  fontWeight: 500, 
-                  fontSize: '32px', 
-                  lineHeight: '1.2em', 
-                  letterSpacing: '-0.1em', 
-                  color: '#020202',
-                  marginTop: '24px'
-                }}>
+                <h3 className="work-headline" style={{ color: '#020202', marginTop: '24px', whiteSpace: 'pre-line' }}>
                   {work.headline}
                 </h3>
                 
                 {/* Role - первый после заголовка, отступ 16px */}
-                <p style={{ 
-                  fontWeight: 300, 
-                  fontSize: '14px', 
-                  lineHeight: '1.4em', 
-                  letterSpacing: '-0.02em', 
-                  color: '#020202',
-                  marginTop: '16px'
-                }}>
+                <p className="work-role" style={{ marginTop: '16px' }}>
                   {work.role}
                 </p>
                 
                 {/* Описание - отступ 16px */}
-                <p style={{ 
-                  fontWeight: 300, 
-                  fontSize: '14px', 
-                  lineHeight: '1.4em', 
-                  letterSpacing: '-0.02em', 
-                  color: '#020202',
-                  marginTop: '16px'
-                }}>
+                <p className="work-description" style={{ marginTop: '16px' }}>
                   {work.descriptions.join(' ')}
                 </p>
                 
@@ -353,7 +331,7 @@ export default function WorkSection() {
     <section ref={sectionRef} className="relative" style={{ zIndex: 10 }}>
       <div 
         className="absolute inset-0"
-        style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-2px' }}
+        style={{ background: 'var(--rd-light-gradient)', width: '100vw', left: '50%', transform: 'translateX(-50%)', top: '-2px' }}
       />
       
       <div 
@@ -363,9 +341,7 @@ export default function WorkSection() {
         <div className="relative flex" style={{ minHeight: `${imageSize}px`, gap: '16px' }}>
           <div className="relative" style={{ flex: 1, minHeight: `${imageSize}px` }}>
             {/* Статичный заголовок секции - на одной линии с картинкой */}
-            <p style={{ fontWeight: 300, fontSize: '20px', lineHeight: '1.4em', letterSpacing: '0.02em', color: '#ED5C4E', marginBottom: `${labelMargin}px` }}>
-              My works
-            </p>
+            <Badge style={{ marginBottom: `${labelMargin}px` }}>My works</Badge>
 
             {/* Контейнер для работ */}
             <div className="relative" style={{ minHeight: `${Math.max(0, imageSize - 118)}px` }}>
@@ -388,21 +364,12 @@ export default function WorkSection() {
                   <h3 className="work-headline" style={{ color: '#020202', whiteSpace: 'pre-line' }}>
                     {work.headline}
                   </h3>
-                  <div className="flex flex-col" style={{ gap: '24px' }}>
-                    {/* Описание - сплошной текст */}
-                    <p style={{ 
-                      fontWeight: 300, 
-                      fontSize: '16px', 
-                      lineHeight: '1.4em', 
-                      letterSpacing: '-0.02em', 
-                      color: '#020202',
-                      width: '65%',
-                    }}>
-                      {work.descriptions.join(' ')}
-                    </p>
-                    {/* Role - отдельный блок с отступом */}
-                    <p style={{ fontWeight: 300, fontSize: '16px', lineHeight: '1.4em', letterSpacing: '-0.02em', color: '#020202' }}>
+                  <div className="flex flex-col" style={{ gap: '16px', width: '379px', maxWidth: '100%' }}>
+                    <p className="work-role">
                       {work.role}
+                    </p>
+                    <p className="work-description">
+                      {work.descriptions.join(' ')}
                     </p>
                   </div>
                 </div>
@@ -420,12 +387,17 @@ export default function WorkSection() {
             </div>
           </div>
 
+          <div className="flex flex-col justify-between" style={{ height: `${imageSize}px`, flexShrink: 0 }}>
+            <FrameCorner position="top" />
+            <FrameCorner position="bottom" />
+          </div>
+
           <div 
             className="relative work-image-container"
             style={{ 
               width: `${imageSize}px`,
               height: `${imageSize}px`,
-              borderRadius: '32px', 
+              borderRadius: '8px', 
               backgroundColor: '#FFFFFF', 
               overflow: 'hidden', 
               flexShrink: 0,

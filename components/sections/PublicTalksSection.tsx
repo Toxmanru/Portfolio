@@ -8,9 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function PublicTalksSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const headingRef = useRef<HTMLHeadingElement>(null);
-  const publicWordRef = useRef<HTMLSpanElement>(null);
-  const talksWordRef = useRef<HTMLSpanElement>(null);
+  const headingRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -25,45 +23,34 @@ export default function PublicTalksSection() {
   useEffect(() => {
     const section = sectionRef.current;
     const heading = headingRef.current;
-    const words = [publicWordRef.current, talksWordRef.current];
-    if (!section || !heading || words.some((w) => !w)) return;
+    if (!section || !heading) return;
 
     // Пользователям с reduced motion ничего не прячем
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      gsap.set(words, { opacity: 1, backgroundPosition: '0% 0%' });
       gsap.set(gsap.utils.toArray('[data-talk-video-wrap] > div', section), { opacity: 1 });
       return;
     }
 
     const ctx = gsap.context(() => {
-      // Заголовок: слова поднимаются и проявляются из размытия, затем "Talks" закрашивается.
-      // Всё идёт по прогрессу скролла (scrub), без привязки к фиксированному числу пикселей.
+      const words = heading.querySelectorAll('[data-talks-word]');
+      const rule = heading.querySelector('[data-talks-rule]');
+
+      gsap.set(words, { yPercent: 100 });
+      gsap.set(rule, { scaleY: 0 });
+
       const headingTl = gsap.timeline({
-        defaults: { ease: 'power2.out' },
         scrollTrigger: {
           trigger: heading,
-          start: isMobile ? 'top 72%' : 'top 70%',
-          end: isMobile ? 'top 28%' : 'top 22%',
+          start: isMobile ? 'top 85%' : 'top 80%',
+          end: isMobile ? 'top 45%' : 'top 35%',
           scrub: 0.8,
           invalidateOnRefresh: true,
         },
       });
 
       headingTl
-        .fromTo(
-          words[0],
-          { opacity: 0, y: 48, filter: 'blur(10px)' },
-          { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1.2, ease: 'power3.out' },
-          0,
-        )
-        .fromTo(
-          words[1],
-          { opacity: 0, y: 48, filter: 'blur(10px)' },
-          { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1.2, ease: 'power3.out' },
-          0.3,
-        )
-        // Закрашивание слова "Talks" оранжевым
-        .to(words[1], { backgroundPosition: '0% 0%', duration: 1, ease: 'power2.inOut' }, 0.9);
+        .to(words, { yPercent: 0, duration: 0.9, stagger: 0.1, ease: 'power3.out' }, 0)
+        .to(rule, { scaleY: 1, duration: 0.6, ease: 'expo.inOut' }, 0.3);
 
       // Видео: каждое появляется по прогрессу собственного положения на экране.
       // Триггер — неанимируемая обёртка, чтобы transform не сдвигал точки старта/конца.
@@ -96,15 +83,6 @@ export default function PublicTalksSection() {
     return () => ctx.revert();
   }, [isMobile]);
 
-  const accentWordStyle: React.CSSProperties = {
-    background: 'linear-gradient(90deg, #ED5C4E 0%, #ED5C4E 50%, #FFFFFF 50%, #FFFFFF 100%)',
-    backgroundSize: '200% 100%',
-    backgroundPosition: '100% 0%',
-    backgroundClip: 'text',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-  };
-
   return (
     <section 
       ref={sectionRef}
@@ -112,32 +90,36 @@ export default function PublicTalksSection() {
       style={{ 
         paddingLeft: isMobile ? '16px' : '64px', 
         paddingRight: isMobile ? '16px' : '64px',
-        paddingTop: isMobile ? '32px' : undefined,
-        paddingBottom: isMobile ? '32px' : undefined,
+        paddingTop: isMobile ? '48px' : undefined,
+        paddingBottom: isMobile ? '48px' : undefined,
         backgroundColor: '#020202',
         zIndex: 20,
       }}
     >
-      <div className="flex flex-col items-center gap-8 xl:gap-16">
-        <h2 ref={headingRef} className="text-white text-center work-headline">
-          <span ref={publicWordRef} className="inline-block" style={{ opacity: 0 }}>Public</span>
-          {' '}
-          <span ref={talksWordRef} className="inline-block" style={{ ...accentWordStyle, paddingRight: '0.1em', opacity: 0 }}>
-            Talks
-          </span>
-        </h2>
+      <div className="flex flex-col" style={{ gap: isMobile ? '32px' : '56px' }}>
+        <div ref={headingRef} className="talks-heading">
+          <span className="talks-rule" data-talks-rule aria-hidden />
+          <h2 className="talks-headline">
+            <span className="talks-word-mask">
+              <span className="talks-word" data-talks-word>Public</span>
+            </span>{' '}
+            <span className="talks-word-mask">
+              <span className="talks-word" data-talks-word>Talks</span>
+            </span>
+          </h2>
+        </div>
 
         <div className={`${isMobile ? 'flex flex-col' : 'flex'} w-full`} style={{ gap: '16px' }}>
           <div data-talk-video-wrap className="flex-1">
             <div style={{ opacity: 0 }}>
-              <div style={{ position: 'relative', paddingBottom: '56.25%', borderRadius: '24px', overflow: 'hidden' }}>
+              <div style={{ position: 'relative', paddingBottom: '56.25%', borderRadius: '8px', overflow: 'hidden' }}>
                 <iframe
                   src="https://www.youtube.com/embed/dqeFii50Gg8"
                   title="YouTube video 1"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
-                  style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', borderRadius: '24px' }}
+                  style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', borderRadius: '8px' }}
                 />
               </div>
             </div>
@@ -145,14 +127,14 @@ export default function PublicTalksSection() {
 
           <div data-talk-video-wrap className="flex-1">
             <div style={{ opacity: 0 }}>
-              <div style={{ position: 'relative', paddingBottom: '56.25%', borderRadius: '24px', overflow: 'hidden' }}>
+              <div style={{ position: 'relative', paddingBottom: '56.25%', borderRadius: '8px', overflow: 'hidden' }}>
                 <iframe
                   src="https://www.youtube.com/embed/Y-Eu5dlszDU"
                   title="YouTube video 2"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
-                  style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', borderRadius: '24px' }}
+                  style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', borderRadius: '8px' }}
                 />
               </div>
             </div>

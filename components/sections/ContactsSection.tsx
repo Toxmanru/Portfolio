@@ -4,24 +4,26 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Badge from '@/components/ui/Badge';
+import LinkChip from '@/components/ui/LinkChip';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const contacts = [
+  { label: 'Linked In', href: 'https://linkedin.com/in/anton-gubarev-pentin' },
+  { label: 'e-mail me', href: 'mailto:toxmanru@icloud.com' },
+  { label: 'telegram', href: 'https://t.me/toxman' },
+];
+
+const headlineLines = ["Let's Stay", 'Connected'];
+
 export default function ContactsSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLParagraphElement>(null);
-  const headlineWordsRef = useRef<(HTMLSpanElement | null)[]>([]);
+  const titleRef = useRef<HTMLDivElement>(null);
+  const headlineLinesRef = useRef<(HTMLSpanElement | null)[]>([]);
   const contactsRef = useRef<(HTMLAnchorElement | null)[]>([]);
   const imageRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
-
-  const contacts = [
-    { label: 'e-mail', value: 'toxmanru@icloud.com', href: 'mailto:toxmanru@icloud.com' },
-    { label: 'telegram', value: '@toxman', href: 'https://t.me/toxman' },
-    { label: 'Linked In', value: 'in/anton-gubarev-pentin', href: 'https://linkedin.com/in/anton-gubarev-pentin' },
-  ];
-
-  const headlineText = "Let's Stay Connected";
 
   useEffect(() => {
     const updateSize = () => {
@@ -34,58 +36,27 @@ export default function ContactsSection() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const headlineWords = headlineWordsRef.current.filter(Boolean);
+      const lines = headlineLinesRef.current.filter(Boolean);
       const contactItems = contactsRef.current.filter(Boolean);
 
-      // Начальное состояние
-      gsap.set(titleRef.current, { opacity: 0, y: 30 });
-      gsap.set(headlineWords, { opacity: 0, y: 80 });
-      gsap.set(contactItems, { opacity: 0, y: 30 });
-
-      // Timeline привязанный к скроллу
+      // Те же движения, что в интро hero: строки из-под маски, бейдж выезжает слева
       const tl = gsap.timeline({
+        defaults: { ease: 'power3.out' },
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top 60%',
-          end: 'top 20%',
-          scrub: 1,
+          start: 'top 65%',
           once: true,
         },
       });
 
-      // Картинка появляется
-      tl.from(imageRef.current, {
-        opacity: 0,
-        duration: 1.2,
-        ease: 'power2.inOut',
-      })
-      // Заголовок "My contacts"
-      .to(titleRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: 'power3.out',
-      }, '-=0.8')
-      // Слова headline появляются
-      .to(headlineWords, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        stagger: 0.08,
-        ease: 'power3.out',
-      }, '-=0.3')
-      // Контакты появляются
-      .to(contactItems, {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: 'power3.out',
-      }, '-=0.4');
+      tl.from(imageRef.current, { opacity: 0, y: 40, duration: 1.2 })
+        .from(lines, { yPercent: 100, duration: 0.9, stagger: 0.1 }, '-=1')
+        .from(titleRef.current, { opacity: 0, x: -24, duration: 0.6 }, '-=0.6')
+        .from(contactItems, { opacity: 0, y: 16, duration: 0.6, stagger: 0.1 }, '-=0.4');
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [isMobile]);
 
   // Меняем цвет хедера при пересечении секции контактов
   useEffect(() => {
@@ -108,97 +79,63 @@ export default function ContactsSection() {
       observer.disconnect();
       document.body.classList.remove('contacts-section-active');
     };
-  }, []);
+  }, [isMobile]);
+
+  const headline = (
+    <h3 className="contacts-headline">
+      {headlineLines.map((line, index) => (
+        <span key={line} className="block overflow-hidden">
+          <span
+            ref={(el) => { headlineLinesRef.current[index] = el; }}
+            className="block"
+          >
+            {line}
+          </span>
+        </span>
+      ))}
+    </h3>
+  );
+
+  const chips = contacts.map((contact, index) => (
+    <LinkChip
+      key={contact.label}
+      ref={(el) => { contactsRef.current[index] = el; }}
+      href={contact.href}
+      {...(contact.href.startsWith('mailto:') ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
+    >
+      {contact.label}
+    </LinkChip>
+  ));
+
+  const background = (
+    <div
+      className="absolute inset-0"
+      style={{ background: 'var(--rd-light-gradient)', width: '100vw', left: '50%', transform: 'translateX(-50%)' }}
+    />
+  );
 
   // Мобильная версия
   if (isMobile) {
     return (
-      <section 
+      <section
         ref={sectionRef}
         className="relative w-full"
-        style={{ 
-          paddingLeft: '16px', 
-          paddingRight: '16px',
-          paddingTop: '32px',
-          paddingBottom: '32px',
-        }}
+        style={{ padding: '48px 16px' }}
       >
-        {/* Full-width white background */}
-        <div 
-          className="absolute inset-0"
-          style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)' }}
-        />
+        {background}
 
-        {/* Content wrapper */}
         <div className="relative flex flex-col">
-          {/* Заголовок секции */}
-          <p 
-            ref={titleRef}
-            style={{ fontWeight: 300, fontSize: '16px', lineHeight: '1.4em', letterSpacing: '0.02em', color: '#ED5C4E' }}
-          >
-            My contacts
-          </p>
+          <div ref={titleRef}>
+            <Badge>My contacts</Badge>
+          </div>
 
-          {/* Headline - отступ 16px, "Connected" с принудительным переносом */}
-          <h3 className="work-headline" style={{ color: '#020202', marginTop: '16px' }}>
-            <span
-              ref={(el) => { headlineWordsRef.current[0] = el; }}
-              className="inline-block"
-            >
-              Let&apos;s
-            </span>
-            {'\u00A0'}
-            <span
-              ref={(el) => { headlineWordsRef.current[1] = el; }}
-              className="inline-block"
-            >
-              Stay
-            </span>
-            <br />
-            <span
-              ref={(el) => { headlineWordsRef.current[2] = el; }}
-              className="inline-block"
-            >
-              Connected
-            </span>
-          </h3>
+          <div style={{ marginTop: '24px' }}>{headline}</div>
 
-          {/* Контакты - отступ 16px между каждым */}
-          {contacts.map((contact, index) => (
-            <a
-              key={index}
-              ref={(el) => { contactsRef.current[index] = el; }}
-              href={contact.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex flex-col group"
-              style={{ gap: '2px', marginTop: '16px' }}
-            >
-              <span style={{ 
-                fontWeight: 200, 
-                fontSize: '14px', 
-                lineHeight: '1.4em', 
-                letterSpacing: '-0.1em', 
-                color: '#020202',
-                transition: 'color 0.3s ease',
-              }} className="group-hover:!text-[#ED5C4E]">
-                {contact.label}
-              </span>
-              <span style={{ 
-                fontWeight: 400, 
-                fontSize: '16px', 
-                lineHeight: '1.4em', 
-                letterSpacing: '-0.1em', 
-                color: '#020202',
-                transition: 'color 0.3s ease',
-              }} className="group-hover:!text-[#ED5C4E]">
-                {contact.value}
-              </span>
-            </a>
-          ))}
+          <div className="flex flex-col" style={{ gap: '24px', marginTop: '24px' }}>
+            {chips}
+          </div>
 
-          {/* Фото - отступ 32px, во всю ширину */}
-          <div 
+          <div
             ref={imageRef}
             className="relative overflow-hidden w-full"
             style={{
@@ -217,84 +154,32 @@ export default function ContactsSection() {
 
   // Десктопная версия
   return (
-    <section 
+    <section
       ref={sectionRef}
-      className="relative w-full section-padding-adaptive" 
+      className="relative w-full public-talks-padding"
       style={{ paddingLeft: '64px', paddingRight: '64px' }}
     >
-      {/* Full-width white background */}
-      <div 
-        className="absolute inset-0"
-        style={{ backgroundColor: '#FFFFFF', width: '100vw', left: '50%', transform: 'translateX(-50%)' }}
-      />
+      {background}
 
-      {/* Content wrapper */}
-      <div className="relative flex justify-between content-min-height">
-        {/* Left content */}
-        <div className="flex flex-col" style={{ width: '422px', gap: '48px' }}>
-          <p 
-            ref={titleRef}
-            style={{ fontWeight: 300, fontSize: '20px', lineHeight: '1.4em', letterSpacing: '0.02em', color: '#ED5C4E' }}
-          >
-            My contacts
-          </p>
+      <div className="relative flex content-min-height" style={{ gap: '16px' }}>
+        <div className="flex flex-col justify-between" style={{ flex: 1, minWidth: 0 }}>
+          <div className="flex flex-col" style={{ gap: '48px' }}>
+            <div ref={titleRef}>
+              <Badge>My contacts</Badge>
+            </div>
+            {headline}
+          </div>
 
           <div className="flex flex-col" style={{ gap: '24px' }}>
-            <h3 className="work-headline" style={{ color: '#020202' }}>
-              {headlineText.split(' ').map((word, index) => (
-                <span
-                  key={index}
-                  ref={(el) => { headlineWordsRef.current[index] = el; }}
-                  className="inline-block"
-                >
-                  {word}{index < headlineText.split(' ').length - 1 ? '\u00A0' : ''}
-                </span>
-              ))}
-            </h3>
-
-            <div className="flex flex-col" style={{ gap: '24px' }}>
-              {contacts.map((contact, index) => (
-                <a
-                  key={index}
-                  ref={(el) => { contactsRef.current[index] = el; }}
-                  href={contact.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex flex-col group"
-                  style={{ gap: '2px' }}
-                >
-                  <span style={{ 
-                    fontWeight: 200, 
-                    fontSize: '16px', 
-                    lineHeight: '1.4em', 
-                    letterSpacing: '-0.1em', 
-                    color: '#020202',
-                    transition: 'color 0.3s ease',
-                  }} className="group-hover:!text-[#ED5C4E]">
-                    {contact.label}
-                  </span>
-                  <span style={{ 
-                    fontWeight: 400, 
-                    fontSize: '16px', 
-                    lineHeight: '1.4em', 
-                    letterSpacing: '-0.1em', 
-                    color: '#020202',
-                    transition: 'color 0.3s ease',
-                  }} className="group-hover:!text-[#ED5C4E]">
-                    {contact.value}
-                  </span>
-                </a>
-              ))}
-            </div>
+            {chips}
           </div>
         </div>
 
-        {/* Right image */}
-        <div 
+        <div
           ref={imageRef}
-          className="relative overflow-hidden work-image-container"
+          className="relative overflow-hidden work-image-container contacts-photo"
           style={{
-            borderRadius: '32px',
+            borderRadius: '8px',
             backgroundColor: '#494949',
             flexShrink: 0,
           }}

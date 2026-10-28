@@ -84,7 +84,6 @@ export default function CrossProductExperiencesPage() {
       <section
         className="relative w-full"
         style={{
-          clipPath: 'inset(0)',
           paddingTop: isMobile ? '96px' : '168px',
           paddingBottom: isMobile ? '32px' : '120px',
           paddingLeft: `${horizontalPadding}px`,
@@ -96,30 +95,17 @@ export default function CrossProductExperiencesPage() {
           style={{ backgroundColor: '#020202', left: 'calc(50% - 50vw)', right: 'calc(50% - 50vw)', top: '-1px', bottom: '-1px', pointerEvents: 'none' }}
         />
 
-        <div
-          className="absolute pointer-events-none"
-          style={{
-            width: isMobile ? '140vw' : '1200px',
-            height: isMobile ? '140vw' : '1200px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            bottom: isMobile ? '-40vw' : '-600px',
-            borderRadius: '50%',
-            background:
-              'radial-gradient(circle, rgba(237, 92, 78, 0.20) 0%, rgba(237, 92, 78, 0.10) 40%, rgba(237, 92, 78, 0) 70%)',
-            zIndex: 0,
-          }}
-        />
-
         <div className={`relative ${isMobile ? 'flex flex-col' : 'flex items-start'}`} style={{ gap: isMobile ? '32px' : '64px', zIndex: 1 }}>
           <div className="flex flex-col" style={{ gap: isMobile ? '24px' : '40px', width: isMobile ? '75%' : 'calc(40% - 32px)', flexShrink: 0, order: isMobile ? 2 : undefined }}>
             <h1
               style={{
-                fontWeight: 500,
+                fontWeight: 900,
                 fontSize: isMobile ? '32px' : '48px',
-                lineHeight: '1.05em',
-                letterSpacing: '-0.1em',
-                color: '#FFFFFF',
+                lineHeight: '1.13em',
+                letterSpacing: '-0.08em',
+                textTransform: 'uppercase',
+                color: '#C0FE06',
+                width: isMobile ? 'calc(100% / 0.75)' : undefined,
               }}
             >
               Cross-Product Experiences
@@ -127,18 +113,18 @@ export default function CrossProductExperiencesPage() {
 
             <div className="flex flex-col" style={{ gap: isMobile ? '16px' : '24px' }}>
               <div className="flex flex-col" style={{ gap: '4px' }}>
-                <span style={{ fontWeight: 200, fontSize: '16px', lineHeight: '1.4em', color: 'rgba(255,255,255,0.6)' }}>Area</span>
-                <span style={{ fontWeight: 400, fontSize: '16px', lineHeight: '1.4em', color: '#FFFFFF' }}>
+                <span style={{ fontWeight: 300, fontSize: '12px', lineHeight: '1.4em', color: '#FFFFFF', textTransform: 'uppercase' }}>Area</span>
+                <span style={{ fontWeight: 400, fontSize: '14px', lineHeight: '1.4em', color: '#FFFFFF' }}>
                   Car Insurance, Life services, Health, Loyalty, Platform foundation
                 </span>
               </div>
               <div className="flex flex-col" style={{ gap: '4px' }}>
-                <span style={{ fontWeight: 200, fontSize: '16px', lineHeight: '1.4em', color: 'rgba(255,255,255,0.6)' }}>Role</span>
-                <span style={{ fontWeight: 400, fontSize: '16px', lineHeight: '1.4em', color: '#FFFFFF' }}>Lead Product Designer</span>
+                <span style={{ fontWeight: 300, fontSize: '12px', lineHeight: '1.4em', color: '#FFFFFF', textTransform: 'uppercase' }}>Role</span>
+                <span style={{ fontWeight: 400, fontSize: '14px', lineHeight: '1.4em', color: '#FFFFFF' }}>Lead Product Designer</span>
               </div>
               <div className="flex flex-col" style={{ gap: '4px' }}>
-                <span style={{ fontWeight: 200, fontSize: '16px', lineHeight: '1.4em', color: 'rgba(255,255,255,0.6)' }}>Expertise</span>
-                <span style={{ fontWeight: 400, fontSize: '16px', lineHeight: '1.4em', color: '#FFFFFF' }}>
+                <span style={{ fontWeight: 300, fontSize: '12px', lineHeight: '1.4em', color: '#FFFFFF', textTransform: 'uppercase' }}>Expertise</span>
+                <span style={{ fontWeight: 400, fontSize: '14px', lineHeight: '1.4em', color: '#FFFFFF' }}>
                   Cross-Product UX • Ecosystem Thinking •
                   <br />
                   Service Design • Customer Retention •
@@ -179,8 +165,8 @@ export default function CrossProductExperiencesPage() {
             style={{
               width: isMobile ? '100%' : 'calc(60% - 32px)',
               aspectRatio: '16 / 12',
-              borderRadius: isMobile ? '24px' : '32px',
-              clipPath: `inset(0 round ${isMobile ? '24px' : '32px'})`,
+              borderRadius: '8px',
+              clipPath: 'inset(0 round 8px)',
               flexShrink: 0,
               backgroundColor: '#A4A0FF',
               cursor: canOpenFullscreen ? 'pointer' : 'default',
@@ -203,10 +189,11 @@ export default function CrossProductExperiencesPage() {
           <div style={{ flex: isMobile ? undefined : '0 0 calc((100% - 48px) / 3)', width: isMobile ? '100%' : undefined }}>
             <h2
               style={{
-                fontWeight: 500,
-                fontSize: isMobile ? '28px' : '32px',
-                lineHeight: '1.2em',
-                letterSpacing: '-0.06em',
+                fontWeight: 900,
+                fontSize: '32px',
+                lineHeight: '1.13em',
+                letterSpacing: '-0.08em',
+                textTransform: 'uppercase',
                 color: '#020202',
               }}
             >
@@ -257,10 +244,11 @@ export default function CrossProductExperiencesPage() {
             <div style={{ flex: isMobile ? undefined : '0 0 calc((100% - 48px) / 3)', width: isMobile ? '100%' : undefined }}>
               <h2
                 style={{
-                  fontWeight: 500,
-                  fontSize: isMobile ? '28px' : '32px',
-                  lineHeight: '1.2em',
-                  letterSpacing: '-0.06em',
+                  fontWeight: 900,
+                  fontSize: '32px',
+                  lineHeight: '1.13em',
+                  letterSpacing: '-0.08em',
+                  textTransform: 'uppercase',
                   color: '#020202',
                 }}
               >
@@ -328,8 +316,8 @@ export default function CrossProductExperiencesPage() {
             style={{
               width: '100%',
               marginTop: isMobile ? '24px' : '32px',
-              borderRadius: isMobile ? '24px' : '32px',
-              clipPath: `inset(0 round ${isMobile ? '24px' : '32px'})`,
+              borderRadius: '8px',
+              clipPath: 'inset(0 round 8px)',
               cursor: canOpenFullscreen ? 'pointer' : 'default',
             }}
             onClick={canOpenFullscreen ? () => openFullscreen(stage.image) : undefined}
@@ -349,10 +337,11 @@ export default function CrossProductExperiencesPage() {
           <div style={{ flex: isMobile ? undefined : '0 0 calc((100% - 48px) / 3)', width: isMobile ? '100%' : undefined }}>
             <h2
               style={{
-                fontWeight: 500,
-                fontSize: isMobile ? '28px' : '32px',
-                lineHeight: '1.2em',
-                letterSpacing: '-0.06em',
+                fontWeight: 900,
+                fontSize: '32px',
+                lineHeight: '1.13em',
+                letterSpacing: '-0.08em',
+                textTransform: 'uppercase',
                 color: '#020202',
               }}
             >
@@ -377,8 +366,8 @@ export default function CrossProductExperiencesPage() {
           style={{
             width: '100%',
             marginTop: isMobile ? '24px' : '32px',
-            borderRadius: isMobile ? '24px' : '32px',
-            clipPath: `inset(0 round ${isMobile ? '24px' : '32px'})`,
+            borderRadius: '8px',
+            clipPath: 'inset(0 round 8px)',
             cursor: canOpenFullscreen ? 'pointer' : 'default',
           }}
           onClick={canOpenFullscreen ? () => openFullscreen('/images/works/cross-product-experiences/bringing-everything-together.webp') : undefined}
@@ -449,7 +438,7 @@ export default function CrossProductExperiencesPage() {
               fontSize: '16px',
               lineHeight: '1.6em',
               letterSpacing: '-0.02em',
-              color: '#ED5C4E',
+              color: 'var(--rd-pink)',
             }}
           >
             {teamColumns.map((names) => (

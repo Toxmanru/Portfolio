@@ -1,12 +1,13 @@
 'use client';
 
-import { ReactNode, useState, useEffect } from 'react';
+import { ReactNode } from 'react';
 
 interface GlassButtonProps {
   children: ReactNode;
   onClick?: () => void;
   href?: string;
   openInNewTab?: boolean;
+  /** Не влияет на внешний вид после редизайна; оставлен для совместимости. */
   variant?: 'light' | 'dark';
   className?: string;
   fullWidth?: boolean;
@@ -18,94 +19,31 @@ export default function GlassButton({
   onClick,
   href,
   openInNewTab = false,
-  variant = 'light',
   className = '',
   fullWidth = false,
   disabled = false,
 }: GlassButtonProps) {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isTouchInput, setIsTouchInput] = useState(false);
-
-  useEffect(() => {
-    const updateInputType = () => {
-      const hasCoarsePointer = window.matchMedia('(hover: none), (pointer: coarse)').matches;
-      setIsTouchInput(hasCoarsePointer);
-    };
-    updateInputType();
-    window.addEventListener('resize', updateInputType);
-    return () => window.removeEventListener('resize', updateInputType);
-  }, []);
-
-  // На touch-устройствах кнопки всегда активны (как hover)
-  const isActive = disabled ? false : (isTouchInput || isHovered);
-
-  // Единый padding для всех вариантов
-  const padding = '16px 32px';
-
-  const bgColor = disabled
-    ? (variant === 'light' ? 'rgba(255, 255, 255, 0.12)' : 'rgba(2, 2, 2, 0.08)')
-    : (variant === 'light' ? 'rgba(255, 255, 255, 0.24)' : 'rgba(2, 2, 2, 0.16)');
+  const padding = '24px 32px';
 
   const content = (
     <>
-      {/* Лёгкий оранжевый glow слева */}
-      <span
-        aria-hidden
-        style={{
-          position: 'absolute',
-          top: '0%',
-          bottom: '-40%',
-          left: '-10%',
-          width: '50%',
-          background: 'radial-gradient(circle at 30% 50%, rgba(237, 92, 78, 0.3), rgba(237, 92, 78, 0))',
-          filter: 'blur(18px)',
-          WebkitFilter: 'blur(18px)',
-          pointerEvents: 'none',
-          zIndex: 0,
-          opacity: disabled ? 0 : 1,
-        }}
-      />
-      {/* Оранжевая заливка слева направо */}
-      <span 
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: '#ED5C4E',
-          borderRadius: '48px',
-          transform: isActive ? 'translateX(0%)' : 'translateX(-102%)',
-          transition: isTouchInput ? 'none' : 'transform 0.4s ease-out',
-          pointerEvents: 'none',
-          zIndex: 1,
-        }}
-      />
-      {/* Текст поверх всего */}
-      <span 
-        style={{ 
-          position: 'relative', 
-          zIndex: 2,
-          color: variant === 'light' ? '#FFFFFF' : (isActive ? '#FFFFFF' : '#020202'),
-          transition: isTouchInput ? 'none' : 'color 0.4s ease-out',
-          pointerEvents: 'none',
-        }}
-      >
-        {children}
+      <span className="rd-glass-button-clip" aria-hidden>
+        <span className="rd-glass-button-fill" />
       </span>
+      <span className="rd-glass-button-label">{children}</span>
     </>
   );
 
   const buttonStyle: React.CSSProperties = {
     position: 'relative',
-    clipPath: 'inset(0 round 48px)',
     padding: padding,
-    backgroundColor: bgColor,
+    backgroundColor: 'var(--rd-button)',
     borderRadius: '48px',
-    backdropFilter: 'blur(10px)',
-    WebkitBackdropFilter: 'blur(10px)',
-    fontWeight: 300,
-    fontSize: '16px',
+    fontWeight: 600,
+    fontSize: '18px',
+    lineHeight: '1.4em',
+    letterSpacing: '-0.06em',
+    textTransform: 'uppercase',
     display: fullWidth ? 'flex' : 'inline-flex',
     width: fullWidth ? '100%' : 'auto',
     alignItems: 'center',
@@ -119,24 +57,16 @@ export default function GlassButton({
     opacity: disabled ? 0.6 : 1,
   };
 
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-  
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
+  const buttonClassName = `rd-glass-button ${className}`.trim();
 
   if (href && !disabled) {
     return (
-      <a 
-        href={href} 
+      <a
+        href={href}
         target={openInNewTab ? '_blank' : undefined}
         rel={openInNewTab ? 'noopener noreferrer' : undefined}
-        className={className}
+        className={buttonClassName}
         style={buttonStyle}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
       >
         {content}
       </a>
@@ -144,12 +74,10 @@ export default function GlassButton({
   }
 
   return (
-    <button 
-      onClick={onClick} 
-      className={className}
+    <button
+      onClick={onClick}
+      className={buttonClassName}
       style={buttonStyle}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
       disabled={disabled}
     >
       {content}

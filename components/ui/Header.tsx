@@ -1,13 +1,16 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 
+const NAV_LINKS = [
+  { label: 'My works', href: '#works', className: 'header-my-works-link' },
+  { label: 'CV', href: '/cv/gubarev-pentin-cv.pdf', newTab: true },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/anton-gubarev-pentin', newTab: true },
+];
+
 export default function Header() {
-  const [baseHeight, setBaseHeight] = useState(104);
-  const [basePadding, setBasePadding] = useState(20);
-  const [horizontalPadding, setHorizontalPadding] = useState(64);
-  const [isMobile, setIsMobile] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -16,192 +19,123 @@ export default function Header() {
       setIsScrolled(window.scrollY > 0);
     };
 
-    const updateSizes = () => {
-      const width = window.innerWidth;
-      if (width < 960) {
-        setBaseHeight(64);
-        setBasePadding(12);
-        setHorizontalPadding(16);
-        setIsMobile(true);
-      } else if (width < 1280) {
-        setBaseHeight(64);
-        setBasePadding(12);
-        setHorizontalPadding(64);
-        setIsMobile(false);
-      } else {
-        setBaseHeight(104);
-        setBasePadding(20);
-        setHorizontalPadding(64);
-        setIsMobile(false);
-      }
+    const closeMenuOnDesktop = () => {
+      if (window.innerWidth >= 960) setIsMenuOpen(false);
     };
 
-    updateSizes();
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', updateSizes);
+    window.addEventListener('resize', closeMenuOnDesktop);
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', updateSizes);
+      window.removeEventListener('resize', closeMenuOnDesktop);
     };
   }, []);
 
-  const bgColor = isScrolled ? 'rgba(255, 255, 255, 1)' : 'rgba(255, 255, 255, 0)';
-  const textColor = isScrolled ? '#020202' : '#FFFFFF';
-
-  // On desktop, the white (scrolled) header becomes ~30% more compact.
-  const isCompact = isScrolled && !isMobile;
-  const effectiveHeight = isCompact ? Math.round(baseHeight * 0.7) : baseHeight;
-  const effectivePadding = isCompact ? Math.round(basePadding * 0.7) : basePadding;
-
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
   return (
     <>
-      <header 
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-        style={{ 
-          backgroundColor: bgColor,
-        }}
+      <header
+        className={`rd-header fixed top-0 left-0 right-0 z-50 ${isMenuOpen ? 'rd-header--menu-open' : ''}`}
+        style={{ background: isScrolled && !isMenuOpen ? 'var(--rd-header-gradient)' : 'transparent' }}
       >
-        <div 
-          className="flex items-center justify-between transition-all duration-300"
-          style={{ 
-            maxWidth: '1440px',
-            margin: '0 auto',
-            height: `${effectiveHeight}px`,
-            paddingTop: `${effectivePadding}px`, 
-            paddingBottom: `${effectivePadding}px`,
-            paddingLeft: `${horizontalPadding}px`,
-            paddingRight: `${horizontalPadding}px`,
-          }}
-        >
-          <Link 
-            href="/" 
-            className="header-link hover:opacity-70 transition-all duration-300"
-            style={{ color: textColor }}
+        <div className="rd-header-inner">
+          <Link
+            href="/"
+            className="rd-header-brand hover:opacity-70 transition-opacity duration-300"
+            aria-label="Anton Gubarev-Pentin — home"
           >
-            Anton Gubarev-Pentin
+            <Image
+              src="/icons/romb-24.svg"
+              alt=""
+              width={26}
+              height={26}
+              className="rd-header-romb rd-header-romb--desktop"
+              priority
+            />
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 18 18"
+              fill="none"
+              className="rd-header-romb rd-header-romb--mobile"
+              aria-hidden
+            >
+              <rect x="0.730816" y="9" width="11.6943" height="11.6943" transform="rotate(-45 0.730816 9)" stroke="currentColor" />
+              <rect x="6.58441" y="9.00543" width="3.43289" height="3.43289" transform="rotate(-45 6.58441 9.00543)" fill="currentColor" />
+            </svg>
+            <span
+              className="rd-header-name"
+              style={{
+                opacity: isScrolled ? 1 : 0,
+                transform: isScrolled ? 'translateX(0)' : 'translateX(-8px)',
+              }}
+              aria-hidden={!isScrolled}
+            >
+              Anton Gubarev-Pentin
+            </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          {!isMobile && (
-            <nav className="flex items-center" style={{ gap: '32px' }}>
-              <Link 
-                href="#works" 
-                className="header-link header-my-works-link hover:opacity-70 transition-all duration-300"
-                style={{ color: textColor }}
+          <nav className="rd-header-nav">
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                target={link.newTab ? '_blank' : undefined}
+                rel={link.newTab ? 'noopener noreferrer' : undefined}
+                className={`rd-header-link hover:opacity-70 transition-opacity duration-300 ${link.className ?? ''}`}
               >
-                My works
+                {link.label}
               </Link>
-              <Link 
-                href="/cv/gubarev-pentin-cv.pdf" 
-                target="_blank"
-                className="header-link hover:opacity-70 transition-all duration-300"
-                style={{ color: textColor }}
-              >
-                CV
-              </Link>
-              <Link 
-                href="https://linkedin.com/in/anton-gubarev-pentin" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="header-link hover:opacity-70 transition-all duration-300"
-                style={{ color: textColor }}
-              >
-                LinkedIn
-              </Link>
-            </nav>
-          )}
+            ))}
+          </nav>
 
-          {/* Burger Menu Button */}
-          {isMobile && (
-            <button
-              onClick={toggleMenu}
-              className="relative transition-all duration-300 hover:opacity-70"
-              style={{ width: '24px', height: '24px' }}
-              aria-label="Toggle menu"
-            >
-              <span 
-                className="absolute left-1/2 transition-all duration-300"
-                style={{ 
-                  width: '20px', 
-                  height: '2px', 
-                  backgroundColor: textColor,
-                  top: isMenuOpen ? '11px' : '6px',
-                  transform: `translateX(-50%) ${isMenuOpen ? 'rotate(45deg)' : 'rotate(0)'}`,
-                }}
-              />
-              <span 
-                className="absolute left-1/2 top-1/2 transition-all duration-300"
-                style={{ 
-                  width: '20px', 
-                  height: '2px', 
-                  backgroundColor: textColor,
-                  transform: 'translateX(-50%) translateY(-50%)',
-                  opacity: isMenuOpen ? 0 : 1,
-                }}
-              />
-              <span 
-                className="absolute left-1/2 transition-all duration-300"
-                style={{ 
-                  width: '20px', 
-                  height: '2px', 
-                  backgroundColor: textColor,
-                  top: isMenuOpen ? '11px' : '16px',
-                  transform: `translateX(-50%) ${isMenuOpen ? 'rotate(-45deg)' : 'rotate(0)'}`,
-                }}
-              />
-            </button>
-          )}
+          <button
+            onClick={() => setIsMenuOpen((open) => !open)}
+            className="rd-header-burger hover:opacity-70"
+            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isMenuOpen}
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
+              {(['top', 'mid', 'bottom'] as const).map((pos, i) => (
+                <line
+                  key={pos}
+                  className={`rd-burger-line rd-burger-line--${pos}`}
+                  x1="4"
+                  x2="20"
+                  y1={6 + i * 6}
+                  y2={6 + i * 6}
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              ))}
+            </svg>
+          </button>
         </div>
       </header>
 
-      {/* Mobile Menu Overlay */}
-      {isMobile && isMenuOpen && (
-        <div
-          className="fixed inset-0 z-40 transition-all duration-300"
-          style={{
-            backgroundColor: 'rgba(2, 2, 2, 0.95)',
-            opacity: 1,
-            pointerEvents: 'auto',
-            paddingTop: `${baseHeight}px`,
-          }}
-        >
-          <nav 
-            className="flex flex-col items-center justify-center h-full"
-            style={{ gap: '32px' }}
-          >
-            <Link 
-              href="#works" 
-              className="header-link header-my-works-link hover:opacity-70 transition-all duration-300"
-              style={{ color: '#FFFFFF', fontSize: '24px' }}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              My works
-            </Link>
-            <Link 
-              href="/cv/gubarev-pentin-cv.pdf" 
-              target="_blank"
-              className="header-link hover:opacity-70 transition-all duration-300"
-              style={{ color: '#FFFFFF', fontSize: '24px' }}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              CV
-            </Link>
-            <Link 
-              href="https://linkedin.com/in/anton-gubarev-pentin" 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="header-link hover:opacity-70 transition-all duration-300"
-              style={{ color: '#FFFFFF', fontSize: '24px' }}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              LinkedIn
-            </Link>
-          </nav>
-        </div>
-      )}
+      <div
+        className={`rd-mobile-menu fixed inset-0 z-40 bg-black ${isMenuOpen ? 'is-open' : ''}`}
+        aria-hidden={!isMenuOpen}
+        inert={!isMenuOpen}
+      >
+        <nav className="flex flex-col items-center justify-center h-full" style={{ gap: '32px' }}>
+          {NAV_LINKS.map((link, i) => (
+            <span key={link.label} className={`rd-mobile-menu-mask ${link.className ?? ''}`}>
+              <Link
+                href={link.href}
+                target={link.newTab ? '_blank' : undefined}
+                rel={link.newTab ? 'noopener noreferrer' : undefined}
+                className="rd-mobile-menu-line rd-header-link"
+                style={{ fontSize: '24px', color: 'var(--rd-lime)', '--i': i } as React.CSSProperties}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            </span>
+          ))}
+        </nav>
+      </div>
     </>
   );
 }

@@ -1,198 +1,120 @@
 'use client';
 
-import { useEffect, useRef, useState, Suspense } from 'react';
-import dynamic from 'next/dynamic';
+import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { gsap } from 'gsap';
+import Badge from '@/components/ui/Badge';
 
-// Динамический импорт для WebGL компонента (client-side only)
-const HeroImageEffect = dynamic(
-  () => import('@/components/3d/HeroImageEffect'),
-  { ssr: false }
-);
+const NAME_LINES = ['Anton', 'Gubarev\u2022', 'Pentin'];
+
+const DOMAINS = ['Insure-Tech', 'E-com', 'Med-Tech', 'Finance', 'Ecosystems'];
+
+const NUMBERS = [
+  ['9 Years', 'in Product Design'],
+  ['3 Years', 'in Design Leadership'],
+  ['8+ Products', 'Launched'],
+];
+
+function Cross({ corner }: { corner: 'tl' | 'tr' | 'bl' | 'br' }) {
+  return (
+    <Image
+      src="/icons/cross.svg"
+      alt=""
+      width={16}
+      height={16}
+      className={`rd-hero-cross rd-hero-cross--${corner}`}
+      aria-hidden
+    />
+  );
+}
 
 export default function HeroSection() {
-  const wordsRef = useRef<(HTMLSpanElement | null)[]>([]);
-  const accentWord1Ref = useRef<HTMLSpanElement>(null);
-  const accentWord2Ref = useRef<HTMLSpanElement>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const imageContainerRef = useRef<HTMLDivElement>(null);
-  const [scrollOpacity, setScrollOpacity] = useState(1);
-  const [triggerDemo, setTriggerDemo] = useState(false);
-
-  // Fade out scroll indicator on scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const fadeDistance = 100; // Полностью исчезает после 100px
-      const opacity = Math.max(0, 1 - scrollY / fadeDistance);
-      setScrollOpacity(opacity);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ 
-        defaults: { ease: 'power3.out' },
-        onComplete: () => {
-          // Trigger demo spotlight after all animations complete
-          setTimeout(() => setTriggerDemo(true), 300);
-        }
-      });
-      const words = wordsRef.current.filter(Boolean);
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-      // Картинка - плавный fade
-      tl.from(imageContainerRef.current, {
-        opacity: 0,
-        duration: 1.2,
-        ease: 'power2.inOut',
+      tl.from('[data-hero="lime"]', {
+        scaleY: 0,
+        transformOrigin: 'bottom',
+        duration: 1,
+        ease: 'power3.inOut',
       })
-      // Слова появляются
-      .from(words, {
-        y: 80,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.08,
-      }, '-=0.8')
-      // Закрашивание оранжевых слов
-      .to([accentWord1Ref.current, accentWord2Ref.current], {
-        backgroundPosition: '0% 0%',
-        duration: 0.8,
-        stagger: 0.2,
-        ease: 'power2.inOut',
-      }, '-=0.3')
-      // Подзаголовок
-      .from(subtitleRef.current, {
-        y: 30,
-        opacity: 0,
-        duration: 0.8,
-      }, '-=0.5');
-    });
+        .from('[data-hero="photo"]', { opacity: 0, y: 40, duration: 1.2 }, '-=0.5')
+        .from('[data-hero="name-line"]', { yPercent: 100, duration: 0.9, stagger: 0.1 }, '-=1')
+        .from('[data-hero="badge"]', { opacity: 0, x: -24, duration: 0.6 }, '-=0.6')
+        .from('[data-hero="domains"]', { opacity: 0, y: 16, duration: 0.6 }, '-=0.4')
+        .from('[data-hero="text"]', { opacity: 0, y: 24, duration: 0.8 }, '-=0.4');
+    }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
-  const accentWordStyle: React.CSSProperties = {
-    background: 'linear-gradient(90deg, #ED5C4E 0%, #ED5C4E 50%, #FFFFFF 50%, #FFFFFF 100%)',
-    backgroundSize: '200% 100%',
-    backgroundPosition: '100% 0%',
-    backgroundClip: 'text',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-  };
-
-  const setWordRef = (index: number) => (el: HTMLSpanElement | null) => {
-    wordsRef.current[index] = el;
-  };
-
   return (
-    <section 
-      className="relative hero-margin hero-section"
-    >
+    <section ref={sectionRef} className="rd-hero">
+      <div className="rd-hero-bg" aria-hidden />
 
-      {/* Hero Picture with WebGL Liquid Effect */}
-      <div 
-        ref={imageContainerRef}
-        className="overflow-hidden hero-image-mobile"
-        style={{
-          right: '64px',
-          top: '0',
-          borderRadius: '50%',
-        }}
-      >
-        <Suspense fallback={<div className="w-full h-full bg-[#494949]" />}>
-          <HeroImageEffect 
-            className="w-full h-full"
-            style={{ borderRadius: '50%' }}
-            triggerDemo={triggerDemo}
-          />
-        </Suspense>
+      <h1 className="rd-hero-name" aria-label="Anton Gubarev-Pentin">
+        {NAME_LINES.map((line) => (
+          <span key={line} className="rd-hero-name-mask" aria-hidden>
+            <span className="rd-hero-name-line" data-hero="name-line">
+              {line}
+            </span>
+          </span>
+        ))}
+      </h1>
+
+      <div className="rd-hero-photo" data-hero="photo">
+        <Image
+          src="/images/hero-photo.png"
+          alt="Anton Gubarev-Pentin"
+          fill
+          sizes="573px"
+          priority
+          style={{ objectFit: 'cover' }}
+        />
       </div>
 
-      {/* Hero Content */}
-      <div className="flex flex-col relative z-10 hero-content-gap hero-content">
-        <h1 className="hero-title text-white">
-          <div className="overflow-hidden" style={{ paddingBottom: '10px', marginBottom: '-10px' }}>
-            <span 
-              ref={(el) => {
-                wordsRef.current[0] = el;
-                (accentWord1Ref as React.MutableRefObject<HTMLSpanElement | null>).current = el;
-              }}
-              className="inline-block"
-              style={{ ...accentWordStyle, paddingBottom: '10px', marginBottom: '-10px' }}
-            >
-              Product
-            </span>
-            {' '}
-            <span ref={setWordRef(1)} className="inline-block">Design</span>
-          </div>
-          <div className="overflow-hidden" style={{ paddingBottom: '10px', marginBottom: '-10px' }}>
-            <span ref={setWordRef(2)} className="inline-block">Lead</span>
-            {' '}
-            <span ref={setWordRef(3)} className="inline-block">&</span>
-            {' '}
-            <span 
-              ref={(el) => {
-                wordsRef.current[4] = el;
-                (accentWord2Ref as React.MutableRefObject<HTMLSpanElement | null>).current = el;
-              }}
-              className="inline-block"
-              style={{ ...accentWordStyle, paddingBottom: '10px', marginBottom: '-10px' }}
-            >
-              Design
-            </span>
-          </div>
-          <div className="overflow-hidden" style={{ paddingBottom: '10px', marginBottom: '-10px' }}>
-            <span ref={setWordRef(5)} className="inline-block">Manager</span>
-          </div>
-        </h1>
+      <div className="rd-hero-lime" data-hero="lime" aria-hidden />
 
-        <p ref={subtitleRef} className="hero-subtitle text-white">
-          8+ years of experience • Design ops • Team building • Cross-Platform • Insure-Tech • E-com • Med-Tech •
+      <div className="rd-hero-domains" data-hero="domains">
+        <div className="rd-hero-domains-col">
+          <Cross corner="tl" />
+          <span className="rd-hero-domains-badge">domains</span>
+          <Cross corner="bl" />
+        </div>
+        <ul className="rd-hero-domains-list">
+          {DOMAINS.map((domain) => (
+            <li key={domain}>{domain}</li>
+          ))}
+        </ul>
+        <div className="rd-hero-domains-col">
+          <Cross corner="tr" />
+          <Cross corner="br" />
+        </div>
+      </div>
+
+      <Badge className="rd-hero-badge" data-hero="badge">
+        product design leader
+      </Badge>
+
+      <div className="rd-hero-text" data-hero="text">
+        <p className="rd-hero-description">
+          I&apos;ve worked on digital products at QIC, SberHealth, Wildberries and more. Built and led
+          Design Function from scratch, shaped the UX strategy of a digital ecosystem, and introduced
+          DesignOps and AI-enabled workflows. I also help startups establish product design from the
+          ground up.
         </p>
-      </div>
-
-      {/* Scroll Down Indicator */}
-      <div 
-        className="fixed left-1/2 -translate-x-1/2 z-20 flex flex-col items-center transition-opacity duration-300"
-        style={{ 
-          bottom: '32px', 
-          gap: '8px',
-          opacity: scrollOpacity,
-          pointerEvents: scrollOpacity === 0 ? 'none' : 'auto',
-        }}
-      >
-        {/* Animated Arrow */}
-        <svg 
-          width="16" 
-          height="16" 
-          viewBox="0 0 16 16" 
-          fill="none"
-          className="animate-bounce"
-          style={{ animationDuration: '1.5s' }}
-        >
-          <path 
-            d="M8 3L8 13M8 13L13 8M8 13L3 8" 
-            stroke="white" 
-            strokeWidth="1.5" 
-            strokeLinecap="round" 
-            strokeLinejoin="round"
-          />
-        </svg>
-        
-        {/* Text */}
-        <span 
-          className="text-white"
-          style={{ 
-            fontWeight: 300, 
-            fontSize: '16px',
-            lineHeight: '1.25em',
-          }}
-        >
-          Scroll down
-        </span>
+        <ul className="rd-hero-numbers">
+          {NUMBERS.map(([value, label]) => (
+            <li key={value}>
+              {value}
+              <br />
+              {label}
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
