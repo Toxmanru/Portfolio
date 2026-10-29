@@ -1110,9 +1110,9 @@ canvas {
   z-index: 9999;
 }
 
-/* Фото 80% и имя 112px: десктоп уже 1300px или ниже 700px */
+/* Фото 80% и имя 112px: десктоп уже 1300px или ниже 780px */
 @media (min-width: 960px) and (max-width: 1299px),
-       (min-width: 960px) and (max-height: 699px) {
+       (min-width: 960px) and (max-height: 779px) {
   .rd-hero-photo {
     width: calc(573px * 0.8);
     height: calc(656px * 0.8);
